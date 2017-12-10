@@ -1,0 +1,59 @@
+/////Screenshakes/////
+
+Code located in scripts/effects.rpy
+
+Screenshakes work as such:
+  "HELLO THERE!" with shake
+
+Shake Sizes:
+  tinyshake - Half Second, 5 Pixel Shake
+  smallshake - Half Second, 10 Pixel Shake
+  shake - One Second, 15 Pixel Shake
+  bigshake - One Second, 25 Pixel Shake (probably overkill)
+
+
+/////White Flash/////
+
+Code located in scripts/effects.rpy
+
+White Flashes work as such
+    show white with Pause(0.05)
+    hide white
+
+/////Black Screen/////
+
+Code implemented in RenPy
+
+Black Screen works as such:
+    scene black with dissolve # Half Second Dissolve - for more specificity, use Dissolve()
+    "I am a secret ghost"
+    scene previousScene with dissolve
+
+To Keep Character On Screen:
+    scene black
+    show Character
+    with dissolve
+    "Tell no one of my secret"
+    scene previousScene
+    show Character
+    with dissolve
+
+
+/////Text Formatting////
+
+Italics, Color, Alpha, Speed, Font Type and Font Size already implemented in renpy
+For more info, see: https://www.renpy.org/doc/html/text.html
+
+
+/////Objections/////
+
+Code located in interface.rpy
+
+Objections work as such:
+    call objection
+    "This evidence contradicts the testimony!"
+
+Use as template to create other objections, hold its, etc
+
+
+/////Animation/////

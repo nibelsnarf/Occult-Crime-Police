@@ -1,0 +1,133 @@
+﻿# You can place the script of your game in this file.
+
+image placeholder = "assets/portraits/placeholder.png"
+
+image background1 = "assets/backgrounds/background1.png"
+image background2 = "assets/backgrounds/background2.png"
+image background3a = "assets/backgrounds/background3a.png"
+image background3b = "assets/backgrounds/background3b.png"
+image BackgroundTest = Image("assets/backgrounds/BackgroundTest.png", xalign=0.0)
+
+# Declare characters used by this game.
+define e = Character('Warren', callback=mdefvoice, ctc="ctc_blink", ctc_position="nestled")
+define typing = Character(None, xalign=0.5, yalign=0.5)
+define a = Character('Ash', callback=adefvoice, ctc="ctc_blink", ctc_position="nestled")
+define ayell = Character('Ash', callback=ayellvoice, ctc="ctc_blink", ctc_position="nestled")
+define c = Character('Carlos', callback=cdefvoice, ctc="ctc_blink", ctc_position="nestled")
+define b = Character(name="Butt", callback=bvoice, ctc="ctc_blink", ctc_position="nestled")
+define bsurprise = Character(name="Butt", callback=bsurpvoice, ctc="ctc_blink", ctc_position="nestled")
+
+# The game starts here.
+label start:
+    python:
+        player = Player("Derp")
+        chocolate = Item("Chocolate",image="gui/inv_chocolate.png")
+        banana = Item("Banana", image="gui/inv_banana.png")
+        gun = Item("Gun", image="gui/inv_gun.png")
+        laser = Item("Laser Gun", image="gui/inv_laser.png")
+        autopsy = Item("Autopsy Report", image="gui/inv_autopsy.png")
+
+
+        gun = Person("Gun", image="gui/pro_gun.png")
+        laser = Person("Laser Gun", image="gui/pro_laser.png")
+
+
+        inventory = Inventory()
+        profile = Profiles()
+
+    if picked_case == 1:
+        call case_1
+    elif picked_case == 2:
+        call case_2
+    elif picked_case == 3:
+        call case_3
+    else:
+        "Something went horribly wrong."
+
+label case_1:
+    jump pitchdemo
+
+    scene background1
+
+    "Prologue"
+
+    show mir default at left
+
+    e "You've created a new Ren'Py game."
+
+    e "Once you add a story, pictures, and music, you can release it to the world!"
+
+    e "Inventory and Profiles work. Journal has yet to be implemented. There is nowhere to move yet."
+
+    $ save_name = "Act 1"
+
+    "Act 1"
+
+    e "Done with prologue, save name should change here."
+
+    $ save_name = "Act 2"
+
+    "Act 2"
+
+    e "Adding stuff to inventory!"
+
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+    $inventory.add(chocolate)
+    $inventory.add(banana)
+
+    e "Added chocolate and banana."
+
+    "Act 3"
+
+    e "Adding profiles."
+
+    $profile.add(gun)
+    $profile.add(laser)
+
+    e "Added profiles."
+
+    "Act IV"
+
+    $ cleared_area = 0
+    $ cleared_items = []
+    $ loop2 = 0
+    $ presentedChocolate = 0
+
+    scene BackgroundTest
+
+    show butt
+
+    call demo_act_IV
+
+    return
+
+label case_3:
+    "Case 3 here."
+    call endgame
+    return
+
+label endgame:
+
+    "End game"
+    $ renpy.full_restart()
+    return
