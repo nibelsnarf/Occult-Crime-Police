@@ -66,9 +66,16 @@ init -1 python:
     config.overlay_functions.append(display_items_overlay)
 
 screen inventory_screen_button:
-    hbox align (0.01,0.01) spacing 10:
+    hbox align (0,0) spacing 10:
         #textbutton "Show Case Files" action [ Show("inventory_screen")]
-        imagebutton idle "assets/menu/court_record_default.png" hover "assets/menu/court_record_selected.png" action [ Show("inventory_screen")]
+        imagebutton idle "assets/menu/evidence_default.png" hover "assets/menu/evidence_selected.png" action [ Show("inventory_screen")]
+    hbox align (1.0,0) spacing 10:
+        imagebutton idle "assets/menu/options_default.png" hover "assets/menu/options_selected.png" action [ Show("custom_menu")]
+
+screen jumpTo:
+    hbox align (1.2,1.2) spacing 0:
+        textbutton "jump2" keysym 'j' action Jump("jumpToMenu")
+
 
 screen inventory_screen:
     tag menu

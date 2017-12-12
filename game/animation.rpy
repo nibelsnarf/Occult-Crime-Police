@@ -3,11 +3,13 @@ init:
     $ imageheight = config.screen_height
 
     image ctc_blink:
+        xalign 0.94
+        yalign 0.92
         "assets/menu/CTC1.png"
-        pause 0.3
-        "assets/menu/CTC2.png"
-        pause 0.3
+        linear 0.25 zoom 1.1
+        linear 0.25 zoom 1.0
         repeat
+
 
     transform flip:
         xzoom -1

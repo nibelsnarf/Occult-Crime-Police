@@ -1,10 +1,10 @@
 label smart_house_act_1:
-
     scene black
 
     typing "September 13th. 7:28 P.M.\nNear the outskirts of town."
     play music "sound/Car_Loop.ogg" fadein 1.0
     scene policecarbythesideoftheroad with fade
+    show screen jumpTo
     pscanner "Sheriff? Sheriff Warren, are you there?"
     menu:
         "No, it's a completely different person emulating her voice perfectly.":
@@ -36,7 +36,7 @@ label smart_house_act_1:
             pscanner "Yeah."
 
     wos "So what happened?"
-    pscanner "We don't know yet. Somebody called in a dismembered body just a few minutes ago."
+    pscanner "We don't know yet. Somebody called in a dead body just a few minutes ago."
     pscanner "We've already sent Carlos over to have a look."
 
     menu:
@@ -281,7 +281,7 @@ label outside_base_outro:
 label meeting_ash_intro:
 
     scene black
-    typing "September 13th\nBase 24\nWarehouse"
+    typing "September 13th - Base 24 - Warehouse"
     show screen inventory_screen_button
     scene basewarehouse with fade
     show mir default

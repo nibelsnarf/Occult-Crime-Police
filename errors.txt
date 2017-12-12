@@ -2,8 +2,16 @@
 errors listed below, and try again.
 
 
-File "game/screens.rpy", line 491: style property italicized is not known.
-    italicized True
-              ^
+File "game/scripts/smart_house_act2.rpy", line 83: expected ':' not found.
+    label testimony1_intro
+                          ^
 
-Ren'Py Version: Ren'Py 6.99.12.4.2187
+File "game/scripts/smart_house_act2.rpy", line 336: expected ':' not found.
+    label testimony2_intro
+                          ^
+
+File "game/scripts/smart_house_act2.rpy", line 595: expected ':' not found.
+    label testimony3_intro
+                          ^
+
+Ren'Py Version: Ren'Py 6.99.13.2919

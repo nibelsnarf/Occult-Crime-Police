@@ -17,7 +17,7 @@ init:
 #
 # Screen that's used to display adv-mode dialogue.
 # http://www.renpy.org/doc/html/screen_special.html#say
-screen say(who, what, side_image=None, two_window=False):
+screen say(who, what, side_image=None, two_window=True):
 
     # Decide if we want to use the one-window or two-window variant.
     if not two_window:
@@ -39,14 +39,6 @@ screen say(who, what, side_image=None, two_window=False):
         # The two window variant.
         vbox:
             style "say_two_window_vbox"
-
-            if who:
-                window:
-                    style "say_who_window"
-
-                    text who:
-                        id "who"
-
             window:
                 id "window"
 
@@ -57,26 +49,38 @@ screen say(who, what, side_image=None, two_window=False):
 
                 text what id "what"
 
+            if who:
+                window:
+                    style "say_who_window"
+
+                    text who:
+                        id "who"
+
+
+
     # If there's a side image, display it above the text.
     if side_image:
         add side_image
     else:
         add SideImage() xalign 0.0 yalign 1.0
 
+style say_two_window_vbox:
+    yalign 0.93
+
 style say_who_window:
+    ypos -50
+    top_padding 3
     background Frame("assets/menu/BorderedWindow.png", 170,170)
-    ypadding 25
-    xpadding 25
-    #left_margin 300
-    xmargin 150
-    ymargin 10
+    xpadding 45
+    xmargin 200
 
 style say_window:
-    background "gui/textboxtest.png"
-    ypadding 20
-    xpadding 30
-    xmargin 150
-    bottom_margin 150
+    ypos 210
+    background "assets/menu/OCP_TextboxTest.png"
+    top_padding 50
+    xpadding 100
+    xmargin 110
+
     #ysize 225
     #box_wrap True
 
@@ -486,18 +490,18 @@ init -2:
         xfill True
 
     style say_label:
-        size 50
+        size 60
         bold False
         kerning -3
-        color "2db951"
-        font "Mechanical.otf"
-        text_align 0.5
+        font "NeoBulletin Semi Bold.ttf"
+        color "000000"
 
     style say_dialogue:
-        size 40
-        kerning -2
-        font "Mechanical.otf"
-        color "2db951"
+        size 35
+        kerning 0
+        font "NeoBulletin Semi Bold.ttf"
+        color "abd8b7"
+        outlines [(2, "000000", 0,0)]
 
     style pref_button:
         size_group "pref"

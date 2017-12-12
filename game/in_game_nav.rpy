@@ -9,6 +9,7 @@ init:
 
 screen custom_menu():
     tag menu
+    modal True
     if menustate == "options":
         $ menuground = "assets/menu/options_menu_options.png"
     if menustate == "save":

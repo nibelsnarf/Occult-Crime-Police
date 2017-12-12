@@ -80,6 +80,10 @@ label smart_house_act_2:
             warren "You'll figure it out as we go."
             ash "No tutorial for me, huh?"
 
+label testimony1_intro:
+    scene kitchen
+    show mir
+    show ash at flip
     ash "All right, let's take this guy's testimony down a peg!"
     # Interrogation Animation
     $ current_present = "SH_Objection1"
@@ -329,6 +333,10 @@ label SH_Success1:
     bottomi "I thought I saw movement in the window, so I ran away."
     bottomi "While I was wandering around the base, I took off the gloves and threw them away."
 
+label testimony2_intro:
+    scene kitchen
+    show mir
+    show ash at flip
     #Fade to Black, Fade In
     ash "How did that sound to you?"
     warren "Hmm... I didn't see any glaring errors in his statements."
@@ -584,6 +592,10 @@ label SH_Success2:
     bottomi "They were kicking me off the trial because they thought I had leaked information."
     bottomi "I was so mad that I started beating him up. And then... I grabbed the knife and..."
 
+label testimony3_intro:
+    scene kitchen
+    show mir
+    show drang
     #Fade to Black, Fade In
     drang "I'll admit I doubted you, assistant, but you really did pull it off."
     drang "You managed to drag the motive out of him! This is really going to cut down on the paperwork I need to file!"

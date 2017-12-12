@@ -10,59 +10,59 @@ image houseflyer = Image("gui/check_brochure.png", yalign= 0.3)
 image darshasid = Image("gui/check_id.png", yalign= 0.3)
 
 # Define characters used by this game.
-define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="nestled")
-define nameless = Character(callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
-define pscanner = Character("Police Scanner", callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
+define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
+define nameless = Character(callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
+define pscanner = Character("Police Scanner", callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
 
 # Define Warren sprites
-define wos = Character('Warren', callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
-define wthought = Character("Warren", callback=wdefos, ctc="ctc_blink", ctc_position="nestled", what_color="#66CCFF")
-define wbase = Character('Warren', callback=wdefvoice, ctc="ctc_blink", ctc_position="nestled")
-define wangry = Character('Warren', callback=wangryvoice, ctc="ctc_blink", ctc_position="nestled")
-define wannoy = Character('Warren', callback=wannoyvoice, ctc="ctc_blink", ctc_position="nestled")
-define wcasefile = Character('Warren', callback=wcasevoice, ctc="ctc_blink", ctc_position="nestled")
-define wrecoil = Character('Warren', callback=wrecoilvoice, ctc="ctc_blink", ctc_position="nestled")
-define whattip = Character('Warren', callback=whattipvoice, ctc="ctc_blink", ctc_position="nestled")
-define wthink = Character('Warren', callback=wthinkvoice, ctc="ctc_blink", ctc_position="nestled")
+define wos = Character('Warren', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
+define wthought = Character("Warren", callback=wdefos, ctc="ctc_blink", ctc_position="fixed", what_color="#66CCFF")
+define wbase = Character('Warren', callback=wdefvoice, ctc="ctc_blink", ctc_position="fixed")
+define wangry = Character('Warren', callback=wangryvoice, ctc="ctc_blink", ctc_position="fixed")
+define wannoy = Character('Warren', callback=wannoyvoice, ctc="ctc_blink", ctc_position="fixed")
+define wcasefile = Character('Warren', callback=wcasevoice, ctc="ctc_blink", ctc_position="fixed")
+define wrecoil = Character('Warren', callback=wrecoilvoice, ctc="ctc_blink", ctc_position="fixed")
+define whattip = Character('Warren', callback=whattipvoice, ctc="ctc_blink", ctc_position="fixed")
+define wthink = Character('Warren', callback=wthinkvoice, ctc="ctc_blink", ctc_position="fixed")
 
 # Define Carlos Sprites
-define cos = Character('Carlos', callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
-define cdef = Character('Carlos', callback=cdefvoice, ctc="ctc_blink", ctc_position="nestled")
-define cagit = Character('Carlos', callback=cagitvoice, ctc="ctc_blink", ctc_position="nestled")
-define cwhis = Character('Carlos', callback=cwhisvoice, ctc="ctc_blink", ctc_position="nestled")
-define clift = Character('Carlos', callback=cliftvoice, ctc="ctc_blink", ctc_position="nestled")
-define chold = Character('Carlos', callback=choldvoice, ctc="ctc_blink", ctc_position="nestled")
-define cser = Character('Carlos', callback=cservoice, ctc="ctc_blink", ctc_position="nestled")
+define cos = Character('Carlos', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
+define cdef = Character('Carlos', callback=cdefvoice, ctc="ctc_blink", ctc_position="fixed")
+define cagit = Character('Carlos', callback=cagitvoice, ctc="ctc_blink", ctc_position="fixed")
+define cwhis = Character('Carlos', callback=cwhisvoice, ctc="ctc_blink", ctc_position="fixed")
+define clift = Character('Carlos', callback=cliftvoice, ctc="ctc_blink", ctc_position="fixed")
+define chold = Character('Carlos', callback=choldvoice, ctc="ctc_blink", ctc_position="fixed")
+define cser = Character('Carlos', callback=cservoice, ctc="ctc_blink", ctc_position="fixed")
 
 # Define Guard Sprites
-define gglasses = Character('Guard', callback=gglassesvoice, ctc="ctc_blink", ctc_position="nestled")
-define geyes = Character('Guard', callback=geyesvoice, ctc="ctc_blink", ctc_position="nestled")
-define gremglasses = Character('Guard', callback=gremglassesvoice, ctc="ctc_blink", ctc_position="nestled")
-define gholdglasses = Character('Guard', callback=gholdglassesvoice, ctc="ctc_blink", ctc_position="nestled")
-define greturnglasses = Character('Guard', callback=greturnglassesvoice, ctc="ctc_blink", ctc_position="nestled")
+define gglasses = Character('Guard', callback=gglassesvoice, ctc="ctc_blink", ctc_position="fixed")
+define geyes = Character('Guard', callback=geyesvoice, ctc="ctc_blink", ctc_position="fixed")
+define gremglasses = Character('Guard', callback=gremglassesvoice, ctc="ctc_blink", ctc_position="fixed")
+define gholdglasses = Character('Guard', callback=gholdglassesvoice, ctc="ctc_blink", ctc_position="fixed")
+define greturnglasses = Character('Guard', callback=greturnglassesvoice, ctc="ctc_blink", ctc_position="fixed")
 
 #Define Drang Sprites
-define dos = Character('Drang', callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
-define ddef_gdown = Character('Drang', callback=ddefgdownvoice, ctc="ctc_blink", ctc_position="nestled")
-define ddef_gup = Character('Drang', callback=ddefgupvoice, ctc="ctc_blink", ctc_position="nestled")
-define dthink_gdown = Character('Drang', callback=dthinkgdownvoice, ctc="ctc_blink", ctc_position="nestled")
-define dthink_gup = Character('Drang', callback=dthinkgupvoice, ctc="ctc_blink", ctc_position="nestled")
-define dangry_gdown = Character('Drang', callback=dangrygdownvoice, ctc="ctc_blink", ctc_position="nestled")
-define dangry_gup = Character('Drang', callback=dangrygupvoice, ctc="ctc_blink", ctc_position="nestled")
-define ddril_gdown = Character('Drang', callback=ddrilgdownvoice, ctc="ctc_blink", ctc_position="nestled")
-define ddril_gup = Character('Drang', callback=ddrilgupvoice, ctc="ctc_blink", ctc_position="nestled")
-define djacket_pop = Character('Drang', callback=djpopvoice, ctc="ctc_blink", ctc_position="nestled")
-define djacket_popped = Character('Drang', callback=djpoppedvoice, ctc="ctc_blink", ctc_position="nestled")
+define dos = Character('Drang', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
+define ddef_gdown = Character('Drang', callback=ddefgdownvoice, ctc="ctc_blink", ctc_position="fixed")
+define ddef_gup = Character('Drang', callback=ddefgupvoice, ctc="ctc_blink", ctc_position="fixed")
+define dthink_gdown = Character('Drang', callback=dthinkgdownvoice, ctc="ctc_blink", ctc_position="fixed")
+define dthink_gup = Character('Drang', callback=dthinkgupvoice, ctc="ctc_blink", ctc_position="fixed")
+define dangry_gdown = Character('Drang', callback=dangrygdownvoice, ctc="ctc_blink", ctc_position="fixed")
+define dangry_gup = Character('Drang', callback=dangrygupvoice, ctc="ctc_blink", ctc_position="fixed")
+define ddril_gdown = Character('Drang', callback=ddrilgdownvoice, ctc="ctc_blink", ctc_position="fixed")
+define ddril_gup = Character('Drang', callback=ddrilgupvoice, ctc="ctc_blink", ctc_position="fixed")
+define djacket_pop = Character('Drang', callback=djpopvoice, ctc="ctc_blink", ctc_position="fixed")
+define djacket_popped = Character('Drang', callback=djpoppedvoice, ctc="ctc_blink", ctc_position="fixed")
 
 #Define Ash Sprites
-define aos = Character('Ash', callback=wdefos, ctc="ctc_blink", ctc_position="nestled")
-define aunk = Character('???', callback=astandardvoice, ctc="ctc_blink", ctc_position="nestled")
-define adef = Character('Ash', callback=astandardvoice, ctc="ctc_blink", ctc_position="nestled")
-define acam = Character('Ash', callback=acameravoice, ctc="ctc_blink", ctc_position="nestled")
+define aos = Character('Ash', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
+define aunk = Character('???', callback=astandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define adef = Character('Ash', callback=astandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define acam = Character('Ash', callback=acameravoice, ctc="ctc_blink", ctc_position="fixed")
 
 #Define Bottomi Sprites
-define bunk = Character('???', callback=bstandardvoice, ctc="ctc_blink", ctc_position="nestled")
-define bdef = Character('Bottomi', callback=bstandardvoice, ctc="ctc_blink", ctc_position="nestled")
+define bunk = Character('???', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define bdef = Character('Bottomi', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
 
 # The game starts here.
 label start:
@@ -128,6 +128,30 @@ label talkTest:
 
     call endgame from _call_endgame
     return
+
+label jumpToMenu:
+    menu:
+        "Outside Base":
+            jump outside_base_intro
+        "Meeting Ash":
+            jump meeting_ash_intro
+        "Meeting Drang":
+            jump meeting_drang_intro
+        "Investigation 1":
+            jump meeting_ash_outro
+        "Act 2 Intro":
+            jump smart_house_act_2
+        "Testimony 1":
+            jump testimony1_intro
+        "Testimony 2":
+            jump testimony2_intro
+        "Testimony 3":
+            jump testimony3_intro
+        "Act 3 Intro":
+            jump smart_house_act_3_intro
+
+
+
 
 label endgame:
     "End game"
