@@ -1,5 +1,6 @@
 label smart_house_act_5_intro:
     ### ACT 5: THE OSTENSIBLE CALAMITY
+    $ save_name = "Act 5"
     show black
     typing "September 13th. 10:24 P.M.\nSmart House - Kitchen"
     show kitchen with fade
@@ -179,7 +180,11 @@ label smart_house_act_5_intro:
     warren "Exactly. That's why I need you to go find her."
     carlos "Me?"
     warren "I've got to stay here and keep her talking so that you can track her down."
-    warren "You're the only one I can trust with this."
+    carlos "You mean I get to place her under citizen's arrest?"
+    warren "Uh, you don't need to do that."
+    warren "You work for the Sheriff's Department. You're already authorized to do the regular kind of arrests."
+    carlos "I know, but citizen's arrest always sounded so cool!"
+    warren "Focus, Tsukada! You're the only one I can trust with this."
     carlos ". . . I won't let you down, Chief."
     carlos os "BOY DO I HAVE TO GO TO THE BATHROOM"
     carlos os "LET ME JUST DUCK OUT AND MAKE MY WAY THERE"
@@ -190,7 +195,7 @@ label smart_house_act_5_intro:
     neering "The pipes aren't actually connected to anything yet."
     drang "THEY AREN'T!?"
     neering "No, they're not. Why do you ask?"
-    drang ". . . No reason."
+    drang ". . . . No reason."
     warren "Ms Neering, can you tell me more about this accident?"
     neering "WYS."
     menu:
@@ -201,7 +206,7 @@ label smart_house_act_5_intro:
             warren "I thought maybe you were asking if I was in charge here."
             neering "No. Obviously it was \"Whatever You Say\"."
             warren "Fine. Sheesh."
-            neering "Y'all's need to get on my level."
+            neering "You all need to get on my level."
 
         "Whatever You Say?":
             warren "Whatever You Say?"
@@ -495,7 +500,7 @@ label scratchesProofSuccess:
     # Besides, a couple of scratch marks doesn't prove anything.
     neering "BACOSMDPA."
     # You want to pin this whole thing on me? Well, it's not gonna happen!
-    neering "YWTPTWTOM? WINGH."
+    neering "YWTPTWTOM? WINGH!"
     # Darsha's death was just an accident caused by a mistake in the AI.
     neering "DDWJAACBAMITAI."
 
@@ -509,11 +514,498 @@ label scratchesProofSuccess:
             warren "...bad dadaist poetry!"
         "...syllable puke!":
             warren "...syllable puke!"
-        "...a conlang invented by morons!":
-            warren "...a conlang invented by a moron!"
+        "...a malfunctioning junior jumble!":
+            warren "...a malfunctioning junior jumble!"
 
     neering "As a matter of fact, it was a series of acronyms."
     neering "You've taken enough of my time as it is. I can't afford to waste time speaking every sentence."
     warren thought "Again with the acronyms! At this point, I think she's just doing it to tick me off."
 
     # Interrogation Animation
+$ current_present = "ObjectionLabel"
+$ back_action = "CurrentTestimony"
+
+label SH_Testimony9A:
+    $ settesti("SH_Testimony9A", None, "SH_Testimony9B", "SH_Press9A","SH_Advice9")
+    show screen testi
+    neering "TAMEFTSITC."
+    jump NextTestimony
+
+label SH_Press9A:
+    hide screen testi
+    warren "I'm going to have to ask you to clarify what that meant."
+    neering "What a complete waste of my time."
+    neering "Obviously I said, \"There are many explainations for the scratches in the carpet.\""
+    neering "See, the \"T\" stands for \"There\", the \"A\" stands for \"are\", the-{nw}"
+    warren "I wasn't confused about the {i}concept{/i} of acronyms!"
+    warren "Let's just move on..."
+    jump NextTestimony
+
+label SH_Testimony9B:
+    $ settesti("SH_Testimony9B", "SH_Testimony9A", "SH_Testimony9C", "SH_Press9B","SH_Advice9")
+    show screen testi
+    neering "POOTCITCDIBM."
+    jump NextTestimony
+
+label SH_Press9B:
+    hide screen testi
+    warren "You can't really expect me to be able to guess what you're saying, can you?"
+    neering "Of course not. For a clever enough mind, there should be no guesswork involved."
+    neering "For example: there are only a certain number of words that begin with the letter P."
+    neering "From there, only a certain number of letters which begin with O can follow those words."
+    neering "Following the chain of causality from there, one can logically arive at the only possible combination."
+    neering "Which, in this case, is \"Perhaps one of the contractors installing the carpet did it by mistake.\""
+    warren "You honestly think the contractor is the one who left those scratches?"
+    neering "Maybe. Maybe not. But there's reasonable doubt, for certain."
+    warren "We could check for DNA traces in the carpet fibers!"
+    neering "Perhaps, but HARPER is impressively thorough when it cleans."
+    neering "I doubt there would be any traces left behind."
+    neering "Not that it matters anyway..."
+
+    jump NextTestimony
+
+label SH_Testimony9C:
+    $ settesti("SH_Testimony9C", "SH_Testimony9B", "SH_Testimony9D", "SH_Press9C","SH_Advice9")
+    show screen testi
+    neering "BACOSMDPA."
+    jump NextTestimony
+
+label SH_Press9C:
+    hide screen testi
+    warren "Ah, well this one is obvious."
+    warren "You said \"Banana apple cucumber orange salad mango durian pear apricot.\""
+    neering "What? No! How could you possibly come to that conclusion?"
+    neering "{i}Clearly{/i} it was \"Besides, a couple of scratch marks doesn't prove anything.\""
+    neering "Honestly, I don't know where you got all those fruit names fro- oh."
+    neering "You were messing with me, weren't you?"
+    warren thought "Actually, I was fishing for the answer to that acronym."
+    warren thought "And you fell for it hook, line, and sinker."
+    jump NextTestimony
+
+label SH_Testimony9D:
+    $ settesti("SH_Testimony9D", "SH_Testimony9C", "SH_Testimony9E", "SH_Press9D","SH_Advice9")
+    show screen testi
+    neering "YWTPTWTOM? WINGH!"
+    jump NextTestimony
+
+label SH_Press9D:
+    hide screen testi
+    warren "Ms Neering. Angela. Am I a dentist? Because I sure feel like I'm pulling teeth right now."
+    warren "Do you really want to go through the motions for every one of these?"
+    warren "Couldn't you just, for once, tell me what you meant without me prompting?"
+    neering "I refuse to deign to lesser minds. If you want to know what I meant, you can ask."
+    warren "* sigh *"
+    warren "Could you please explain what you meant by \"YWTPTWTOM? WINGH!\"?"
+    neering "Hah! Clearly I was saying \"You want to pin this whole thing on me? Well, it's not gonna happen!\""
+    warren "Great. Good to know. Moving on."
+    jump NextTestimony
+
+label SH_Testimony9E:
+    $ settesti("SH_Testimony9E", "SH_Testimony9D", "SH_Testimony9A", "SH_Press9E","SH_Advice9")
+    show screen testi
+    neering "DDWJAACBAMITAI."
+    jump NextTestimony
+
+label SH_Press9E:
+    hide screen testi
+    warren "So what does this one mea{nw}"
+    neering "It means \"Darsha's death was just an accident caused by a mistake in the AI.\""
+    warren thought "Wow, that was fast. Maybe even Ms Neering is getting sick of this charade."
+    warren "So, you still think Mr Darsha's death was the result of an accident?"
+    neering "Of course. Not even your precious scratch marks can prove otherwise."
+    neering "Perhaps Darsha realized early on that something was wrong, and tried to claw his way out of the trap door."
+    neering "There's just no evidence that this was anything but a machine error."
+    jump NextTestimony
+
+label SH_Advice9:
+    hide screen testi
+    ash "Okay, what the heck is going on here?"
+    warren "It's an entire testimony of acronyms."
+    warren "Either Neering is trying to slow me down because she's afraid I'm on the right track..."
+    warren "Or she's just trying to mess with me."
+    warren "In either case, we're just going to have to press each statement just to figure out what they mean."
+    warren "Then we'll have to present evidence which contradicts the erroneous, um, acronym."
+    ash "What a pain in the neck!"
+    ash "I sure hope Ms Neering is getting a kick out of all this, because otherwise it's just needlessly complicated!"
+    jump CurrentTestimony
+
+label SH_Objection9:
+    hide screen testi
+    if testipart == "SH_Testimony9E" and present_response == "SecurityLogs":
+        jump SH_Success9
+    else:
+        jump SH_Failure9
+
+label SH_Failure9:
+    warren "Sorry, Ms Neering, but your web of lies comes crumbling down now!"
+    warren "Actually, I'm looking at this evidence, and I don't think it actually disproves anything."
+    warren "This is very embarrasing. I must have been confused by all the acronyms."
+    warren "Can I get a do-over?"
+    drang "I don't know... let's ask Mister Penalty."
+    drang "Mister Penalty, can Officer Warren get a do-over?"
+    $ mc_health -= 1
+    drang "Ah, I see. Very succinct, Mister Penalty."
+    warren thought "All right, all right, I get it."
+    if mc_health == 0:
+        jump SH_GameOver9
+    else:
+        jump SH_Testimony9A
+
+label SH_GameOver9:
+    drang "Mister Penalty says you're done for, Warren."
+    drang "He says to get out of my crime scene and not come back."
+    drang "I think you better do what he says, Warren. He's got that look in his eye."
+    warren "Great. Agent Drang is trying to shoo us away with imaginary characters."
+    warren "Are we really going to let him push us around like this?"
+    ash "I dunno. I'm pretty scared of what that Mister Penalty guy could do to us."
+    ash "I think we should get out of here!"
+    show black with fade
+    warren thought "And so, the truth disappeared into darkness."
+    warren thought "Drang failed to bring the real culprit to justice."
+    warren thought "And I never unravelled the enigma of Base 24."
+    jump endgame
+
+label SH_Success9:
+    warren "Ms Neering."
+    neering "Oh great. You've got that look in your eyes like you're about to twist my words around on me."
+    warren "You are familiar with the feedback logs in your office, correct?"
+    neering "I'm familiar with the fact that those are supposed to be private."
+    warren "I have here the logs pertaining to the hour of Orin Darsha's death."
+    warren "It shows 'Tour Mode' deactivating at 5:30 PM."
+    warren "In between then and the moment the body was discovered at 6, there's an interesting note here."
+    warren "At 5:51, it seems that the safety protocols were manually disabled."
+    warren "Now, why would somebody do something like that..."
+    warren "...unless they were trying to stage an \"accident\"!"
+    neering "Wh-what!?"
+    neering "You think I turned off the safety protocols so that I could kill Darsha?"
+    warren "Who else would have the authority to turn those off?"
+    neering "I'm afraid your theory is for the birds, officer."
+    neering "For you see! Although I am indeed responsible for turning off the protcols..."
+    neering "...I didn't do so until {i}after{/i} Orin was already dead!"
+    warren "You don't expect me to swallow that story, do you?"
+    warren "What possible reason could you have to turn off a vital function like that?"
+    neering "Simple. It was the first step in figuring out what went wrong with the Contraption."
+    neering "I needed to see why the safety protocols malfunctioned so badly, so I had to turn them off to run some tests."
+    neering "I never got around to the rest of the steps, because right around then the power went out."
+    ash "What do you think, Randi?"
+    ash "Is it possible that the safety protocols were turned off {i}after{/i} Mr Darsha's death?"
+    warren "No, it's not possible."
+
+label atThisTIme:
+    warren "It's clear that Orin Darsha was killed after the house's safety protocol was disabled."
+    warren "And the proof can be found within the feedback logs."
+    warren "Specifically, the entry at this time:"
+    menu:
+        "5:30 PM":
+            warren "Let's take a look at the entry at 5:30 PM: \"Tour Mode Deactivated\"."
+            warren "This proves, er, that the tour was not going on after 5:30."
+            neering "That point was never in contention, you double-digit IQ score."
+            $ mc_health -= 1
+            neering "You were supposed to be proving that Darsha was killed after the safety protocol was disabled."
+            neering "I don't blame you for failing, because it is, in fact, impossible to prove."
+            if mc_health == 0:
+                neering "And now, it looks like your time has run out."
+                neering "Isn't that right, Agent Drang?"
+                drang "Yes indeed, suspicious computer."
+                jump SH_GameOver9
+            else:
+                neering "But you're free to keep trying, if you so choose."
+                neering "I enjoy seeing you flounder like this."
+                jump atThisTIme
+        "5:51 PM":
+            warren "Let's take a look at the entry at 5:51 PM: \"Manual Override: Security System Disabled.\""
+            neering "Isn't that the same entry you just showed me? What's that going to prove?"
+            warren "Well, you see, it proves that...oh. Hm."
+            warren "It proves that the security system went down at 5:51?"
+            neering "We already knew that."
+            warren "Ulp!"
+            neering "Lucky for you, I like to see you squirm. So I'm going to give you another shot at proving the impossible."
+            if mc_health == 0:
+                drang "No you're not! This has gone on for too long already. In fact..."
+                jump SH_GameOver9
+            else:
+                warren thought "I'm so close to the truth, I just know it! But I have to figure out this question first!"
+                jump atThisTIme
+        "5:52 PM":
+            jump neeringsBreakdown1
+        "5:58 PM":
+            warren "Let's take a look at the entry at 5:58 PM: \"Communication Error. Please Check Connection\"."
+            warren "It's fair to say that this is when the power outage occurred, correct?"
+            neering "Yes, that's right."
+            warren "Well, that leaves 7 minutes between when the security system went off and when the whole house went off."
+            warren "More than enough time to kill Darsha with The Dressing Contraption."
+            neering "The time it would take to kill Darsha wasn't in question here, you troglodyte."
+            neering "And besides, there was even more time between the tour ending and the security sytem going offline. 21 minutes, to be exact."
+            $ mc_health -= 1
+            neering "If anything, it makes even more sense for Darsha's death to have happened first."
+            warren "Oh! Oh no!"
+            if mc_health == 0:
+                drang "Oh no indeed, Officer."
+                jump SH_GameOver9
+            else:
+                warren thought "This is bad. I take another look at the evidence..."
+                jump atThisTIme
+
+label neeringsBreakdown1:
+    warren "Let's take a look at the entry at 5:52 PM: \"TDC Subroutine Activated.\""
+    warren "When Ash and I found this, we were unsure what TDC could stand for."
+    ash "I still think it was \"Timothy, Don't Creep!\""
+    warren "But looking at it now, I think it's pretty obvious that TDC stands for \"The Dressing Contraption.\""
+    neering "!"
+    warren "This subroutine was only activated {i}after{/i} the security system went down."
+    warren "And it's the only instance of \"TDC\" anywhere in the hour's logs."
+    warren "The only possible explaination for this..."
+    warren "...is that your entire debugging story is a fabrication!"
+    neering "heh"
+    neering "eh heh heh"
+    neering "heh heh heh heh ha hah ha ha hah"
+    neering "HAAAAAAH HAH HAH HAHHHHH HAH HAH HAH HAH"
+    neering "HOO HEE HEE HEE HA HAW HOH HEH HA HA HA HA HAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    neering "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    neering "AAAAAAAAAaaaaaaaaaaaaahhhhh......\nhah. hah. hah."
+    neering "Well done, Officer. My great genius plan, you have foiled it."
+    neering "But don't be too proud of yourself."
+    neering "What should have been a perfect plan was in fact ruined by one event I could not have foreseen."
+    neering "Allow me to explain my masterstroke."
+
+    #Eyewitness Statement Animation
+    typing "-- my_testimony_FINAL(1).txt --{fast}"
+    neering "Darsha was trying to shut down the Smart House project, so I had to get rid of him."
+    neering "So I turned off the safety protocols and asked him to test out the dressing contraption."
+    neering "Everything would have gone according to plan, were it not for that power outage!"
+    neering "The house lost power before it could finish disposing of the body."
+    neering "Then that vapid fool made sure everyone knew about the dead body in the Smart House."
+    neering "So I had to improvise a cover story for the murder. I did pretty well, considering the circumstances."
+
+    # fade out, fade in
+    drang "Well, Warren, you've got some unconventional methods, but you sure do get results."
+    warren thought "Maybe if by 'unconventional methods', you mean 'actually interrogating suspects'."
+    drang "You've managed to find a culprit, find their motive, prove that both of them were lies..."
+    drang "...and then find the person who manufactured both the fake culprit and the fake motive and get them to confess!"
+    drang "All in the span of about three hours!"
+    drang "Now, of course, I could usually do all that in about two and a half, but still."
+    drang "So! Are you ready to tie this all up, or are you going to keep poking and prodding."
+    drang "Keep in mind, the answer to this question will determine if I continue to like you."
+    warren "Agent Drang, I want to be done here just as much as you..."
+    drang "Nope. All right. Stop right there."
+    drang "Unless the end of that sentence is \"so let's book this sucker then go grab some cold ones\" I don't want to hear it."
+    warren "...I don't think this case is completely wrapped up yet."
+    drang "AAAAAAAAGGGGHHHH! COME ON!"
+    drang "WHAT ELSE COULD YOU POSSIBLY NEED? SHE CONFESSED TO THE MURDER!"
+    warren "Exactly. She confessed to one of the worst crimes imaginable."
+    warren "There should be no further reason for her to lie."
+    warren "So why is there still a clear contradiction in her statement?"
+    drang ". . . . ."
+    drang "Damn it, Warren, now you've got me curious."
+    drang "Go ahead. Interrogate her. I want to see where you're going with this."
+    drang "But you better satisfy my curiosity, or else."
+    warren thought "In any case, Carlos should be closing in on Neering's location by now."
+    warren thought "She'll be under arrest soon enough."
+
+    # Interrogation Animation
+    $ current_present = "ObjectionLabel"
+    $ back_action = "CurrentTestimony"
+
+    label SH_Testimony10A:
+        $ settesti("SH_Testimony10A", None, "SH_Testimony10B", "SH_Press10A","SH_Advice10")
+        show screen testi
+        neering "Darsha was trying to shut down the Smart House project, so I had to get rid of him."
+        jump SH_Testimony10B
+
+    label SH_Press10A:
+        hide screen testi
+        warren "It was worth taking a life, just to protect your little project?"
+        neering "You don't understand."
+        neering "This house...was my life's work."
+        neering "Years worth of study and research had gone into it."
+        neering "To have it shut down, all because some small-minded bureaucrat didn't understand what I was doing here..."
+        neering "Well, it simply could not happen."
+        warren "But wouldn't a death surrounding the project be even more damning?"
+        neering "Once again, you fail to understand."
+        neering "If everything had gone according to plan, there wouldn't have been a {i}death{/i}..."
+        neering "Just a... let's say... {i}disappearance.{/i}"
+        neering "Darsha would have just never showed up for work tomorrow."
+        neering "People would ask questions, sure, but they'd never be able to trace anything back to me."
+        neering "Meanwhile, I could continue work on the house in peace."
+        neering "And it would have gone that way, if it weren't for that accursed--"
+        neering "Well, we'll get around to that. Anyways..."
+        jump SH_Testimony10B
+
+    label SH_Testimony10B:
+        $ settesti("SH_Testimony10B", "SH_Testimony10A", "SH_Testimony10C", "SH_Press10B","SH_Advice10")
+        show screen testi
+        neering "So I turned off the safety protocols and asked him to test out the Dressing Contraption."
+        jump SH_Testimony10C
+
+    label SH_Press10B:
+        hide screen testi
+        warren "How could you allow your own creation to be used for evil?"
+        neering "What are you talking about?"
+        warren "HARPER. It's like your child, metaphorically speaking."
+        warren "How could you force it to do something so immoral?"
+        neering "It was an evil, yes, but a neccesary evil. Self-defense, you might say."
+        neering "You've brought up HARPER, so let's consider things from its perspective."
+        neering "If Darsha wasn't gotten rid of, then HARPER would have been shut down, effectively killing it."
+        neering "So if you told the machine, \"It's either you or him\", what's it going to pick?"
+        warren "Aren't there laws or something which tell a machine to value a human's life over its own?"
+        neering "Maybe in Science Fiction stories, but this is real life, Officer."
+        neering "Any sentient creature on earth is going to value its own life above somebody else's. It's just nature."
+        neering "Besides, there are billions of humans out there, but there's only one HARPER."
+        jump SH_Testimony10C
+
+    label SH_Testimony10C:
+        $ settesti("SH_Testimony10C", "SH_Testimony10B", "SH_Testimony10D", "SH_Press10C","SH_Advice10")
+        show screen testi
+        neering "Everything would have gone according to plan, were it not for that power outage!"
+        jump SH_Testimony10D
+
+    label SH_Press10C:
+        hide screen testi
+        warren "The power outage..."
+        warren "Is that the 'one event you could not have forseen' you mentioned earlier?"
+        neering "Precicely."
+        neering "The power outage... and that pesky style boy... they were rogue elements."
+        warren "Well, you know what they say. The best laid plans of mice and men..."
+        neering "Do not compare me to filthy rodents or apes. I... am a genius!"
+        neering "My expert knowledge of the house's workings allowed me complete control of everything inside these walls."
+        neering "I could see everything and do anything. My four walls and a roof of personal godhood."
+        neering "But... there was no way to deal with anything {i}outside{/i} these walls."
+        neering "I'll have to keep that in mind for next time..."
+        warren thought "Next time? Does she plan on doing this again?"
+        jump SH_Testimony10D
+
+    label SH_Testimony10D:
+        $ settesti("SH_Testimony10D", "SH_Testimony10C", "SH_Testimony10E", "SH_Press10D","SH_Advice10")
+        show screen testi
+        neering "The house lost power before it could finish disposing of the body."
+        jump SH_Testimony10E
+
+    label SH_Press10D:
+        hide screen testi
+        warren "How were you planning on getting rid of Orin Darsha's body before you were interrupted?"
+        neering "The house has a garbage disposal here in the kitchen. That's why I'd brought it in here."
+        warren "You really thought a garbage disposal would be enough to get rid of a body?"
+        neering "This is no average garbage disposal. This is the garbage disposal... of the future!"
+        warren thought "She's got that look of motherly pride again..."
+        neering "Every piece of garbage is first run through a trash compactor."
+        neering "Then, it is incinerated in an underground furnace."
+        neering "Finally, the remains are submerged in a heavily corrosive chemical solution."
+        neering "You don't even need to pay for the garbage collector anymore. It's all completely annihilated!"
+        warren thought "Sounds like the EPA's worst nightmare..."
+        neering "But then the power went out, and my infallable plan... well, failed."
+        jump SH_Testimony10E
+
+    label SH_Testimony10E:
+        $ settesti("SH_Testimony10E", "SH_Testimony10D", "SH_Testimony10F", "SH_Press10E","SH_Advice10")
+        show screen testi
+        neering "Then that vapid fool made sure everyone knew about the dead body in the Smart House."
+        jump SH_Testimony10F
+
+    label SH_Press10E:
+        hide screen testi
+        warren "Couldn't you have still disposed of the body?"
+        neering "What would be the point anymore?"
+        neering "The point of getting rid of a body is so that nobody knows there is a body."
+        neering "When a photo of the body starts trending online, that element is sort of lost."
+        neering "I knew that no matter what, I would be getting police attention sooner or later."
+        jump SH_Testimony10F
+
+    label SH_Testimony10F:
+        $ settesti("SH_Testimony10F", "SH_Testimony10E", "SH_Testimony10A", "SH_Press10F","SH_Advice10")
+        show screen testi
+        neering "So I had to improvise a cover story for the murder. I did pretty well, considering the circumstances."
+        jump SH_Testimony10A
+
+    label SH_Press10F:
+        hide screen testi
+        warren "If by pretty well, you mean you brainwashed and framed a man for your crime."
+        neering "I've already killed one man today, Officer."
+        neering "Do you really think I'm going to feel bad about incriminating another?"
+        neering "I'm already past any sort of moral threshold."
+        neering "At this point, anything I do to cover things up is just a drop in the bucket."
+        warren "I'll admit, I've never heard the \"Defense by Relative Criminality\" before."
+        warren "But, uh, I wouldn't count on that strategy at your trial."
+        jump SH_Testimony10A
+
+    label SH_Advice10:
+        hide screen testi
+        ash "Okay, what are we looking for here?"
+        warren "This is a strange one."
+        warren "What we've got here is an embarrassment of riches, as far as confessions go."
+        warren "Neering has laid out her {color=red}motive{/color}, her {color=red}scheme{/color}, and even her {color=red}fatal mistake{/color}."
+        warren "But for whatever reason, she's lying about one of these."
+        warren "So the question becomes... which one?"
+        warren "Is she lying about her {color=red}motive{/color}, her {color=red}scheme{/color}, or her {color=red}mistake{/color}?"
+        warren "If we can answer that question, we can figure out why she's still lying to us."
+        jump CurrentTestimony
+
+    label SH_Objection10:
+        hide screen testi
+        if testipart == "SH_Testimony10A" and present_response == "DarshasEmail":
+            jump SH_Success10
+        else:
+            jump SH_Failure10
+
+    label SH_Failure10:
+        warren "You're lying, Ms Neering."
+        neering "About what?"
+        warren "About... this piece of evidence!"
+        neering "We've known each other for little more than a couple hours, Officer."
+        neering "And yet, I can already tell when you're bluffing."
+        neering "Am I profoundly insightful, or are you just obliviously transparent?"
+        neering "The answer, obviously, is both."
+        warren "Drat."
+        drang "Warren, you piqued my curiosity and then completely failed to follow through!"
+        $ mc_health -= 1
+        drang "I'm very, very disappointed in you."
+        warren thought "Sorry, I guess."
+        if mc_health == 0:
+            jump SH_GameOver10
+        else:
+            jump SH_Testimony10A
+
+    label SH_GameOver10:
+        drang "All right, let's wrap it up."
+        warren "W-what!?"
+        drang "I gave you a fair chance, but you couldn't get results."
+        drang "Now we go back to doing things my way."
+        show black with fade
+        warren thought "But Drang's way didn't work."
+        warren thought "Although he attempted to arrest Ms Neering, she was nowhere to be found."
+        warren thought "It seemed she had slipped away during the conclusion, never to be seen again."
+        warren thought "Orin Darsha's killer was never brought to justice."
+        warren thought "And I never unravelled the enigma of Base 24."
+        jump endgame
+
+    label SH_Success10:
+        warren "So, you killed Orin Darsha because he wanted to shut down the Smart House project?"
+        neering "Yes! How many times do I have to say it?"
+        warren "That's strange, though."
+        neering "What now?"
+        warren "Do you remember this email exchange? I showed it to you earlier."
+        neering "Are you going to bring up the carpeting again?"
+        warren "No, I want you to take a look at another part of this exchange."
+        warren "It seems there was an ongoing debate about whether to continue the Smart House project..."
+        warren "But it was {i}you{i/}, Ms Neering, who wanted to shut things down."
+        neering "W-what? There were emails about...?"
+        warren "It seems strange that you don't remember your own stance in this argument."
+        warren "Even stranger that you don't even remember sending emails on the subject."
+        neering "W-well, it's been a stressful couple of days. A lot has slipped my mind."
+        neering "Perhaps I really did want to shut down the Smart House. What of it?"
+        warren "Well, why would you want that?"
+        warren "You said yourself that the Smart House was your life's work. You would protect it at all costs."
+        warren "So why would you suddenly want to shut it down?"
+        warren "And why was it so important that you would kill a man over it?"
+        warren "Can you explain that?"
+        neering ". . . . ."
+        carlos "CHIIIIEEEEFFFFF!"
+        warren "Carlos? What are you doing back here?"
+        warren "You're suppossed to be looking for..."
+        carlos "That's just the thing, Chief."
+        carlos "I've been all over this crazy house. I went in that dressing room place, and inside the walls, and..."
+        carlos "Angela Neering... is not anywhere in this house!"
+        carlos "In fact, I don't think she's anywhere on this base!"
+        guard "That's impossible! I have Ms Neering's television here hooked up to the house's local network!"
+        carlos "Then... where is she?"
+        show black with fade
+        jump smart_house_act_6

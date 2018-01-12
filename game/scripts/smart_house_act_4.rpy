@@ -1,5 +1,6 @@
 label smart_house_act_4_intro:
     ### ACT 4: DELIVERANCE, THY NAME IS TRUTH
+    $ save_name = "Act 4"
     show black
     typing "September 13th. 9:47 P.M.\nSmart House - Kitchen"
     show kitchen with fade

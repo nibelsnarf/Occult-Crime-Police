@@ -25,7 +25,7 @@ init -1 python hide:
     ## This controls the title of the window, when Ren'Py is
     ## running in a window.
 
-    config.window_title = u"Temashaw Valley"
+    config.window_title = u"Occult Crime Police"
 
     # These control the name and version of the game, that are reported
     # with tracebacks and other debugging logs.
@@ -49,34 +49,34 @@ init -1 python hide:
         ## Color scheme: Vampire Bite
 
         ## The color of an idle widget face.
-        widget = "#653F1A",
+        widget = "#294831",
 
         ## The color of a focused widget face.
-        widget_hover = "#966636",
+        widget_hover = "#448354",
 
         ## The color of the text in a widget.
-        widget_text = "#FFFFFF",
+        widget_text = "#000000",
 
         ## The color of the text in a selected widget. (For
         ## example, the current value of a preference.)
-        widget_selected = "#171717",
+        widget_selected = "#8dc69c",
 
         ## The color of a disabled widget face.
-        disabled = "#653F1A",
+        disabled = "#4d6352",
 
         ## The color of disabled widget text.
-        disabled_text = "#727272",
+        disabled_text = "#1e1e1e",
 
         ## The color of informational labels.
-        label = "#f8ca00",
+        label = "#000000",
 
         ## The color of a frame containing widgets.
-        frame = "#000000",
+        frame = "#4d6352",
 
         ## The background of the main menu. This can be a color
         ## beginning with '#', or an image filename. The latter
         ## should take up the full height and width of the screen.
-        mm_root = "assets/backgrounds/mm_screen.png",
+        mm_root = "main_menu_bg",
 
         ## The background of the game menu. This can be a color
         ## beginning with '#', or an image filename. The latter
@@ -194,7 +194,7 @@ init -1 python hide:
 
     ## Music that is played while the user is at the main menu.
 
-    # config.main_menu_music = "main_menu_theme.ogg"
+    config.main_menu_music = "music/HoveringGhost.ogg"
 
 
     #########################################
@@ -264,6 +264,7 @@ init -1 python hide:
     ## Used when the image is changed by a say statement with image attributes.
     config.say_attribute_transition = None
 
+
     #########################################
     ## This is the name of the directory where the game's data is
     ## stored. (It needs to be set early, before any other init code
@@ -295,6 +296,9 @@ init -1 python hide:
     ## More customizations can go here.
 
     config.allow_skipping = True
+
+    config.thumbnail_width = 480
+    config.thumbnail_height = 270
 
 
 ## This section contains information about how to build your project into

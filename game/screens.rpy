@@ -66,17 +66,17 @@ screen say(who, what, side_image=None, two_window=True):
 
 style say_two_window_vbox:
     yalign 0.93
+    box_reverse True
 
 style say_who_window:
-    ypos -50
     top_padding 3
     background Frame("assets/menu/BorderedWindow.png", 170,170)
     xpadding 45
     xmargin 200
+    ypos 1.5
 
 style say_window:
-    ypos 210
-    background "assets/menu/OCP_TextboxTest.png"
+    background "assets/menu/OCP_TextboxTest3.png"
     top_padding 50
     xpadding 100
     xmargin 110
@@ -94,7 +94,7 @@ style say_vbox:
 
 screen choice(items):
 
-    window:
+    window at menuFade:
         style "menu_window"
         xalign 0.5
         yalign 0.975
@@ -126,30 +126,36 @@ init -2:
     $ config.narrator_menu = True
 
     style menu_window is default:
-        background None
+        background Frame("assets/menu/MenuBW.png",60)
+        xmargin 100
+        xpadding 30
+        ypadding 40
+        bottom_padding 50
 
-style menu_choice_button is button:
-      xminimum int(config.screen_width * 0.90)
-      xmaximum int(config.screen_width * 0.90)
-      yminimum int(config.screen_height * 0.05)
-      top_margin 7
-      padding(30,10)
-      idle_background "#3A8256"
-      hover_background "#479e69"
+    style menu_choice_button is button:
+        idle_background None
+        hover_background "#000000"
+        xsize 1.0
+        ypadding 10
+        hover_ymargin 0
 
-style menu_choice:
-      size 28
-      color "FFFFFF"
-      #outlines [(1, "#000", 0, 0)]
-      xalign 0.0
-      hover_xalign 0.01
-      text_align 0.0
+    style menu_choice:
+        idle_size 28
+        hover_size 30
+        idle_color "c7e5cf"
+        hover_color "#ffffff"
+        font "Young.ttf"
+        xalign 0.5
+        bold True
 
-#style menu_choice_chosen:
-    #color "cccccc"
-    #strikethrough True
-
-
+    style menu_choice_chosen:
+        idle_size 28
+        idle_color "c7e5cf"
+        hover_color "#ffffff"
+        font "Young.ttf"
+        bold True
+        text_align 0.5
+        strikethrough True
 
 ##############################################################################
 # Input
@@ -236,15 +242,13 @@ screen main_menu():
     # The main menu buttons.
     frame:
         style_group "mm"
-        xalign .5
-        yalign .75
+        xalign 1.1
+        yalign .85
         background "#FFFFFF00"
         has vbox
-
-
-        textbutton _("Start Game") action Start() text_style "mm_text"
-        textbutton _("Load Game") action ShowMenu("load")  text_style "mm_text"
-        textbutton _("Options") action ShowMenu("mm_prefs")  text_style "mm_text"
+        textbutton _("New Game") action Start() text_style "mm_text"
+        textbutton _("Load Game") action [ ShowMenu("mm_load"), Hide("mm_prefs") ] text_style "mm_text"
+        textbutton _("Options") action [ Show("mm_prefs"), Hide("mm_load") ]  text_style "mm_text"
         textbutton _("Quit") action Quit(confirm=False)  text_style "mm_text"
 
 init -2:
@@ -253,15 +257,18 @@ init -2:
     style mm_button:
         size_group "mm"
         xsize 500
-        ysize 75
+        ysize 125
         ymargin 10
-        background "#299363"
-        hover_background "#2bb269"
+        background Frame("assets/menu/OCP_TextboxTest2.png",75)
+        hover_xpos -40
 
     style mm_text:
         size 36
-        xalign 0.5
+        font "Young.ttf"
+        hover_color "c5e6ca"
+        xalign 0.25
         yalign 0.5
+        hover_xalign 0.2
 
 
 
@@ -313,7 +320,7 @@ screen file_picker():
 
         xalign 0.5
         yalign 0.5
-        xmargin 300
+        xmargin 100
 
         has vbox
 
@@ -321,22 +328,22 @@ screen file_picker():
 
         #The buttons at the top allow the user to pick a
         #page of files.
-        hbox:
-            xalign 0.5
-            style_group "file_picker_nav"
+#        hbox:
+#            xalign 0.5
+#            style_group "file_picker_nav"
+#
+#            textbutton _("Prev"):
+#                action FilePagePrevious()
+#
+#            for i in range(1, 7):
+#                textbutton str(i):
+#                    action FilePage(i)
+#
+#            textbutton _("Next"):
+#                action FilePageNext()
 
-            textbutton _("Prev"):
-                action FilePagePrevious()
-
-            for i in range(1, 7):
-                textbutton str(i):
-                    action FilePage(i)
-
-            textbutton _("Next"):
-                action FilePageNext()
-
-        $ columns = 1
-        $ rows = 3
+        $ columns = 2
+        $ rows = 2
 
         # Display a grid of file slots.
         grid columns rows:
@@ -347,54 +354,159 @@ screen file_picker():
             for i in range(1, columns * rows + 1):
 
                 # Each file slot is a button.
-                button:
+                button xmargin 20 ymargin 20:
                     action [Stop(channel="movie"), FileAction(i)]
-                    xfill True
+                    xfill False
                     style "large_button"
 
-                    has hbox
+                    has vbox
                     add FileScreenshot(i)
 
-                    $ file_name = FileSlotName(i, columns * rows)
+                    $ file_name = "Save " + FileSlotName(i, columns * rows)
                     $ file_time = FileTime(i, empty=_("Empty Slot."))
                     $ save_name = FileSaveName(i)
 
-                    text "[file_name]. [file_time!t]\n[save_name!t]"
+                    text "[file_name]\n[file_time!t]\n[save_name!t]"
 
                     key "save_delete" action FileDelete(i)
 
-        hbox:
-            xalign 0.5
-            style_group "file_picker_nav"
+        #hbox:
+#            xalign 0.5
+#            style_group "file_picker_nav"
+#
+#            textbutton _("Auto"):
+#                action FilePage("auto")
+#
+#            textbutton _("Regular"):
+#                action FilePage(1)
+#
+#            textbutton _("Quick"):
+#                action FilePage("quick")
 
-            textbutton _("Auto"):
-                action FilePage("auto")
-
-            textbutton _("Regular"):
-                action FilePage(1)
-
-            textbutton _("Quick"):
-                action FilePage("quick")
-
-            textbutton _("Return"):
-                action Return()
+            #textbutton _("Return"):
+                #action Return()
 
         null height 5
 
 screen save():
-    tag menu
-    use file_picker
+    #tag menu
+    #use file_picker
+    frame:
+        style "file_picker_frame"
+        background "#ffffff00"
+        xalign 0.5
+        yalign 0.95
+        xmargin 100
+
+        has vbox
+
+        null height 5
+
+        $ columns = 2
+        $ rows = 2
+
+        # Display a grid of file slots.
+        grid rows columns:
+            transpose False
+            style_group "file_picker"
+
+            # Display ten file slots, numbered 1 - 10.
+            for i in range(1, columns * rows + 1):
+
+                # Each file slot is a button.
+                button xmargin 20 ymargin 20:
+                    action [Stop(channel="movie"), FileSave(i)]
+                    xfill False
+                    style "large_button"
+                    idle_background "assets/menu/polaroid-blank.jpg"
+                    hover_background "assets/menu/polaroid-blank.jpg"
+                    idle_ypos 0
+                    hover_ypos -10
+                    ypadding 20
+                    xpadding 30
+
+                    has vbox
+                    add FileScreenshot(i)
+
+                    $ file_name = "Save " + FileSlotName(i, columns * rows)
+                    $ file_time = FileTime(i, empty=_("Empty Slot."))
+                    $ save_name = FileSaveName(i)
+
+                    text "[file_name]\n[file_time!t]\n[save_name!t]"
+
+                    key "save_delete" action FileDelete(i)
 
 screen load():
-    tag menu
-    use file_picker
+    #tag menu
+    #use file_picker
+    frame:
+        style "file_picker_frame"
+        background "#ffffff00"
+        xalign 0.5
+        yalign 0.95
+        xmargin 100
+
+        has vbox
+
+        null height 5
+
+        $ columns = 2
+        $ rows = 2
+
+        # Display a grid of file slots.
+        grid rows columns:
+            transpose False
+            style_group "file_picker"
+
+            # Display ten file slots, numbered 1 - 10.
+            for i in range(1, columns * rows + 1):
+
+                # Each file slot is a button.
+                button xmargin 20 ymargin 20:
+                    action [Stop(channel="movie"), FileLoad(i)]
+                    xfill False
+                    style "large_button"
+                    idle_background "assets/menu/polaroid-blank.jpg"
+                    hover_background "assets/menu/polaroid-blank.jpg"
+                    insensitive_background "assets/menu/polaroid-blank.jpg"
+                    idle_ypos 0
+                    hover_ypos -10
+                    ypadding 20
+                    xpadding 30
+
+                    has vbox
+                    add FileScreenshot(i)
+
+                    $ file_name = "Save " + FileSlotName(i, columns * rows)
+                    $ file_time = FileTime(i, empty=_("Empty Slot."))
+                    $ save_name = FileSaveName(i)
+
+                    text "[file_name]\n[file_time!t]\n[save_name!t]"
+
+                    key "save_delete" action FileDelete(i)
+
+screen mm_load():
+    frame:
+        background "#ffffff00"
+        xalign 0.2
+        yalign 0.5
+        use load
 
 init -2:
     style file_picker_frame is menu_frame
     style file_picker_nav_button is small_button
     style file_picker_nav_button_text is small_button_text
     style file_picker_button is large_button
-    style file_picker_text is large_button_text
+    style file_picker_text is large_boy_text
+
+    style large_boy_text:
+        size 24
+        xalign 0.5
+        text_align 0.5
+        font "Young.ttf"
+        color "#000000"
+
+
 
 
 ##############################################################################
@@ -407,8 +519,10 @@ screen custom_quit():
         xalign 0.5
         yalign 0.5
         spacing 100
-        text "Do you really want to quit?\nUnsaved progress may be lost." size 40 color "#000000"
-        textbutton _("Yes") action Quit(confirm=None)
+        text "Do you really want to quit?\nUnsaved progress may be lost." size 40 color "#000000" font "NeoBulletin Semi Bold.ttf"
+        textbutton _("Yes") action Quit(confirm=False) xalign 0.5 text_size 50 background Frame("assets/menu/MenuBW.png",75) xsize 300 hover_xsize 320 text_hover_kerning 5
+
+
 
 
 ##############################################################################
@@ -421,73 +535,70 @@ screen preferences():
 
     #tag menu
 
-    vbox ypos 0.5:
-        frame:
-            style_group "pref"
-            has vbox
-
-            label _("Display")
-            textbutton _("Window") action Preference("display", "window")
-            textbutton _("Fullscreen") action Preference("display", "fullscreen")
-
-        frame:
-            style_group "pref"
-            has vbox
-
-            label _("Transitions")
-            textbutton _("All") action Preference("transitions", "all")
-            textbutton _("None") action Preference("transitions", "none")
-
-        frame:
-            style_group "pref"
-            has vbox
-
-            textbutton _("Joystick...") action Preference("joystick")
-
-        frame:
-            style_group "pref"
-            has vbox
-
-            label _("Music Volume")
-            bar value Preference("music volume")
-
-        frame:
-            style_group "pref"
-            has vbox
-
-            label _("Sound Volume")
-            bar value Preference("sound volume")
-
-            if config.sample_sound:
-                textbutton _("Test"):
-                    action Play("sound", config.sample_sound)
-                    style "soundtest_button"
-
-        if config.has_voice:
+    vbox yalign 0.66 xalign 0.5:
+        hbox xpos -0.0125:
             frame:
                 style_group "pref"
                 has vbox
 
-                label _("Voice Volume")
-                bar value Preference("voice volume")
+                label _("Display")
+                hbox xalign 0.5:
+                    textbutton _("Window") action Preference("display", "window")
+                    textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
-                textbutton _("Voice Sustain") action Preference("voice sustain", "toggle")
-                if config.sample_voice:
+            frame:
+                style_group "pref"
+                has vbox
+
+                label _("Transitions")
+                hbox xalign 0.5:
+                    textbutton _("All") action Preference("transitions", "all")
+                    textbutton _("None") action Preference("transitions", "none")
+
+        hbox xpos 0.0125:
+            frame:
+                style_group "pref"
+                has vbox
+
+                label _("Music Volume")
+                bar value Preference("music volume")
+
+            frame:
+                style_group "pref"
+                has vbox
+
+                label _("Sound Volume")
+                bar value Preference("sound volume")
+
+                if config.sample_sound:
                     textbutton _("Test"):
-                        action Play("voice", config.sample_voice)
+                        action Play("sound", config.sample_sound)
                         style "soundtest_button"
+
+        frame xalign 0.5:
+            style_group "pref"
+            has vbox
+            label _("Joystick Settings")
+            textbutton _("Joystick...") action Preference("joystick") xalign 0.5
 
 init -2:
     style pref_frame:
-        xfill True
-        xmargin 0.4
-        top_margin 5
+        xfill False
+        top_margin -5
+        ypadding 20
+        background Frame("assets/menu/OCP_TextboxTest3.png",75)
+        ymargin 20
+        ysize 190
 
     style Display:
         color "653F1A"
 
+    style pref_label:
+        xalign 0.5
+
     style pref_vbox:
         xfill True
+        xsize 700
 
     style say_label:
         size 60
@@ -497,22 +608,43 @@ init -2:
         color "000000"
 
     style say_dialogue:
-        size 35
+        size 40
         kerning 0
-        font "NeoBulletin Semi Bold.ttf"
+        bold True
+        font "Young.ttf"
         color "abd8b7"
-        outlines [(2, "000000", 0,0)]
+        outlines [(4, "000000", 0,0)]
 
     style pref_button:
         size_group "pref"
         xalign 1.0
+        ypadding 10
 
     style pref_slider:
-        xmaximum 192
-        xalign 1.0
+        xmaximum 530
+        ysize 50
+        xalign 0.5
+        left_bar "assets/menu/health_left.png"
+        right_bar "assets/menu/health_right.png"
+        thumb "assets/menu/thumb.png"
+        thumb_offset 0
 
     style soundtest_button:
         xalign 1.0
+
+    style wow:
+        xpos 50
+        ypos 300
+
+    style pref_button_text:
+        size 40
+        font "Young.ttf"
+
+    style pref_label_text:
+        font "NeoBulletin Semi Bold.ttf"
+        size 50
+
+
 
 
 ##############################################################################
@@ -521,10 +653,9 @@ init -2:
 # I need a separate screen for the preferences menu on the main menu
 
 screen mm_prefs():
-    modal True
-    add "assets/backgrounds/preferences.png" xalign 0.5 yalign 0.9
-    use preferences
-    textbutton "Return" action [ Hide("mm_prefs"), Return(None)] xalign 0.5 yalign 0.9
+    frame:
+        style "wow"
+        use preferences
 
 
 ##############################################################################

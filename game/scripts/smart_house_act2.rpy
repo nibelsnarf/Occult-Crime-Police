@@ -1,5 +1,6 @@
 label smart_house_act_2:
     ### ACT 2: THE GOSSAMER PENANCE
+    $ save_name = "Act 2"
     scene black
     typing "September 13th. 8:32 P.M.\nSmart House - Kitchen"
     scene kitchen with fade
@@ -150,7 +151,7 @@ label SH_Press1C:
     warren "It's a Smart House."
     bottomi "Oh, uh, okay."
     bottomi "So there's, what, a bunch of dictionaries in here?"
-    warren "I can explain it later. What happened next?"
+    warren "I'll explain it to you later. What happened next?"
     jump SH_Testimony1D
 
 label SH_Testimony1D:
@@ -220,7 +221,7 @@ label SH_Press1G:
     warren "And most people don't go around stabbing random individuals for no reason."
     warren "Do you have a history of mental illness, Mr Bottomi?"
     bottomi "You think I'm some kind of psycho?"
-    bottomi "No, no, I don't think so. I had to pass a medical examination to qualify for the clinical trial here."
+    bottomi "Well, sorry, but I'm not. I had to pass a medical examination to qualify for the clinical trial here."
     bottomi "They wouldn't have let me participate if I had something wrong with my head."
     bottomi "It would have interfered with the hardw- with the tests, I mean."
     if mentionedhardware == True:

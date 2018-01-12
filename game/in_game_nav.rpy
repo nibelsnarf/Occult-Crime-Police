@@ -10,6 +10,9 @@ init:
 screen custom_menu():
     tag menu
     modal True
+
+    add "mm_bg_scroll" alpha 0.75
+
     if menustate == "options":
         $ menuground = "assets/menu/options_menu_options.png"
     if menustate == "save":
@@ -21,10 +24,10 @@ screen custom_menu():
 
     imagemap:
         ground menuground
-        hotspot (235, 70, 370, 70) action SetVariable("menustate","options")
-        hotspot (614, 70, 370, 70) action SetVariable("menustate","save")
-        hotspot (985, 70, 370, 70) action SetVariable("menustate","load")
-        hotspot (1344, 70, 370, 70) action SetVariable("menustate","quit")
+        hotspot (235, 140, 370, 70) action SetVariable("menustate","options")
+        hotspot (614, 140, 370, 70) action SetVariable("menustate","save")
+        hotspot (985, 140, 370, 70) action SetVariable("menustate","load")
+        hotspot (1344, 140, 370, 70) action SetVariable("menustate","quit")
 
     if menustate == "options":
         #add "gui/inventory2.png"
@@ -36,8 +39,8 @@ screen custom_menu():
     if menustate == "quit":
         use custom_quit
 
-    hbox align (.97,.03) spacing 20:
-        textbutton "Return" action [ Hide("custom_menu"), Return(None)]
+    hbox align (0.97,-0.01) spacing 20:
+        imagebutton auto "assets/menu/inv_back_%s.png" action [ Hide("custom_menu")]
 
 screen examine_navigation():
     vbox xalign 0.5 yalign 0.95:

@@ -1,6 +1,6 @@
 label smart_house_act_1:
     scene black
-
+    pause 1.0
     typing "September 13th. 7:28 P.M.\nNear the outskirts of town."
     play music "sound/Car_Loop.ogg" fadein 1.0
     scene policecarbythesideoftheroad with fade
@@ -76,6 +76,7 @@ label smart_house_act_1:
 
     ## play act stinger
     scene act1 with dissolve
+    $ save_name = "Act 1"
     pause 3.0
 
 label outside_base_intro:
@@ -88,7 +89,7 @@ label outside_base_intro:
 
     scene outsidebase with dissolve
     pause 1.0
-    typing "Septenber 13th\nBase 24\nSecurity Checkpoint"
+    typing "September 13th\nBase 24 - Security Checkpoint"
     play music "music/Investigation_Loops.ogg" fadein 1.0
     show screen inventory_screen_button
     show guard glasses at flip
@@ -98,7 +99,7 @@ label outside_base_intro:
     cagit "Hey buddy, I'm an american citizen! My taxes pay your salary!" with smallshake
     hide guard eyes
     show mir default at flip
-    wbase "Carlos, you work for the Sherrif's Department. His taxes pay {i}your{/i} salary too."
+    wbase "Carlos, you work for the Sherrif's Department. His taxes pay {i}your{/i} salary."
     $profile.add(carlos)
     cdef "Oh! Hey, Chief. About time you got here."
     cagit "This stick-in-the-mud won't let me in to investigate."
@@ -281,7 +282,7 @@ label outside_base_outro:
 label meeting_ash_intro:
 
     scene black
-    typing "September 13th - Base 24 - Warehouse"
+    typing "September 13th\nBase 24 - Warehouse"
     show screen inventory_screen_button
     scene basewarehouse with fade
     show mir default
@@ -300,7 +301,7 @@ label meeting_ash_intro:
     aunk "What with the murder and all..."
     wbase "Ash? What are you doing here?"
     $profile.add(ash)
-    adef "I'm here for the {color=#FF9966}tour!{/color} What else would I be doing?"
+    aconfident "I'm here for the {color=#FF9966}tour!{/color} What else would I be doing?"
     play music "music/TheyWantToBelieve.ogg" fadein 1.0
 
 label meeting_ash_conversation:
@@ -337,7 +338,7 @@ label meeting_ash_conversation:
                 hide ash
                 whattip "Ash is also {i}very bad{/i} at asking permission."
                 hide mir
-                adef "Oh, whoops."
+                asurprise "Oh, whoops."
                 cdef "So how do you two know each other?"
                 menu:
                     "I know Ash from an old case.":
@@ -346,13 +347,14 @@ label meeting_ash_conversation:
                         hide car
                         with dissolve
                         wbase "I know Ash from an old case."
-                        adef "A few years back, I lost my brother."
-                        adef "Sheriff Warren was really nice to me through it all."
+                        asad "A few years back, I lost my brother."
+                        asad "Sheriff Warren was really nice to me through it all."
                         wthink "Seems like it was the only thing I was good for."
                         hide ash
                         show car default at flip
                         cser "Wait a minute... this wouldn't happen to be the {color=#FF9966}PW-3 Incident{/color}, would it?"
-                        wangry ". . . . ."
+                        show mir angry
+                        wos ". . . . ."
 
                     "I owe Ash for a mistake I made a few years back.":
                         show mir default
@@ -360,10 +362,10 @@ label meeting_ash_conversation:
                         hide car
                         with dissolve
                         wbase "I owe Ash for a {color=#FF9966}mistake{/color} I made a few years back."
-                        adef "You didn't make a mistake, Randi. You did everything you could."
-                        adef "Besides, we both know the {i}real{/i} reason you keep me around is because I'm good company."
+                        asad "You didn't make a mistake, Randi. You did everything you could."
+                        aconfident "Besides, we both know the {i}real{/i} reason you keep me around is because I'm good company."
                         wos ". . . . ."
-                        adef "Deny it all you want, we all know I'm the life of the party!"
+                        aannoy "Deny it all you want, we all know I'm the life of the party!"
                         hide ash
                         show car default at flip
                         cser "Hmm... this {color=#FF9966}mistake{/color}..."
@@ -380,8 +382,8 @@ label meeting_ash_conversation:
                         hide mir
                         show ash standard
                         adef "It's fine, Randi."
-                        adef "A few years back, I lost my brother."
-                        adef "Sherrif Warren helped on the case."
+                        asad "A few years back, I lost my brother."
+                        asad "Sherrif Warren helped on the case."
                         hide ash
                         show mir default
                         cser "Wait a minute... this wouldn't happen to be the {color=#FF9966}PW-3 Incident{/color}, would it?"
@@ -391,9 +393,9 @@ label meeting_ash_conversation:
                 cdef "So, uh... why do you keep calling her Randi?"
                 hide mir default
                 show ash standard
-                adef "It's a nickname. Like, Mir-Randi."
+                aflippant "It's a nickname. Like, Mir-Randi."
                 adef "I came up with it when I was a kid."
-                adef "But I will never, {i}ever{/i} stop using it."
+                aconfident "But I will never, {i}ever{/i} stop using it."
                 hide ash
                 wannoy "* sigh *"
                 $ meeting_ash_cleared_items.append("ashjager")
@@ -401,19 +403,20 @@ label meeting_ash_conversation:
             "The Tour":
                 show mir default
                 show ash standard at flip
+                hide car
                 with dissolve
                 whattip "What's this tour you were talking about?"
-                adef "You mean you haven't heard?"
-                adef "Oh, that's right. You don't use the internet, do you?"
+                asurprise "You mean you haven't heard?"
+                aposit "Oh, that's right. You don't use the internet, do you?"
                 wthink "I-I don't see what that has to do with anything."
-                adef "Base 24 has been hyping this event up for the past couple weeks."
+                aflippant "Base 24 has been hyping this event up for the past couple weeks."
                 adef "\"Come See The Future of Home Living!\""
-                adef "I managed to snag tickets for the first tour."
+                aconfident "I managed to snag tickets for the first tour."
                 wbase "Okay, but what {i}is{/i} it?"
-                adef "A {color=#FF9966}Smart House!{/color}"
+                apsyched "A {color=#FF9966}Smart House!{/color}"
                 whattip "What does that... mean?"
-                adef "It's like a robot butler or something, but it's built into the house itself."
-                adef "Hang on, I've got a flyer."
+                athink "It's like a robot butler or something, but it's built into the house itself."
+                athink "Hang on, I've got a flyer."
                 show houseflyer with dissolve
                 aos "It's got these hands that come down from the ceiling to cook and clean."
                 aos "There's a whole room where it bathes and dresses you!"
@@ -425,11 +428,11 @@ label meeting_ash_conversation:
                 hide mir default
                 show car default
                 cser "The AI {i}learns?{/i} How does it do that?"
-                adef "There were a lot of big words in the explaination, but I'm pretty sure it's..."
-                adef "The Cloud?"
+                athink "There were a lot of big words in the explaination, but I'm pretty sure it's..."
+                athink "The Cloud?"
                 hide car default
                 show mir default
-                adef "Anyway, it's pretty cool, huh?"
+                aconfident "Anyway, it's pretty cool, huh?"
                 menu:
                     "Yeah, pretty cool.":
                         wbase "Yeah, pretty cool."
@@ -437,14 +440,15 @@ label meeting_ash_conversation:
                         wbase "Pretty creepy, more like."
 
                 whattip "But still, you don't strike me as the kind of person who gets excited about domestic innovation."
+                show ash surprised at flip
                 wbase "Is there another reason you came here today, Ash?"
                 aos ". . ."
-                adef "Look, between you and me..."
-                adef "I was hoping I might see something related to {color=#FF9966}that case{/color} again."
+                asad "Look, between you and me..."
+                asad "I was hoping I might see something related to {color=#FF9966}that case{/color} again."
                 wbase "I understand."
                 wbase "That's part of my reason for coming here too."
                 wthink "The other part being, it's my job to solve crimes, of course."
-                adef "Of course."
+                aflippant "Of course."
                 show mir default
                 $ meeting_ash_cleared_items.append("thetour")
 
@@ -453,40 +457,40 @@ label meeting_ash_conversation:
                 show ash standard at flip
                 with dissolve
                 wbase "You know about the murder?"
-                adef "Of course I do! That picture's been all over social media."
+                aflippant "Of course I do! That picture's been all over social media."
                 whattip "Picture?"
                 hide ash standard
                 show car default at flip
                 cagit "Social Media?"
                 hide car default
                 show ash standard at flip
-                adef "Yeah, some internet \"Thought Influencer\" was here on the tour."
+                aannoy "Yeah, some internet \"Thought Influencer\" was here on the tour."
                 wannoy "I have no idea what a Thought Influencer is and I have no desire to find out."
                 show mir default
-                adef "He uploaded a selfie without realizing there was a dead body in the background."
+                aflippant "He uploaded a selfie without realizing there was a dead body in the background."
                 hide ash standard
                 show car default at flip
                 cdef "Sheesh. How dense can you be?"
                 hide car default
                 show ash standard at flip
                 whattip "Wait... does this mean there's a photo of the crime scene online?"
-                adef "Yeah, I guess so."
+                athink "Yeah, I guess so."
                 wbase "I need to see this right away."
                 adef "Hm... looks like it's been taken down."
-                adef "I guess photos of corpses violate the site's Terms of Service."
+                aposit "I guess photos of corpses violate the site's Terms of Service."
                 whattip "Ash... you're not a suspect in the murder, are you?"
-                adef "No, no, don't worry. I was in the tour group the whole time. My alibi is solid as a rock."
+                aannoy "No, no, don't worry. I was in the tour group the whole time. My alibi is solid as a rock."
                 hide mir default
                 show car liftdrink
                 clift "But this other guy... the, uh, \"Thought Influencer\"..."
                 chold "He slipped away to take selfies, right?"
                 adef "Yeah."
                 chold "His alibi's a bit shakier, then."
-                adef "He'd have to be pretty stupid to take a photo of his own victim."
+                athink "He'd have to be pretty stupid to take a photo of his own victim."
                 hide car default
                 show mir default
                 wbase "At the very least, he might have seen something the rest of you didn't."
-                adef "He should be around here somewhere. None of us are allowed to leave until this is wrapped up."
+                athink "He should be around here somewhere. None of us are allowed to leave until this is wrapped up."
                 $ meeting_ash_cleared_items.append("themurder")
         if "ashjager" in meeting_ash_cleared_items and "thetour" in meeting_ash_cleared_items and "themurder" in meeting_ash_cleared_items:
             $ meeting_ash_cleared = True
@@ -502,8 +506,8 @@ label meeting_ash_outro:
     wbase "Carlos, we need to get going."
     hide car
     show ash standard at flip
-    adef "Can I come with you, Randi?"
-    adef "It's not like I can go anywhere else right now."
+    apsyched "Can I come with you, Randi?"
+    aflippant "It's not like I can go anywhere else right now."
     hide ash standard
     show car default at flip
     clift "Sure! Come along! There's a murderer hiding around here, after all."
@@ -517,12 +521,12 @@ label meeting_ash_outro:
     with dissolve
     cdef "Woah, did you see that guy?"
     hide mir default
-    show ash standard
-    adef "He was so fast I didn't even have time to snap a picture of him."
+    show ash surprised
+    asurprise "He was so fast I didn't even have time to snap a picture of him."
     acam "Oh well. Guess I'll just have to snap a picture of you, Mr Tsukada."
     cagit "No wait I have a problem with{nw}"
     show white with Pause(0.05)
-    hide white
+    hide white with dissolve
     show Ash_Camera_Polaroid
     acam "Ooh, that was a nice one!"
     hide Ash_Camera_Polaroid
@@ -531,16 +535,16 @@ label meeting_ash_outro:
 label meeting_drang_intro:
     show screen inventory_screen_button
     scene black
-    typing "September 13th\nSmart House\nKitchen"
+    typing "September 13th\nSmart House - Kitchen"
     scene kitchen with fade
     pause 2.0
     show mir default
     show ash standard at flip
     with dissolve
     wbase "There's the body."
-    adef "Oh...man..."
-    adef "I've never seen a dead body before..."
-    adef "Do you ever get used to them?"
+    asad "Oh...man..."
+    asad "I've never seen a dead body before..."
+    asad "Do you ever get used to them?"
     wbase "No... not really."
     hide ash
     show car at flip
@@ -578,26 +582,26 @@ label meeting_drang_intro:
     ddril_gdown "So of course I just took it. They don't pay FBI Agents to ask questions, after all."
     hide drang
     show ash at flip
-    adef "That's exactly what they pay FBI Agents to d{nw}"
+    aflippant "That's exactly what they pay FBI Agents to d{nw}"
     hide ash
     ddef_gdown "Anyways, I'm going to need you all to back away from the crime scene."
     ddef_gup "Only qualified professionals are allowed in here."
     hide drang with dissolve
-    show ash standard at flip
+    show ash thinking at flip
     with dissolve
-    adef "How are we going to get past this clown?"
+    athink "How are we going to get past this clown?"
     wthink "It seems he really does have authority over me. We'll need his cooperation if we want to investigate."
     whattip "In order to do so, we're going to have to take advantage of his {color=#FF9966}psychology{/color}."
-    adef "You mean we're going to {i}brainwash{/i} him?"
+    apsyched "You mean we're going to {i}brainwash{/i} him?"
     wbase "No, we've just got to figure out what makes him tick, then capitalize on that."
-    adef "So, like what?"
+    athink "So, like what?"
     wcasefile "For instance, I've noticed that he {color=#FF9966}seems to highly value logical thought.{/color}"
     wcasefile "He thinks highly of himself and {color=#FF9966}may respond to flattery.{/color}"
     wcasefile "Finally, he {color=#FF9966}prefers people to speak bluntly{/color}. Up to a point, I'm sure."
     wbase "If I can exploit these personality traits in the right way..."
     wbase "I might be able to convince him to let us investigate."
-    adef "And then Plan B is we brainwash him, right?"
-    show mir annoy anim
+    aposit "And then Plan B is we brainwash him, right?"
+    show mir annoy talk
     wos ". . . "
     wannoy "Sure."
     hide ash
@@ -683,7 +687,7 @@ label meeting_drang_conversation_p2:
             wbase "A Watson to your Holmes. A Hastings to your Poirot."
             hide mir
             show ash
-            adef "A Marty to your Doc Brown!"
+            aflippant "A Marty to your Doc Brown!"
             hide ash
             show mir
             wannoy "Not the analogy I would have gone with,{nw}"
@@ -709,7 +713,7 @@ label meeting_drang_conversation_p3:
             ddril_gup "No..... Just he."
             hide mir
             show ash
-            adef "What about \"they\"?"
+            aannoy "What about \"they\"?"
             hide ash
             show mir default
             djacket_pop "Very well, Officer. I accept your proposition."
@@ -733,8 +737,8 @@ label meeting_drang_conversation_p3:
             whattip "Well, Of course. You are my superior officer, after all."
             hide drang
             show ash at flip
-            adef "(Randi! What are you saying?)"
-            adef "(You're not really gonna let this chauvinistic prat boss you around, are you?)"
+            aunsure "(Randi! What are you saying?)"
+            aunsure "(You're not really gonna let this chauvinistic prat boss you around, are you?)"
             wbase "(No, of course not.)"
             wbase "(But the only way to examine this crime scene is to play along for now.)"
             hide mir
@@ -742,12 +746,12 @@ label meeting_drang_conversation_p3:
             show ash standard
             show drang
             dangry_gdown "What are you two whispering about over there?"
-            adef "!"
+            asurprise "!"
             dthink_gdown "No need to answer. My skills of deduction have already surmised..."
             ddril_gdown "...that you are talking about what a genius I am!"
-            adef "uh"
-            adef "yes"
-            adef "that is exactly, the thing, we were doing,"
+            asurprise "uh"
+            asurprise "yes"
+            asurprise "that is exactly, the thing, we were doing,"
             ddef_gup "Well, don't be so shy about it from now on."
             ddef_gup "I am a humble man. I am not embarrassed by descriptions of my incredible wit."
             ddef_gdown "Now, come along. There will be plenty of time to bask in my genius."
@@ -861,18 +865,19 @@ label investigation1_drang_conversation:
     call investigation1 from _call_investigation1
 
 label investigation_1_drang_present:
-    if present_response == "sheriffbadge":
+    if present_response == "badge":
         ddef_gup "Aww, that's cute. It almost looks like a real one."
         hide drang
         show ash standard at flip
-        adef "Oh my gosh!"
+        asurprise "Oh my gosh!"
         adef "Can I punch this guy, Randi?"
         wbase "Speaking as a police officer: No."
         wthought "Though I'd be lying if I said I wasn't considering it myself..."
         hide ash
         show drang default gup
+        jump investigation1_drang_conversation
 
-    if present_response == "HouseFlyer":
+    if present_response == "brochure":
         whattip "Have you toured the rest of the house yet?"
         ddril_gdown "Why bother? The body is right here."
         wangry "The culprit could be hiding somewhere in the house right now!"
@@ -881,6 +886,7 @@ label investigation_1_drang_present:
         dthink_gup "But these Base 24 goons are real sensitive about anyone looking at their precious R&D projects."
         dthink_gup "They won't let me anywhere else in the house until I can prove it has something to do with the case."
         ddef_gup "So let's hope there's something of the sort hidden around here, eh?"
+        jump investigation1_drang_conversation
 
     if present_response == "knife":
         djacket_pop "There it is, the murder weapon."
@@ -894,19 +900,21 @@ label investigation_1_drang_present:
         wannoy "I, uh, don't think it's that."
         wthink "I don't think even Carlos is inept enough to mess up a simple fingerprint test."
         cos "{b}ET TU, CHIEF?{/b}"
+        jump investigation1_drang_conversation
 
-    if present_response == "autopsyreport":
+    if present_response == "prelim":
         whattip "What do you make of the bruises on the victim's body?"
         ddef_gup "I've seen this kind of thing before. Nasty business."
         wbase "What is it?"
         dthink_gdown "Technically, I'm not supposed talk about it."
         dthink_gup "But if it's neccesary to solve this case..."
         wangry "What? What is it? Tell me!"
-        dthink_gup ". . ."
+        dos ". . ."
         dthink_gup "Have you ever heard... of a \"Fight Club\"?"
         wannoy "Ugh, never mind."
+        jump investigation1_drang_conversation
 
-    if present_response == "shoe":
+    if present_response == "missingshoe":
         dangry_gdown "Now, I've noticed here, that the thing you're showing me, is nothing."
         dangry_gdown "It's literally the absence of a thing."
         dangry_gdown "And now I'm wondering if this is some new Police Officer Prank."
@@ -915,6 +923,7 @@ label investigation_1_drang_present:
         wbase "I'm trying to say that the victim's missing shoe might be an important clue."
         wbase "It could tell us where he's been."
         dthink_gup "Well... you shouldn't have wasted my time by letting me go on that whole tirade."
+        jump investigation1_drang_conversation
 
     if present_response == "idcard":
         ddef_gup "You've ID'd the victim?"
@@ -923,6 +932,7 @@ label investigation_1_drang_present:
         ddril_gdown "Hah. I don't intend to know {i}anyone{/i} in this bumpkin town."
         ddril_gdown "That includes this guy, and it includes {i}you{/i}, small fry."
         wthought "The feeling's mutual, you smarmy puke."
+        jump investigation1_drang_conversation
 
     if present_response == "darsha":
         ddef_gup "You've ID'd the victim?"
@@ -931,6 +941,7 @@ label investigation_1_drang_present:
         ddril_gdown "Hah. I don't intend to know {i}anyone{/i} in this bumpkin town."
         ddril_gdown "That includes this guy, and it includes {i}you{/i}, small fry."
         wthought "The feeling's mutual, you smarmy puke."
+        jump investigation1_drang_conversation
 
     if present_response == "crimephoto":
         djacket_pop "What a sorry excuse for evidence."
@@ -938,6 +949,7 @@ label investigation_1_drang_present:
         djacket_popped "There was some dignity to the whole affair."
         djacket_popped "Now it's all {i}selfies{/i} and {i}smartphones.{/i} I mean, where's the respect?"
         wthought "For once, I actually agree with him."
+        jump investigation1_drang_conversation
 
     #if present_response == "paulchritude":
         #drang "I see you've met our \"eyewitness\"."
@@ -956,19 +968,19 @@ label investigation_1_drang_present:
 label investigation1_chritude_conversation:
     if chritudeinto == False:
         warren "There's somebody over there taking pictures of himself."
-        adef "Hey, that's the guy!"
+        asurprise "Hey, that's the guy!"
         warren "You mean the, uh, \"Thought Influencer\"?"
         adef "Yup."
         warren "Let's go introduce ourselves, then."
-        adef "What? I don't want to talk to that pompous chump."
+        aannoy "What? I don't want to talk to that pompous chump."
         warren "Me either, but we need that photo he took of the crime scene."
-        adef "All right, all right."
+        aunsure "All right, all right."
         ### Show Chritude
         warren "Excuse me, sir. Are you..."
         unknown chritude "...The most fabulous eCeleb ever beheld by mankind?"
         unknown chritude "Why, yes. How kind of you to say."
         chritude "My name is Paul Chritude, but you probably know me by my internet handle... MASTER STYLE!"
-        adef "How did you make those sparkles appear?"
+        athink "How did you make those sparkles appear?"
         chritude "Trade secret, my dear."
         wthought "Master Style, huh? He looks more like a King Clown."
         warren "Mr Chritude, my name is Miranda Warren. I'm the Sheriff of Boomtown."
@@ -985,8 +997,8 @@ label investigation1_chritude_conversation:
                 warren "Mr Chritude... could you explain to me what it is you actually do?"
                 chritude "Are you saying you've never heard of moi?"
                 chritude "Why, I've never been more offended in all my life!"
-                adef "You'll have to excuse my friend, Master Style. She doesn't go on the internet all that much."
-                adef "(She doesn't even know what a hashtag is!)"
+                aannoy "You'll have to excuse my friend, Master Style. She doesn't go on the internet all that much."
+                aflippant "She doesn't even know what a hashtag is!"
                 chritude "You poor soul! I... I had no idea!"
                 chritude "Very well. I will explain who I am, for your sake."
                 chritude "I... am a tastemaker. I make tastes."
@@ -1002,7 +1014,7 @@ label investigation1_chritude_conversation:
                 chritude "Why, yes. This unveiling is the first step in a major rollout for the Smart House brand."
                 chritude "So naturally they needed a Thought Influencer such as myself to give it the stamp of approval."
                 chritude "My upcoming tell-all exposé vlog will either make or break the Smart House."
-                adef "So... are you going to make it, or break it?"
+                aflippant "So... are you going to make it, or break it?"
                 chritude "You'll have to wait and see, now won't you?"
                 warren "At one point you snuck away from the the tour group, is that right?"
                 chritude "Yes, that tour was getting dreadfully boring."
@@ -1029,14 +1041,14 @@ label investigation1_chritude_conversation:
                 chritude "Very well, very well..."
                 chritude "...spoilsport..."
                 ### Show Photo
-                warren "This has got to be the most absurd evidence I've ever recieved."
-                warren "Still, it's a bit more understandable he didn't notice something that was on the other side of a window."
-                warren "All this time I thought he'd been in the same room as the body."
-                adef "Hey, look at that! Is there someone else inside the kitchen?"
-                warren "You're right! It's hard to make out any detail, but that's definitely the silhouette of another person."
-                warren "Whoever it is, it's probably our culprit."
-                adef "Or, maybe it's the victim's spirit, caught on camera as it exited its corporeal host!"
-                warren "Let's... put a pin in that theory, okay?"
+                wos "This has got to be the most absurd evidence I've ever recieved."
+                wos "Still, it's a bit more understandable he didn't notice something that was on the other side of a window."
+                wos "All this time I thought he'd been in the same room as the body."
+                aos "Hey, look at that! Is there someone else inside the kitchen?"
+                wos "You're right! It's hard to make out any detail, but that's definitely the silhouette of another person."
+                wos "Whoever it is, it's probably our culprit."
+                aos "Or, maybe it's the victim's spirit, caught on camera as it exited its corporeal host!"
+                wos "Let's... put a pin in that theory, okay?"
                 ### Hide Photo
                 ### Add Photo to Inventory
                 $ investigation1_cleareditems.append("3")
@@ -1052,8 +1064,8 @@ label investigation1_chritude_conversation:
                 chritude "Too bad! It wasn't me! I don't know anything about that power outage, or that big explosion!"
                 warren "Big explosion?"
                 chritude "Ulp!"
-                adef "Oh, that's right! Around the time the power went out, there was this big BANG noise!"
-                adef "I guess it did kind of sound like an explosion..."
+                asurprise "Oh, that's right! Around the time the power went out, there was this big BANG noise!"
+                athink "I guess it did kind of sound like an explosion..."
                 chritude "Exactly! {i}That{/i} explosion noise!"
                 chritude "I don't know anything about it."
                 warren ". . ."
@@ -1100,7 +1112,7 @@ label investigation_1_chritude_present:
         chritude "Such a shame..."
         chritude "My poor selfie...stricken down before its time by the Cruel Internet Gods."
         chritude "Had it been allowed to prosper, it could have gone viral! I just know it!"
-        adef "It's got a dead body in it, though!"
+        aunsure "It's got a dead body in it, though!"
         chritude "I know! Just think of the {i}scandal!{/i}"
         chritude "My shares would have hit the BILLIONS!"
         warren "Well, at least your priorities are in the right place."
@@ -1120,12 +1132,12 @@ label investigation_1_chritude_present:
 label investigation1_footprints:
     show mir default
     show ash standard at flip
-    adef "Look over here, Randi! Muddy footprints!"
-    adef "That's like Clues 101!"
-    adef "But whose could they be...?"
+    apsyched "Look over here, Randi! Muddy footprints!"
+    apsyched "That's like Clues 101!"
+    athink "But whose could they be...?"
     wthink "They don't seem to be the victim's. His feet are clean."
-    adef "We know one thing for certain..."
-    adef "Whoever this person is, they don't possess the power of flight."
+    aposit "We know one thing for certain..."
+    aposit "Whoever this person is, they don't possess the power of flight."
     hide ash
     show car at flip
     clift "I just kind of assume that about everybody, all the time."
@@ -1138,7 +1150,7 @@ label investigation1_footprints:
     hide car
     show ash standard at flip
     adef "There's a little fake garden outside the house."
-    adef "Maybe this person stepped in the dirt out there?"
+    athink "Maybe this person stepped in the dirt out there?"
     wthink "It's possible..."
     whattip "Still, it seems like you'd have to go out of your way to make these footprints."
     hide ash
@@ -1272,7 +1284,7 @@ label smart_house_act_1_finale:
     show bottomi standard with dissolve
     pause 1.0
     hide mir
-    adef "Randi, who is this guy?"
+    asurprise "Randi, who is this guy?"
     hide ash
     wbase "I don't know."
     bunk "That man... on the ground..."

@@ -1,5 +1,6 @@
 label smart_house_act_3_intro:
     ### ACT 3: A THEOREM REVISED
+    $ save_name = "Act 3"
     $ askedHarperAboutMurder = False
     show black
     typing "September 13th. 9:02 P.M.\nSmart House - Kitchen"
@@ -241,13 +242,14 @@ label investigation2_securitylogs:
     ash "Maybe the house logged somebody saying \"I'm gonna murder you!\""
     warren "We should be so lucky..."
     ### Show Logs
+    warren "Most of this is programmer gobbeldygook, but I can make out some of it."
     warren "It shows \"Tour Mode\" ending at 5:30..."
     warren "Was Mr Darsha with your group through the whole tour?"
     ash "I think so... he was hanging around near the back."
     warren "So he died some time between then and 6 P.M."
-    warren "Odd... somebody disabled the safety systems at 5:50."
+    warren "Odd... somebody disabled the safety protocols at 5:51."
     warren "I wonder how many people have the authority to do something like that?"
-    warren "It shows usage of something called \"TDC\" at 5:52."
+    warren "Hm. Look at this. At 5:52 it says \"TDC Subroutine Activated.\""
     ash "What do you think TDC stands for?"
     ash "\"Terribly Dangerous Cookies?\""
     ash "\"Total Dinosaur Conquest?\""
@@ -375,7 +377,7 @@ label investigation2_scratches:
     warren "There are scratch marks in the carpeting down here."
     ash "You know what that must mean..."
     warren "Somebody was probably atta{nw}"
-    ash "Chupacabra."
+    ash "Chupacabra marks."
     ash "I mean, uh, the thing that you said."
     warren "The square foot of carpeting around the scratch marks are wet."
     warren "I wonder if someone was trying to clean up a stain..."

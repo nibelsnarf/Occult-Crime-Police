@@ -2,16 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/scripts/smart_house_act2.rpy", line 83: expected ':' not found.
-    label testimony1_intro
-                          ^
-
-File "game/scripts/smart_house_act2.rpy", line 336: expected ':' not found.
-    label testimony2_intro
-                          ^
-
-File "game/scripts/smart_house_act2.rpy", line 595: expected ':' not found.
-    label testimony3_intro
-                          ^
+File "game/options.rpy", line 197: unexpected indent
+        config.main_menu_music = "music/HoveringGhost.ogg"
+        ^
+    
 
 Ren'Py Version: Ren'Py 6.99.13.2919

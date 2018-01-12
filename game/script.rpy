@@ -7,7 +7,7 @@ image basewarehouse = "assets/backgrounds/basewarehousewhouse.png"
 image kitchen = "assets/backgrounds/SmartHouseKitchen.png"
 image victimbody = "assets/backgrounds/DarshasBody.png"
 image houseflyer = Image("gui/check_brochure.png", yalign= 0.3)
-image darshasid = Image("gui/check_id.png", yalign= 0.3)
+image darshasid = Image("gui/check_idcard.png", yalign= 0.3)
 
 # Define characters used by this game.
 define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
@@ -24,6 +24,7 @@ define wcasefile = Character('Warren', callback=wcasevoice, ctc="ctc_blink", ctc
 define wrecoil = Character('Warren', callback=wrecoilvoice, ctc="ctc_blink", ctc_position="fixed")
 define whattip = Character('Warren', callback=whattipvoice, ctc="ctc_blink", ctc_position="fixed")
 define wthink = Character('Warren', callback=wthinkvoice, ctc="ctc_blink", ctc_position="fixed")
+define wgotcha = Character('Warren', callback=wgotchavoice, ctc="ctc_blink", ctc_position="fixed")
 
 # Define Carlos Sprites
 define cos = Character('Carlos', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
@@ -33,6 +34,8 @@ define cwhis = Character('Carlos', callback=cwhisvoice, ctc="ctc_blink", ctc_pos
 define clift = Character('Carlos', callback=cliftvoice, ctc="ctc_blink", ctc_position="fixed")
 define chold = Character('Carlos', callback=choldvoice, ctc="ctc_blink", ctc_position="fixed")
 define cser = Character('Carlos', callback=cservoice, ctc="ctc_blink", ctc_position="fixed")
+define cconfuse = Character('Carlos', callback=cconfusevoice, ctc="ctc_blink", ctc_position="fixed")
+define cgloves = Character('Carlos', callback=cglovesvoice, ctc="ctc_blink", ctc_position="fixed")
 
 # Define Guard Sprites
 define gglasses = Character('Guard', callback=gglassesvoice, ctc="ctc_blink", ctc_position="fixed")
@@ -59,27 +62,73 @@ define aos = Character('Ash', callback=wdefos, ctc="ctc_blink", ctc_position="fi
 define aunk = Character('???', callback=astandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define adef = Character('Ash', callback=astandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define acam = Character('Ash', callback=acameravoice, ctc="ctc_blink", ctc_position="fixed")
+define aannoy = Character('Ash', callback=aannoyedvoice, ctc="ctc_blink", ctc_position="fixed")
+define aconfident = Character('Ash', callback=aconfidentvoice, ctc="ctc_blink", ctc_position="fixed")
+define aflippant = Character('Ash', callback=aflippantvoice, ctc="ctc_blink", ctc_position="fixed")
+define aposit = Character('Ash', callback=apositingvoice, ctc="ctc_blink", ctc_position="fixed")
+define apsyched = Character('Ash', callback=apsychedvoice, ctc="ctc_blink", ctc_position="fixed")
+define asad = Character('Ash', callback=asadvoice, ctc="ctc_blink", ctc_position="fixed")
+define asurprise = Character('Ash', callback=asurprisedvoice, ctc="ctc_blink", ctc_position="fixed")
+define athink = Character('Ash', callback=athinkingvoice, ctc="ctc_blink", ctc_position="fixed")
+define aunsure = Character('Ash', callback=aunsurevoice, ctc="ctc_blink", ctc_position="fixed")
 
 #Define Bottomi Sprites
 define bunk = Character('???', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define bdef = Character('Bottomi', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define bapology = Character('Bottomi', callback=bapologeticvoice, ctc="ctc_blink", ctc_position="fixed")
+define bdespair = Character('Bottomi', callback=bdespairvoice, ctc="ctc_blink", ctc_position="fixed")
+define bfreak = Character('Bottomi', callback=bfreakvoice, ctc="ctc_blink", ctc_position="fixed")
+define bfuzzy = Character('Bottomi', callback=bfuzzyvoice, ctc="ctc_blink", ctc_position="fixed")
+define bkaboom = Character('Bottomi', callback=bkaboomvoice, ctc="ctc_blink", ctc_position="fixed")
+define bmad = Character('Bottomi', callback=bmadvoice, ctc="ctc_blink", ctc_position="fixed")
+define bnervous = Character('Bottomi', callback=bnervousvoice, ctc="ctc_blink", ctc_position="fixed")
+define bremember = Character('Bottomi', callback=bremembervoice, ctc="ctc_blink", ctc_position="fixed")
+
+#Define Chritude Sprites
+define punk = Character('???', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define pdef = Character('Chritude', callback=pstandardvoice, ctc="ctc_blink", ctc_position="fixed")
+define pconceited = Character('Chritude', callback=pconceitedvoice, ctc="ctc_blink", ctc_position="fixed")
+define pglitter = Character('Chritude', callback=pglittervoice, ctc="ctc_blink", ctc_position="fixed")
+define plaugh = Character('Chritude', callback=plaughvoice, ctc="ctc_blink", ctc_position="fixed")
+define poutrage = Character('Chritude', callback=poutragevoice, ctc="ctc_blink", ctc_position="fixed")
+define psad = Character('Chritude', callback=psadvoice, ctc="ctc_blink", ctc_position="fixed")
+
+label splashscreen:
+    play music "music/HoveringGhost.ogg"
+    show main_menu_bg
+    pause 0.5
+    show willitblend
+    pause 0.05
+    hide willitblend
+    pause 0.025
+    show willitblend
+    pause 0.025
+    hide willitblend
+    pause 0.05
+    show willitblend
+    pause 0.5
+    show pressStart
+    pause
+    hide pressStart
+    hide splashscreen_bg
+    play sound "sound/clickStart.wav"
+    show mm_glitch
+    pause 0.3
+    hide mm_glitch
+    return
 
 # The game starts here.
 label start:
     python:
         player = Player("Derp")
-        chocolate = Item("Chocolate",image="gui/inv_chocolate.png")
-        banana = Item("Banana", image="gui/inv_banana.png")
-        gun = Item("Gun", image="gui/inv_gun.png")
-        laser = Item("Laser Gun", image="gui/inv_laser.png")
         autopsy = Item("Autopsy Report", image="gui/inv_autopsy.png")
 
         badge = Item("Sherriff's Badge", image="gui/inv_badge.png")
         brochure = Item("Smart House Brochure", image="gui/inv_brochure.png")
         footprints = Item("Muddy Footprints", image="gui/inv_footprints.png")
         missingshoe = Item("Missing Shoe", image="gui/inv_missingshoe.png")
-        idcard = Item("Victim's ID Card", image="gui/inv_id.png")
-        prelim = Item("Preliminary Autopsy", image="gui/inv_autopsy.png")
+        idcard = Item("Victim's ID Card", image="gui/inv_idcard.png")
+        prelim = Item("Preliminary Autopsy", image="gui/inv_prelim.png")
         knife = Item("Kitchen Knife", image="gui/inv_knife.png")
 
         gun = Person("Gun", image="gui/pro_gun.png")
@@ -93,11 +142,12 @@ label start:
         inventory = Inventory()
         profile = Profiles()
 
+    stop music fadeout 0.5
     call case_1 from _call_case_1
 
 
 label case_1:
-    #jump meeting_drang_outro
+    #jump case_2
     jump smart_house_act_1
 
 label talkTest:
@@ -138,7 +188,7 @@ label jumpToMenu:
         "Meeting Drang":
             jump meeting_drang_intro
         "Investigation 1":
-            jump meeting_ash_outro
+            jump meeting_drang_outro
         "Act 2 Intro":
             jump smart_house_act_2
         "Testimony 1":
@@ -149,9 +199,6 @@ label jumpToMenu:
             jump testimony3_intro
         "Act 3 Intro":
             jump smart_house_act_3_intro
-
-
-
 
 label endgame:
     "End game"

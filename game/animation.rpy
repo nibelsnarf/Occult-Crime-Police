@@ -10,9 +10,61 @@ init:
         linear 0.25 zoom 1.0
         repeat
 
+    image mm_bg_scroll:
+        "assets/backgrounds/MM_BG_Lines.png"
+        ypan 0
+        linear 100 ypan 360
+        repeat
+
+    image willitblend:
+        yalign 0.0
+        xalign 0.475
+        zoom 0.5
+        "assets/menu/OCP_Logo2.png"
+        additive 0.25
+
+    image pressStart:
+        alpha 0.0
+        yalign 0.9
+        xalign 0.5
+        "assets/backgrounds/pressStart.png"
+        ease 2.0 alpha 1.0
+        ease 2.0 alpha 0.0
+        repeat
+
+    image mm_glitch:
+        zoom 2.87
+        "assets/backgrounds/glitch1.png"
+        pause 0.05
+        "assets/backgrounds/glitch2.png"
+        pause 0.05
+        "assets/backgrounds/glitch3.png"
+        pause 0.05
+        "assets/backgrounds/glitch4.png"
+        pause 0.05
+        "assets/backgrounds/glitch5.png"
+        pause 0.05
+        repeat
+
+    image splashscreen_bg = LiveComposite((1920,1080),
+                                (0,0), "mm_bg_scroll",
+                                (0,0), "assets/backgrounds/MM_BG_Vignette.png",
+                                (0,0), "assets/backgrounds/TemashawValleyLogo.png"
+                                )
+
+    image main_menu_bg = LiveComposite((1920,1080),
+                                (0,0), "mm_bg_scroll",
+                                (0,0), "assets/backgrounds/MM_BG_Vignette.png",
+                                #(0,0), "willitblend"
+                                )
 
     transform flip:
         xzoom -1
+
+    transform menuFade:
+        zoom 0.0
+        linear 0.3 zoom 1.1
+        linear 0.1 zoom 1.0
 
     image outsidebaseboth = LiveComposite((1920,1080),
                                 (0,0), "outsidebase",
@@ -464,6 +516,11 @@ init:
                                 (0,0), "Miranda_Thinking_Talk",
                                 (0,0), "Miranda_Thinking_Blink")
 
+    image mir gotcha = LiveComposite((1920,1080),
+                                (0,0), "sprites/Miranda/Gotcha.png")
+
+
+
     image Carlos_Default_Blink:
         "sprites/Carlos/Standard/Eye_1.png"
         pause 6.0
@@ -587,10 +644,7 @@ init:
         repeat
 
     image car whisper = LiveComposite((1920,1080),
-                                (0,0), "sprites/Carlos/Whisper/Base.png",
-                                (0,0), "sprites/Carlos/Whisper/Mouth_1.png",
-                                (0,0), "Carlos_Whisper_Blink",
-                                (0,0), "sprites/Carlos/Whisper/Arm.png" )
+                                (0,0), "sprites/Carlos/Whisper.png")
 
     image car whisper talk = LiveComposite((1920,1080),
                                 (0,0), "sprites/Carlos/Whisper/Base.png",
@@ -736,6 +790,12 @@ init:
                                 (0,0), "sprites/Carlos/Serious/Base.png",
                                 (0,0), "Carlos_Serious_Talk",
                                 (0,0), "Carlos_Serious_Blink")
+
+    image car confused = LiveComposite((1920,1080),
+                                (0,0), "sprites/Carlos/Confused.png")
+
+    image car gloves = LiveComposite((1920,1080),
+                                (0,0), "sprites/Carlos/Gloves.png")
 
     image Guard_Talk:
         "sprites/Guard/Standard/Mouth_1.png"
@@ -1211,6 +1271,34 @@ init:
                                 (0,0), "Ash_Camera_Talk",
                                 (0,0), "sprites/Ash/Camera/Arms.png")
 
+    image ash annoyed = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Annoyed.png")
+
+    image ash confident = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Confident.png")
+
+    image ash flippant = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Flippant.png")
+
+    image ash positing = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Positing.png")
+
+    image ash psyched = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Psyched.png")
+
+    image ash sad = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Sad.png")
+
+    image ash surprised = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Surprised.png")
+
+    image ash thinking = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Thinking.png")
+
+    image ash unsure = LiveComposite((1920,1080),
+                                (0,0), "sprites/Ash/Unsure.png")
+
+
     image Bottomi_Standard_Blink:
         "sprites/Bottomi/Standard/Eyes_1.png"
         pause 5.0
@@ -1250,6 +1338,50 @@ init:
                                 (0,0), "sprites/Bottomi/Standard/Base.png",
                                 (0,0), "Bottomi_Standard_Talk",
                                 (0,0), "Bottomi_Standard_Blink")
+
+    image bottomi apologetic = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Apologetic.png")
+
+    image bottomi despair = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Despair.png")
+
+    image bottomi freak = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/FreakOut.png")
+
+    image bottomi fuzzy = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Fuzzy.png")
+
+    image bottomi kaboom = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Kaboom.png")
+
+    image bottomi mad = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Mad.png")
+
+    image bottomi nervous = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Nervous.png")
+
+    image bottomi remembering = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Remembering.png")
+
+
+
+    image chritude conceited = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Conceited.png")
+
+    image chritude glitter = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Glitter.png")
+
+    image chritude laugh = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Laugh.png")
+
+    image chritude outrage = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Outrage.png")
+
+    image chritude sad = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Sad.png")
+
+    image chritude standard = LiveComposite((1920,1080),
+                                (0,0), "sprites/Chritude/Standard.png")
 
 init python:
     def wdefvoice(event, interact=True, **kwargs):
@@ -1339,6 +1471,17 @@ init python:
         elif event == "end":
             renpy.play("sound/sfx-pichoop.wav")
 
+    def wgotchavoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("mir gotcha")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("mir gotcha")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
     def astandardvoice(event, interact=True, **kwargs):
         if event == "show":
             renpy.show("ash standard talk")
@@ -1356,6 +1499,105 @@ init python:
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("ash camera")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def aannoyedvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash annoyed")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash annoyed")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def aconfidentvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash confident")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash confident")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def aflippantvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash flippant")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash flippant")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def apositingvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash positing")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash positing")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def apsychedvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash psyched")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash psyched")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def asadvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash sad")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash sad")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def asurprisedvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash surprised")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash surprised")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def athinkingvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash thinking")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash thinking")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def aunsurevoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("ash unsure")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("ash unsure")
             renpy.sound.stop()
             renpy.restart_interaction()
         elif event == "end":
@@ -1385,7 +1627,7 @@ init python:
 
     def cwhisvoice(event, interact=True, **kwargs):
         if event == "show":
-            renpy.show("car whisper talk")
+            renpy.show("car whisper")
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("car whisper")
@@ -1422,6 +1664,28 @@ init python:
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("car serious")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def cconfusevoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("car confused")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("car confused")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def cglovesvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("car gloves")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("car gloves")
             renpy.sound.stop()
             renpy.restart_interaction()
         elif event == "end":
@@ -1598,6 +1862,160 @@ init python:
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("bottomi standard")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bapologeticvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi apologetic")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi apologetic")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bdespairvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi despair")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi despair")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bfreakvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi freak")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi freak")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bfuzzyvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi fuzzy")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi fuzzy")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bkaboomvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi kaboom")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi kaboom")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bmadvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi mad")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi mad")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bnervousvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi nervous")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi nervous")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bremembervoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi remembering")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi remembering")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def pconceitedvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude conceited")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude conceited")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def pglittervoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude glitter")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude glitter")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def plaughvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude laugh")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude laugh")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def poutragevoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude outrage")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude outrage")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def psadvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude sad")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude sad")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def pstandardvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("chritude standard")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("chritude standard")
             renpy.sound.stop()
             renpy.restart_interaction()
         elif event == "end":
