@@ -127,6 +127,7 @@ init -1:
     image tooltip_inventory_knife=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Kitchen Knife", style="tips_top")), (descriptionX,descriptionY), Text("The knife found plunged into the victim's back. No fingerprints discovered anywhere on the hilt.", style="tips_bottom"))
     image tooltip_inventory_footprints=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Muddy Footprints", style="tips_top")), (descriptionX,descriptionY), Text("Mysterious muddy footprints found in the kitchen. Likely belong to the culprit.", style="tips_bottom"))
     image tooltip_inventory_missingshoe=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Missing Shoe", style="tips_top")), (descriptionX,descriptionY), Text("One of the victim's shoes is missing. There's no trace of it anywhere in the kitchen.", style="tips_bottom"))
+    image tooltip_inventory_photo=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Chritude's Photo", style="tips_top")), (descriptionX,descriptionY), Text("A photo of the Orin Darsha's corpse, taken at 6pm. A second figure is visible standing next to the body.", style="tips_bottom"))
 
     #Tooltips-profile:
     image tooltip_profile_warren=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Miranda Warren", style="tips_top")), (descriptionX,descriptionY), Text("This is me. I am the Sheriff of Temashaw Valley. Why do I have a profile of myself in my case files?", style="tips_bottom"))
@@ -134,6 +135,7 @@ init -1:
     image tooltip_profile_ash=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Ash Jager", style="tips_top")), (descriptionX,descriptionY), Text("A young friend of mine from an old case. Obsessed with all things sacred, sinister, and strange.", style="tips_bottom"))
     image tooltip_profile_drang=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Sturmund Drang", style="tips_top")), (descriptionX,descriptionY), Text("An agent of the Federal Bureau of Investigation. Outranks me on the investigative totem pole. Additionally: A Massive Tool.", style="tips_bottom"))
     image tooltip_profile_darsha=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Orin Darsha", style="tips_top")), (descriptionX,descriptionY), Text("The victim in this case. Head of Base 24's Research and Development department. Found dead in the Smart House's kitchen.", style="tips_bottom"))
+    image tooltip_profile_bottomi=LiveComposite((liveComWidth, liveComHeight), (titleX,titleY), ImageReference(Text("Louis Bottomi", style="tips_top")), (descriptionX,descriptionY), Text("Sort of a big scary guy. Claims to be the one who killed Orin Darsha, but there's something strange about his testimony.", style="tips_bottom"))
 
     $ my_picName = ""
     transform inv_eff: # too lazy to make another version of each item, we just use ATL to make hovered items super bright
@@ -419,6 +421,7 @@ screen present_profile_screen():
 init:
     $ mc_maxhealth = 5
     $ mc_health = mc_maxhealth
+    $ mc_health_display = mc_health
     python:
         def settesti(current, left, right, press, advice):
             store.testipart = current
@@ -430,6 +433,7 @@ init:
             store.testadvice = advice
 
 screen testi():
+    $ CurrentTestimony = store.testipart
     if store.testileft <> None:
         imagebutton auto "assets/menu/testi_arrow_%s.png" action Jump(store.testileft) xpos 0.05 ypos 0.58 at flip
     if store.testiright <> None:
@@ -438,14 +442,17 @@ screen testi():
         imagebutton idle "assets/menu/options_default.png" hover "assets/menu/options_selected.png" action [ShowMenu("custom_menu")]
     vbox align (-0.1,0.075) spacing 30:
         textbutton "Press" style "testiButton" text_style "testiText" action [Jump(store.testipress)]
-        textbutton "Present" style "testiButton" text_style "testiText" action [Show("present_evidence_screen"), Show("back_button"), SetVariable("back_action", store.testipart)]
-        textbutton "Advice" style "testiButton" text_style "testiText" action [Jump(store.testadvice)]
+        textbutton "Present" style "testiButton" text_style "testiText" action [SetVariable("CurrentTestimony", store.testipart), Show("present_evidence_screen"), Show("back_button"), SetVariable("back_action", store.testipart)]
+        textbutton "Advice" style "testiButton" text_style "testiText" action [ SetVariable("CurrentTestimony", store.testipart), Jump(store.testadvice)]
     bar left_bar "assets/menu/health_left.png" right_bar "assets/menu/health_right.png" range mc_maxhealth value mc_health xmaximum 530 ysize 100 xpos 0.37 ypos 0.01 thumb None
     $ m = 0
     #hbox align (0.27,0.79) spacing 5:
         #for m in testiLength:
         #    image "assets/menu/testiMarker.png"
             #$m += 1
+
+screen healthBar():
+    bar left_bar "assets/menu/health_left.png" right_bar "assets/menu/health_right.png" range mc_maxhealth value mc_health_display xmaximum 530 ysize 100 xalign 0.5 yalign 0.05 thumb None
 
 init -2:
 

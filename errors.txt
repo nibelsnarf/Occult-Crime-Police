@@ -2,9 +2,12 @@
 errors listed below, and try again.
 
 
-File "game/options.rpy", line 197: unexpected indent
-        config.main_menu_music = "music/HoveringGhost.ogg"
-        ^
-    
+File "game/scripts/smart_house_act2.rpy", line 882: expected statement.
+    wthought
+            ^
+
+File "game/scripts/smart_house_act2.rpy", line 883: choice menuitem expects a non-empty block.
+    "Don't Ask Him":
+                    ^
 
 Ren'Py Version: Ren'Py 6.99.13.2919

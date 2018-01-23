@@ -1,10 +1,10 @@
 label smart_house_act_1:
+    show screen jumpTo
     scene black
     pause 1.0
     typing "September 13th. 7:28 P.M.\nNear the outskirts of town."
     play music "sound/Car_Loop.ogg" fadein 1.0
     scene policecarbythesideoftheroad with fade
-    show screen jumpTo
     pscanner "Sheriff? Sheriff Warren, are you there?"
     menu:
         "No, it's a completely different person emulating her voice perfectly.":
@@ -607,6 +607,7 @@ label meeting_drang_intro:
     hide ash
     show drang default gdown
     ### BEGIN PERSUASION ANIMATION
+    show healthBar
     wbase "Agent Drang, I need to ask you something."
     ddef_gdown "What, you're still here?"
     ddef_gdown "All right, all right. I'm not dumb."
@@ -642,6 +643,10 @@ label meeting_drang_conversation_p1:
             dangry_gup "You're talking down to me, aren't you?"
             wannoy "N-no, I just {nw}"
             dangry_gdown "Save it. I won't be condescended to."
+            $ mc_health -= 1
+            while mc_health_display > mc_health:
+                $mc_health_display -= 0.1
+                pause 0.01
             show mir recoil anim
             wos "NNNGGGGGG!!!! {w=4.0}"
             djacket_pop "I'm a big man. I know big words."
@@ -674,6 +679,10 @@ label meeting_drang_conversation_p2:
             wangry "Best I can tell, you've just been standing here rubbing your chin."
             dangry_gup "Get out of my sight, you disrespecful cretin!"
             dangry_gup "Never in all my life have I met someone so asinine!"
+            $ mc_health -= 1
+            while mc_health_display > mc_health:
+                $mc_health_display -= 0.1
+                pause 0.01
             show mir recoil anim
             wos "NNNGGGGGG!!!! {w=4.0}"
             wthought "Uh oh. Looks like I pushed him too far."
@@ -725,6 +734,10 @@ label meeting_drang_conversation_p3:
             ddril_gdown "Well, that was a close one."
             ddril_gdown "To think I almost let a rude little boondock cop into {i}my{/i} crime scene!"
             ddril_gdown "Good thing your little outburst there convinved me otherwise!"
+            $ mc_health -= 1
+            while mc_health_display > mc_health:
+                $mc_health_display -= 0.1
+                pause 0.01
             show mir recoil anim
             wos "Ah! Wait! {w=4.0}"
             wthought "What was I thinking, getting so confrontational with him?"
@@ -759,6 +772,7 @@ label meeting_drang_conversation_p3:
 
 label meeting_drang_outro:
     stop music fadeout 1.0
+    hide healthBar
     show black with dissolve
     scene kitchen
     hide black
@@ -769,20 +783,23 @@ label meeting_drang_outro:
     adef "Well, you got us through."
     wthink "Now we just need to stay on his good side for as long as it takes to solve this case."
     adef "Let's hope this is a quick one, then."
+    hide mir
+    hide ash
     $unlockedoutage = False
     $unlockedphoto = False
     $chritudeinto = False
+    $warehouseFirstVisit = True
     $loop = 0
     $investigation1_cleareditems = []
     play music "music/Investigation_Loops.ogg" fadein 1.0
 
 label investigation1:
+    scene kitchendrang with fade
     hide victimbody
-    #if "1" in investigation1_cleareditems and "2" in investigation1_cleareditems and "3" in investigation1_cleareditems and "4" in investigation1_cleareditems and "5" in investigation1_cleareditems and "6" in investigation1_cleareditems and "7" in investigation1_cleareditems and "8" in investigation1_cleareditems and "9" in investigation1_cleareditems:
-        #jump smart_house_act_1_finale
-    if "1" in investigation1_cleareditems and "5" in investigation1_cleareditems and "6" in investigation1_cleareditems and "7" in investigation1_cleareditems and "8" in investigation1_cleareditems and "9" in investigation1_cleareditems:
+    if "1" in investigation1_cleareditems and "2" in investigation1_cleareditems and "3" in investigation1_cleareditems and "4" in investigation1_cleareditems and "5" in investigation1_cleareditems and "6" in investigation1_cleareditems and "7" in investigation1_cleareditems and "8" in investigation1_cleareditems and "9" in investigation1_cleareditems:
         jump smart_house_act_1_finale
     show screen sh_investigation1_kitchen
+
     pause
 
 screen sh_investigation1_kitchen:
@@ -793,12 +810,23 @@ screen sh_investigation1_kitchen:
         hotspot (1525,271,357,768) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_drang_conversation")]
         hotspot (961,732,628,346) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_examining_victim")]
     use inventory_screen_button
+    imagebutton auto "assets/menu/move_%s.png"  xalign 0.5 yalign 1.0 action Jump("inv1_move_kitchen")
+
+label inv1_move_kitchen:
+    menu:
+        "Base 24 - Warehouse":
+            hide screen sh_investigation1_kitchen
+            jump investigation1_warehouse
+
 
 label investigation1_drang_conversation:
     $back_action = "investigation_1_drang_present"
+    scene kitchen
     hide ash
     hide car
     show mir default
+    show drang default gup
+    with dissolve
     if loop == 0:
         ddef_gup "Ah, my new assistant!"
         ddef_gup "How goes your little investigation?"
@@ -964,83 +992,132 @@ label investigation_1_drang_present:
 
     jump investigation1_drang_conversation
 
+label investigation1_warehouse:
+    if warehouseFirstVisit == True:
+        show black with dissolve
+        typing "Base 24 - Warehouse"
+        $warehouseFirstVisit = False
+    scene basewarehousepaul with fade
+    show screen sh_investigation1_warehouse
+    hide black with dissolve
+    pause
+
+screen sh_investigation1_warehouse:
+    modal True
+    imagemap:
+        ground "basewarehousepaul"
+        hotspot (1152,618,242,328) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_chritude_conversation")]
+    use inventory_screen_button
+    imagebutton auto "assets/menu/move_%s.png" xalign 0.5 yalign 1.0 action Jump("inv1_move_warehouse")
+
+label inv1_move_warehouse:
+    menu:
+        "Smart House - Kitchen":
+            hide screen sh_investigation1_warehouse
+            jump investigation1
 
 label investigation1_chritude_conversation:
     if chritudeinto == False:
-        warren "There's somebody over there taking pictures of himself."
+        show mir default
+        show ash standard at flip
+        with dissolve
+        wbase "There's somebody over there taking pictures of himself."
         asurprise "Hey, that's the guy!"
-        warren "You mean the, uh, \"Thought Influencer\"?"
+        whattip "You mean the, uh, \"Thought Influencer\"?"
         adef "Yup."
-        warren "Let's go introduce ourselves, then."
+        wbase "Let's go introduce ourselves, then."
         aannoy "What? I don't want to talk to that pompous chump."
-        warren "Me either, but we need that photo he took of the crime scene."
+        wthink "Me either, but we need that photo he took of the crime scene."
         aunsure "All right, all right."
-        ### Show Chritude
-        warren "Excuse me, sir. Are you..."
-        unknown chritude "...The most fabulous eCeleb ever beheld by mankind?"
-        unknown chritude "Why, yes. How kind of you to say."
-        chritude "My name is Paul Chritude, but you probably know me by my internet handle... MASTER STYLE!"
+        hide ash
+        scene basewarehouse
+        with fade
+        show chritude standard at flip
+        show mir default
+        with dissolve
+        wbase "Excuse me, sir. Are you..."
+        punk "...The most fabulous eCeleb ever beheld by mankind?"
+        punk "Why, yes. How kind of you to say."
+        pglitter "My name is Paul Chritude, but you probably know me by my internet handle... MASTER STYLE!"
+        hide mir
+        show ash
         athink "How did you make those sparkles appear?"
-        chritude "Trade secret, my dear."
+        pconceited "Trade secret, my dear."
+        hide ash
+        show mir hattip
         wthought "Master Style, huh? He looks more like a King Clown."
-        warren "Mr Chritude, my name is Miranda Warren. I'm the Sheriff of Boomtown."
-        chritude "Oh, you're here about the murder!"
-        chritude "Terrible thing, that. Ruined one of my trademark glamour shots!"
-        warren "You'll forgive me if the disruption of a selfie isn't my number one concern right now."
-        chritude "If you have any questions for me, ask away. I'm always glad to help the little people."
+        wbase "Mr Chritude, my name is Miranda Warren. I'm the Sheriff of Boomtown."
+        pdef "Oh, you're here about the murder!"
+        psad "Terrible thing, that. Ruined one of my trademark glamour shots!"
+        wannoy "You'll forgive me if the disruption of a selfie isn't my number one concern right now."
+        pconceited "If you have any questions for me, ask away. I'm always glad to help the little people."
         $chritudeinto = True
 
     $loop = 1
     while loop == 1:
         menu:
             "Paul Chritude":
-                warren "Mr Chritude... could you explain to me what it is you actually do?"
-                chritude "Are you saying you've never heard of moi?"
-                chritude "Why, I've never been more offended in all my life!"
+                show mir
+                show chritude at flip
+                whattip "Mr Chritude... could you explain to me what it is you actually do?"
+                poutrage "Are you saying you've never heard of moi?"
+                poutrage "Why, I've never been more offended in all my life!"
+                hide mir default
+                show ash
                 aannoy "You'll have to excuse my friend, Master Style. She doesn't go on the internet all that much."
                 aflippant "She doesn't even know what a hashtag is!"
-                chritude "You poor soul! I... I had no idea!"
-                chritude "Very well. I will explain who I am, for your sake."
-                chritude "I... am a tastemaker. I make tastes."
-                chritude "When you want to know what's hot in fashion, luxury, technology, you come to me."
-                chritude "I am the utmost authority in all these things."
-                chritude "A new trend simply does not get started without my express approval."
-                chritude "Many people consider me to be Oprah 2: The Sequel to Oprah."
+                hide ash
+                show mir default
+                psad "You poor soul! I... I had no idea!"
+                pconceited "Very well. I will explain who I am, for your sake."
+                pglitter "I... am a tastemaker. I make tastes."
+                pdef "When you want to know what's hot in fashion, luxury, technology, you come to me."
+                pdef "I am the utmost authority in all these things."
+                plaugh "A new trend simply does not get started without my express approval."
+                pconceited "Many people consider me to be Oprah 2: The Sequel to Oprah."
                 wthought "And here I thought Drang was conceited..."
                 $ investigation1_cleareditems.append("2")
 
             "The Tour":
-                warren "So, you were part of the group touring the smart house this evening?"
-                chritude "Why, yes. This unveiling is the first step in a major rollout for the Smart House brand."
-                chritude "So naturally they needed a Thought Influencer such as myself to give it the stamp of approval."
-                chritude "My upcoming tell-all exposé vlog will either make or break the Smart House."
+                show mir
+                show chritude at flip
+                whattip "So, you were part of the group touring the smart house this evening?"
+                pdef "Why, yes. This unveiling is the first step in a major rollout for the Smart House brand."
+                pconceited "So naturally they needed a Thought Influencer such as myself to give it the stamp of approval."
+                pconceited "My upcoming tell-all expoSay vlog will either make or break the Smart House."
+                hide mir
+                show ash
                 aflippant "So... are you going to make it, or break it?"
-                chritude "You'll have to wait and see, now won't you?"
-                warren "At one point you snuck away from the the tour group, is that right?"
-                chritude "Yes, that tour was getting dreadfully boring."
-                chritude "My followers were chomping at the bit for new content! How could I deny them?"
-                warren "So what did you do?"
-                chritude "I simply went and explored the house at my own pace. I wasn't causing any trouble or anything!"
-                warren "And this is when you photographed the body?"
-                chritude "Yes, indeed."
+                plaugh "You'll have to wait and see, now won't you?"
+                hide ash
+                show mir
+                wcasefile "At one point you snuck away from the the tour group, is that right?"
+                pdef "Yes, that tour was getting dreadfully boring."
+                poutrage "My followers were chomping at the bit for new content! How could I deny them?"
+                wbase "So what did you do?"
+                poutrage "I simply went and explored the house at my own pace. I wasn't causing any trouble or anything!"
+                wbase "And this is when you photographed the body?"
+                pdef "Yes, indeed."
                 wthought "I should ask for more detail on that..."
                 $unlockedphoto = True
 
-            "Your Photo" if unlockedphoto = True:
-                warren "I suppose I'll start with the obvious question:"
-                warren "How on earth could you not not have noticed there was a dead body in your photograph?"
-                chritude "Listen here, lady cop. I adhere to a strict regimen of twelve glamour shots per hour."
-                chritude "I don't have the time to be combing each and every one for corpses!"
-                chritude "The only thing I can review with any sort of thoroughness is the face region, which must, of course, be perfect."
-                chritude "Frankly, I only looked twice at that picture after I'd recieved the takedown notice."
-                warren "That reminds me... I need to consult that photograph, but it's been taken offline."
-                warren "Is there any chance you have a copy you could give me?"
-                chritude "Don't worry, I get asked this all the time."
-                chritude "It's fifteen for a glossy, thirty if you want it signed."
-                warren "How about zero for not getting charged with obstruction of justice?"
-                chritude "Very well, very well..."
-                chritude "...spoilsport..."
-                ### Show Photo
+            "Your Photo" if unlockedphoto == True:
+                show mir
+                show chritude at flip
+                whattip "I suppose I'll start with the obvious question:"
+                wangry "How on earth could you not not have noticed there was a dead body in your photograph?"
+                poutrage "Listen here, lady cop. I adhere to a strict regimen of twelve glamour shots per hour."
+                pconceited "I don't have the time to be combing each and every one for corpses!"
+                pconceited "The only thing I can review with any sort of thoroughness is the face region, which must, of course, be perfect."
+                pdef "Frankly, I only looked twice at that picture after I'd recieved the takedown notice."
+                wthink "That reminds me... I need to consult that photograph, but it's been taken offline."
+                wbase "Is there any chance you have a copy you could give me?"
+                plaugh "Don't worry, I get asked this all the time."
+                pdef "It's fifteen for a glossy, thirty if you want it signed."
+                wangry "How about zero for not getting charged with obstruction of justice?"
+                psad "Very well, very well..."
+                psad "...spoilsport..."
+                show chritudesPhoto with dissolve
                 wos "This has got to be the most absurd evidence I've ever recieved."
                 wos "Still, it's a bit more understandable he didn't notice something that was on the other side of a window."
                 wos "All this time I thought he'd been in the same room as the body."
@@ -1049,26 +1126,32 @@ label investigation1_chritude_conversation:
                 wos "Whoever it is, it's probably our culprit."
                 aos "Or, maybe it's the victim's spirit, caught on camera as it exited its corporeal host!"
                 wos "Let's... put a pin in that theory, okay?"
-                ### Hide Photo
-                ### Add Photo to Inventory
+                hide chritudesPhoto with dissolve
+                $inventory.add(photo)
                 $ investigation1_cleareditems.append("3")
 
-            "Power Outage" if unlockedoutage = True:
-                warren "Around the time you took that photo of the crime scene, there was a power outage, right?"
-                chritude "Oh! Was there? I had almost forgotten!"
-                chritude "However did that happen, is what I'm wondering!"
-                warren "Yes, I was curious about that as well. I thought that since you were away from the tour group, you-"
-                chritude "-might have blown the fuse yourself?"
-                warren "I was going to say \"might have seen who did it\"."
-                warren "Although now that you mention it..."
-                chritude "Too bad! It wasn't me! I don't know anything about that power outage, or that big explosion!"
-                warren "Big explosion?"
-                chritude "Ulp!"
+            "Power Outage" if unlockedoutage == True:
+                show mir
+                show chritude at flip
+                wbase "Around the time you took that photo of the crime scene, there was a power outage, right?"
+                pnervous "Oh! Was there? I had almost forgotten!"
+                pnervous "However did that happen, is what I'm wondering!"
+                whattip "Yes, I was curious about that as well. I thought that since you were away from the tour group, you-"
+                poutrage "-might have blown the fuse myself? Preposterous!"
+                wbase "I was going to say \"might have seen who did it\"."
+                wthink "Although now that you mention it..."
+                poutrage "Too bad! It wasn't me! I don't know anything about that power outage, or that big explosion!"
+                wbase "Big explosion?"
+                psurprise "Ulp!"
+                hide mir
+                show ash
                 asurprise "Oh, that's right! Around the time the power went out, there was this big BANG noise!"
                 athink "I guess it did kind of sound like an explosion..."
-                chritude "Exactly! {i}That{/i} explosion noise!"
-                chritude "I don't know anything about it."
-                warren ". . ."
+                psurprise "Exactly! {i}That{/i} explosion noise!"
+                pconceited "I don't know anything about it."
+                hide ash
+                show mir annoy anim
+                wos ". . . . ."
                 wthought "Clearly this guy's hiding something..."
                 wthought "But I've got more pressing matters to deal with than his shaky coverup."
                 wthought "I'll just have to come back to him later."
@@ -1076,56 +1159,61 @@ label investigation1_chritude_conversation:
 
 
             "Show Evidence":
-                warren "What do you make of this right here?"
+                wbase "What do you make of this right here?"
                 $ current_present = "investigation_1_chritude_present"
                 show screen present_evidence_screen
                 show screen back_button
                 pause
 
             "Show Profile":
-                warren "What do you think of this person?"
+                wbase "What do you think of this person?"
                 $ current_present = "investigation_1_chritude_present"
                 show screen present_profile_screen
                 show screen back_button
                 pause
 
             "Goodbye":
-                #block of code to run
+                wbase "Thank you for speaking with us. It's been very, um, helpful."
+                pdef "Oh, any time, darling."
                 $loop = 0
 
-    call investigation1 from _call_investigation1_1
+    call investigation1_warehouse from _call_investigation1_warehouse
 
 
 label investigation_1_chritude_present:
     if present_response == "sheriffbadge":
-        chritude "What a wonderful little trinket!"
-        chritude "Where did you get such a charming accessory?"
-        warren "Um...from the police station. Where I work. Because I'm a police officer."
-        chritude "Yes, yes, of course."
-        chritude "How much?"
-        warren "For my {i}badge?{/i}"
-        chritude "Of course! What else would I be asking for?"
-        chritude "Certainly there's nothing else about that outfit worth any money."
-        warren "I'll be sure to voice your concerns to the police department's wardrobe team."
+        pdef "What a wonderful little trinket!"
+        pdef "Where did you get such a charming accessory?"
+        wannoy "Um...from the police station. Where I work. Because I'm a police officer."
+        plaugh "Yes, yes, of course."
+        pdef "How much?"
+        wbase "For my {i}badge?{/i}"
+        poutrage "Of course! What else would I be asking for?"
+        pconceited "Certainly there's nothing else about that outfit worth any money."
+        wannoy "I'll be sure to voice your concerns to the police department's wardrobe team."
 
     if present_response == "crimephoto":
-        chritude "Such a shame..."
-        chritude "My poor selfie...stricken down before its time by the Cruel Internet Gods."
-        chritude "Had it been allowed to prosper, it could have gone viral! I just know it!"
+        psad "Such a shame..."
+        psad "My poor selfie...stricken down before its time by the Cruel Internet Gods."
+        pglitter "Had it been allowed to prosper, it could have gone viral! I just know it!"
+        hide mir
+        show ash
         aunsure "It's got a dead body in it, though!"
-        chritude "I know! Just think of the {i}scandal!{/i}"
-        chritude "My shares would have hit the BILLIONS!"
-        warren "Well, at least your priorities are in the right place."
-        chritude "You know, I tell myself that {i}all the time.{/i}"
+        plaugh "I know! Just think of the {i}scandal!{/i}"
+        plaugh "My shares would have hit the BILLIONS!"
+        hide ash
+        show mir
+        wannoy "Well, at least your priorities are in the right place."
+        pconceited "You know, I tell myself that {i}all the time.{/i}"
 
     if present_response == "Back":
-        warren "Actually, never mind."
+        wbase "Actually, never mind."
 
     else:
-        chritude "Fabulous! Daring! I love it!"
-        warren "Um, you haven't even looked at it."
-        chritude "I've never seen something so marvellous in all my life!"
-        warren "All right, sheesh, never mind."
+        pconceited "Fabulous! Daring! I love it!"
+        wannoy "Um, you haven't even looked at it."
+        pconceited "I've never seen something so marvellous in all my life!"
+        wannoy "All right, sheesh, never mind."
 
     jump investigation1_chritude_conversation
 
@@ -1187,7 +1275,7 @@ screen sh_investigation1_body:
         hotspot (699,132,299,221) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_injuries")]
         hotspot (483,157,164,290) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_weapon")]
     use inventory_screen_button
-    textbutton "Back" action [Hide("sh_investigation1_body"), Jump("investigation1")] xalign 0.95 yalign 0.05 xsize 200 ysize 100
+    imagebutton auto "assets/menu/return_%s.png"  action [Hide("sh_investigation1_body"), Jump("investigation1")] xalign 1.0 yalign 1.0
 
 label investigation1_missing_shoe:
     wos "Tsukada. Take a look at this."
@@ -1271,8 +1359,7 @@ label investigation1_examine_weapon:
 
 label smart_house_act_1_finale:
     stop music fadeout 1.0
-    show black with dissolve
-    hide black with dissolve
+    show mir default
     show car at flip
     cdef "So, how are things going, Chief?"
     wbase "Not great."

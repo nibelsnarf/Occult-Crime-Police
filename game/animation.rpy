@@ -88,6 +88,10 @@ init:
                                 (0,0), "kitchen",
                                 (0,0), "assets/backgrounds/KitchenDrang.png")
 
+    image basewarehousepaul = LiveComposite((1920,1080),
+                                (0,0), "basewarehouse",
+                                (0,0), "assets/backgrounds/basewarehousechritude.png")
+
     image Miranda_Default_Talk:
         "sprites/Miranda/Default/Mouth_1.png"
         pause 0.1
@@ -190,6 +194,8 @@ init:
         "sprites/Miranda/CaseFile/Arm_11.png"
         pause 0.07
         "sprites/Miranda/CaseFile/Arm_12.png"
+        pause 0.07
+        "sprites/Miranda/CaseFile/Arm_01.png"
         pause 3.0
         repeat
 
@@ -518,6 +524,9 @@ init:
 
     image mir gotcha = LiveComposite((1920,1080),
                                 (0,0), "sprites/Miranda/Gotcha.png")
+
+    image mir holdon = LiveComposite((1920,1080),
+                                (0,0), "sprites/Miranda/HoldOn.png")
 
 
 
@@ -1363,6 +1372,9 @@ init:
     image bottomi remembering = LiveComposite((1920,1080),
                                 (0,0), "sprites/Bottomi/Remembering.png")
 
+    image bottomi sad = LiveComposite((1920,1080),
+                                (0,0), "sprites/Bottomi/Sad.png")
+
 
 
     image chritude conceited = LiveComposite((1920,1080),
@@ -1477,6 +1489,17 @@ init python:
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("mir gotcha")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def wholdonvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("mir holdon")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("mir holdon")
             renpy.sound.stop()
             renpy.restart_interaction()
         elif event == "end":
@@ -1950,6 +1973,17 @@ init python:
             renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
         elif event == "slow_done":
             renpy.show("bottomi remembering")
+            renpy.sound.stop()
+            renpy.restart_interaction()
+        elif event == "end":
+            renpy.play("sound/sfx-pichoop.wav")
+
+    def bsadvoice(event, interact=True, **kwargs):
+        if event == "show":
+            renpy.show("bottomi sad")
+            renpy.sound.play("sound/TextNoiseFIX.ogg", loop=True)
+        elif event == "slow_done":
+            renpy.show("bottomi sad")
             renpy.sound.stop()
             renpy.restart_interaction()
         elif event == "end":
