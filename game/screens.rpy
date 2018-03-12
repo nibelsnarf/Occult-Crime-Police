@@ -127,6 +127,7 @@ init -2:
 
     style menu_window is default:
         background Frame("assets/menu/MenuBW.png",60)
+        xsize 1440
         xmargin 100
         xpadding 30
         ypadding 40
@@ -135,7 +136,7 @@ init -2:
     style menu_choice_button is button:
         idle_background None
         hover_background "#000000"
-        xsize 1.0
+        xsize 1170
         ypadding 10
         hover_ymargin 0
 

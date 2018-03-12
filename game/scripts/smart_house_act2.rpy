@@ -11,7 +11,8 @@ label smart_house_act_2:
     show screen inventory_screen_button
     wbase "Sir...what did you just say?"
     bunk "I- I think I'm the one who killed that man on the ground."
-    bunkfreak "No, I know it! I remember stabbing him with that knife!"
+    show bottomi freak
+    bunkos "No, I know it! I remember stabbing him with that knife!"
     wholdon "S-slow down, sir. What's your name?"
     bapology "My name is Louis Bottomi."
     bdespair "H-how could I have done something like this?"
@@ -60,7 +61,7 @@ label smart_house_act_2:
     bfuzzy "My thoughts seem a little hazy right now..."
     bdef "Okay, I'm ready."
     hide mir with fade
-    # Eyewitness Statement ANIMATION
+    call witness_statement
     typing "-- Bottomi's Confession --{fast}"
     bapology "I'm a test subject in a clinical trial here at the base."
     bdef "Today I was here for another round in the trial."
@@ -105,7 +106,6 @@ label smart_house_act_2:
     apsyched "All right, let's take this guy's testimony down a peg!"
 
 label testimony1_intro:
-    # Interrogation Animation
     $ current_present = "SH_Objection1"
     $ CurrentTestimony = "SH_Testimony1A"
     $ back_action = CurrentTestimony
@@ -116,6 +116,8 @@ label testimony1_intro:
     hide mir
     show bottomi apologetic
     with fade
+    call interrogation
+    play music "Interrogation_Moderato.mp3" fadein 1.0
 
 label SH_Testimony1A:
     $ settesti("SH_Testimony1A", None, "SH_Testimony1B", "SH_Press1A","SH_Advice1")
@@ -203,8 +205,10 @@ label SH_Press1D:
     bfuzzy "I- I couldn't say."
     bapology "Honestly, I'd never even met the guy before."
     bmad "Something in my head just told me that I needed to attack him. I needed to hurt him."
-    bfreak "I needed to make sure he never got up again, he never..."
-    bdef ". . ."
+    show bottomi freak
+    bos "I needed to make sure he never got up again, he never..."
+    show bottomi standard
+    bos ". . ."
     bdespair "...I'm sorry..."
     wholdon "It's okay, Mr Bottomi. Just tell me what happened."
     hide mir
@@ -389,6 +393,7 @@ label SH_GameOver1:
     jump endgame
 
 label SH_Success1:
+    stop music
     show mir default
     wcasefile "Just to clarify, Mr Bottomi... were you wearing the same clothes as you are right now?"
     bapology "I guess I must have been. I don't remember going anywhere to change."
@@ -402,13 +407,14 @@ label SH_Success1:
     bnervous "Y-yes. That's right."
     wbase "Before you arrived, we ran a few tests on it. One of these tests revealed..."
     wgotcha "...THAT THERE WERE NO FINGERPRINTS ANYWHERE ON THE HANDLE!"
-    bfreak "Gah!"
+    show bottomi freak
+    bos "Gah!"
     hide bottomi
     show ash at flip
     apsyched "Great job, Randi! You punched a hole right through that testimony!"
     hide ash
-    show bottomi standard
-    bfreak "No, that can't be right... I remember stabbing him! I swear I'm telling the truth!"
+    show bottomi freak
+    bos "No, that can't be right... I remember stabbing him! I swear I'm telling the truth!"
     bfuzzy "There has to be some sort of explaination..."
     bremember "Gloves!"
     whattip "I'm sorry?"
@@ -458,6 +464,7 @@ label testimony2_intro:
     $ current_present = "SH_Objection2"
     $ knows2E = False
     $ back_action = "CurrentTestimony"
+    play music "Interrogation_Moderato.mp3" fadein 1.0
 
 label SH_Testimony2A:
     $ settesti("SH_Testimony2A", None, "SH_Testimony2B", "SH_Press2A","SH_Advice2")
@@ -591,7 +598,7 @@ label SH_Testimony2F:
     if knows2E:
         $ settesti("SH_Testimony2F", "SH_Testimony2E", "SH_Testimony2G", "SH_Press2F","SH_Advice2")
     else:
-        $ settesti("SH_Testimony2F", "SH_Testimony2D", "SH_Testimony2G", "SH_Press2F","AdviceLabel")
+        $ settesti("SH_Testimony2F", "SH_Testimony2D", "SH_Testimony2G", "SH_Press2F","SH_Advice2")
     show screen testi
     bnervous "I thought I saw movement in the window, so I ran away."
     jump SH_Testimony2G
@@ -739,6 +746,7 @@ label SH_GameOver2:
     jump endgame
 
 label SH_Success2:
+    stop music
     show mir default
     wbase "I thought it was interesting that you were so insistent you only stabbed the victim."
     wgotcha "But it's a good thing you were, because it exposes another key flaw in your story!"
@@ -759,13 +767,16 @@ label SH_Success2:
     cser "...and with severe bruises covering his entire body."
     bnervous "Ah!"
     cser "At this point, it's unknown whether the cause of death was stabbing... or blunt force trauma!"
-    bfreak "AAAAAAHHHHH!"
-    bfreak "I forgot about the bruises!"
+    show bottomi freak
+    bos "AAAAAAHHHHH!"
+    show bottomi freak
+    bos "I forgot about the bruises!"
     hide car
     show mir thinking
     wthink "So you remember them now?"
     bremember "Yes! They were all over his body! Even before I stabbed him!"
-    bfreak "What's going on heeeeeeereeee?"
+    show bottomi freak
+    bos "What's going on heeeeeeereeee?"
     bremember "Wait! I'm... remembering... something... else... now..."
     bfuzzy "Before... I stabbed him... I beat him up!"
     bmad "I threw him to the floor and I kicked him until he passed out!"
@@ -814,6 +825,7 @@ label testimony3_intro:
     hide ash
     show bottomi remembering
     with fade
+    play music "Interrogation_Moderato.mp3" fadein 1.0
 
 label SH_Testimony3A:
     $ settesti("SH_Testimony3A", None, "SH_Testimony3B", "SH_Press3A","SH_Advice3")
@@ -1063,6 +1075,7 @@ label SH_GameOver3:
     jump endgame
 
 label SH_Success3:
+    stop music
     wgotcha "You've really stepped in it now, Mr Bottomi."
     wgotcha "And by {i}it{/i}... I MEAN MUD!"
     bnervous "Excuse me?"
@@ -1070,24 +1083,30 @@ label SH_Success3:
     wcasefile "The muddy footprints and the silt on your shoes prove that pretty conclusively."
     wbase "But if events had proceeded as you claim they did, then the victim would have stepped in mud as well..."
     wgotcha "...AND THERE WOULD BE A SECOND PAIR OF FOOTPRINTS RIGHT NEXT TO YOURS!"
-    bfreak "Gwah! You're absolutely right!"
+    show bottomi freak
+    bos "Gwah! You're absolutely right!"
     bfuzzy "What does this mean?"
     wbase "It means you've been lying to us, Mr Bottomi."
     wbase "You lied about the fingerprints, you lied about the bruises, and you're lying to us right now!"
     bmad "N-no! I'm not lying! I remember walking in with him!"
     bdespair "But the footprints... why aren't there two pairs...?"
-    bfreak "It doesn't make... there has to be... I know that I..."
-    bkaboom "STOP ASKING THESE QUESTIOOOOOOOOOOOOOOOOOOONNNNNNNSSSSSSSSS!"
+    show bottomi freak
+    bos "It doesn't make... there has to be... I know that I..."
+    show bottomi kaboom
+    bos "STOP ASKING THESE QUESTIOOOOOOOOOOOOOOOOOOONNNNNNNSSSSSSSSS!"
     hide bottomi with dissolve
     pause 3.0
     show car agitated at flip
-    ## Bottomi Loses His Medical Cap, Passes Out
     cagit "He passed out!"
     whattip "Looks like he lost his medical cap...wait. What on earth?"
-    show bottomiKO with dissolve
+    show black
+    show BottomiHead
+    show BottomiLight
+    with dissolve
     aos "His head!"
     cos "What is that thing?"
     dos "Well. That's a new one."
-    show black with dissolve
-    jump endgame
+    hide BottomiHead with dissolve
+    pause 2.5
+    hide BottomiLight with dissolve
     jump smart_house_act_3_intro

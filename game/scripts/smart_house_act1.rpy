@@ -5,6 +5,7 @@ label smart_house_act_1:
     typing "September 13th. 7:28 P.M.\nNear the outskirts of town."
     play music "sound/Car_Loop.ogg" fadein 1.0
     scene policecarbythesideoftheroad with fade
+    #show WvDPersuasion
     pscanner "Sheriff? Sheriff Warren, are you there?"
     menu:
         "No, it's a completely different person emulating her voice perfectly.":
@@ -86,7 +87,8 @@ label outside_base_intro:
 
     $ eyesight = 0
     $initialguardtalk = 0
-
+    $renpy.start_predict("sprites/Carlos*.*")
+    $renpy.start_predict("sprites/Miranda*.*")
     scene outsidebase with dissolve
     pause 1.0
     typing "September 13th\nBase 24 - Security Checkpoint"
@@ -119,10 +121,43 @@ screen outside_base_examine:
     modal True
     imagemap:
         ground "outsidebaseboth"
-        hover "outsidebaseaaa"
-        hotspot (700,495,220,570) action [Hide("outside_base_examine"), Jump("outside_base_carlos")]
-        hotspot (970,470,200,590) action [Hide("outside_base_examine"), Jump("outside_base_guard")]
+        #hover "act2"
+        hotspot (922,300,161,767) action [Hide("outside_base_examine"), Jump("outside_base_carlos")]
+        hotspot (1275,261,234,760) action [Hide("outside_base_examine"), Jump("outside_base_guard")]
+        hotspot (197,400,155,198) action [Hide("outside_base_examine"), Jump("outside_base_signs")]
+        hotspot (0,320,480,62) action [Hide("outside_base_examine"), Jump("outside_base_lights")]
+        hotspot (1500,335,480,62) action [Hide("outside_base_examine"), Jump("outside_base_lights")]
+        hotspot (1100,655,170,150) action [Hide("outside_base_examine"), Jump("outside_base_dont")]
+        hotspot (150,150,170,150) action [Hide("outside_base_examine"), Jump("outside_base_camera")]
+
     use inventory_screen_button
+
+label outside_base_signs:
+    wthought "They've got signs posted everywhere warning people to stay out."
+    wthought "I guess they thought the fences were too subtle..."
+    show screen outside_base_examine
+    pause
+
+label outside_base_lights:
+    wthought "You can just barely see the base off in the distance."
+    wthought "Those red lights almost look like eyes from here. Always keeping watch..."
+    wthought "Not that the dozens of security cameras need help in that department."
+    show screen outside_base_examine
+    pause
+
+label outside_base_dont:
+    wthought "Does that sign say... {i}Don't{/i} ?"
+    wthought "I'm pretty sure that's not what those are supposed to say."
+    wthought "Though, I guess that {i}would{/i} probably slow people down a little bit."
+    show screen outside_base_examine
+    pause
+
+label outside_base_camera:
+    wthought "I hate security cameras."
+    wthought "Sure, they're a useful investigating tool..."
+    wthought "But I just don't like the idea of being watched."
+    show screen outside_base_examine
+    pause
 
 label outside_base_carlos:
     scene outsidebaseguard with dissolve
@@ -601,13 +636,19 @@ label meeting_drang_intro:
     wbase "If I can exploit these personality traits in the right way..."
     wbase "I might be able to convince him to let us investigate."
     aposit "And then Plan B is we brainwash him, right?"
-    show mir annoy talk
+    show mir annoy base
     wos ". . . "
     wannoy "Sure."
     hide ash
     show drang default gdown
-    ### BEGIN PERSUASION ANIMATION
-    show healthBar
+    with dissolve
+    pause 0.2
+    call persuasion
+    scene WvDPersuasion
+    show drang default gdown
+    show mir default
+    show screen healthBar
+    pause 1.0
     wbase "Agent Drang, I need to ask you something."
     ddef_gdown "What, you're still here?"
     ddef_gdown "All right, all right. I'm not dumb."
@@ -615,7 +656,7 @@ label meeting_drang_intro:
     dthink_gdown "I can guess from the attire, but let's hear it straight from the horse's mouth."
 
 label meeting_drang_conversation_p1:
-    scene kitchen
+    scene WvDPersuasion
     show mir default
     show drang default gdown
     ddef_gdown "Who are you, and what are you doing at my crime scene?"
@@ -806,9 +847,13 @@ screen sh_investigation1_kitchen:
     modal True
     imagemap:
         ground "kitchendrang"
-        hotspot (535,898,434,187) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_footprints")]
-        hotspot (1525,271,357,768) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_drang_conversation")]
-        hotspot (961,732,628,346) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_examining_victim")]
+        hover "basewarehousepaul"
+        hotspot (1035,798,564,287) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_footprints")]
+        hotspot (1325,271,207,500) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_drang_conversation")]
+        hotspot (261,632,300,200) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_examining_victim")]
+        hotspot (561,212,180,350) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_fridge")]
+        hotspot (0,280,400,330) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_window")]
+        hotspot (1500,170,420,200) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_shelves")]
     use inventory_screen_button
     imagebutton auto "assets/menu/move_%s.png"  xalign 0.5 yalign 1.0 action Jump("inv1_move_kitchen")
 
@@ -1006,7 +1051,11 @@ screen sh_investigation1_warehouse:
     modal True
     imagemap:
         ground "basewarehousepaul"
-        hotspot (1152,618,242,328) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_chritude_conversation")]
+        hover "kitchendrang"
+        hotspot (1220,666,100,200) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_chritude_conversation")]
+        hotspot (750,830,467,60) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_garden")]
+        hotspot (400,690,100,200) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_backdoor")]
+        hotspot (250,620,140,240) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_garage")]
     use inventory_screen_button
     imagebutton auto "assets/menu/move_%s.png" xalign 0.5 yalign 1.0 action Jump("inv1_move_warehouse")
 
@@ -1038,7 +1087,7 @@ label investigation1_chritude_conversation:
         wbase "Excuse me, sir. Are you..."
         punk "...The most fabulous eCeleb ever beheld by mankind?"
         punk "Why, yes. How kind of you to say."
-        pglitter "My name is Paul Chritude, but you probably know me by my internet handle... MASTER STYLE!"
+        pglitterin "My name is Paul Chritude, but you probably know me by my internet handle... MASTER STYLE!"
         hide mir
         show ash
         athink "How did you make those sparkles appear?"
@@ -1055,10 +1104,11 @@ label investigation1_chritude_conversation:
 
     $loop = 1
     while loop == 1:
+        show chritude standard at flip
         menu:
             "Paul Chritude":
                 show mir
-                show chritude at flip
+                show chritude standard at flip
                 whattip "Mr Chritude... could you explain to me what it is you actually do?"
                 poutrage "Are you saying you've never heard of moi?"
                 poutrage "Why, I've never been more offended in all my life!"
@@ -1070,7 +1120,7 @@ label investigation1_chritude_conversation:
                 show mir default
                 psad "You poor soul! I... I had no idea!"
                 pconceited "Very well. I will explain who I am, for your sake."
-                pglitter "I... am a tastemaker. I make tastes."
+                pglitterin "I... am a tastemaker. I make tastes."
                 pdef "When you want to know what's hot in fashion, luxury, technology, you come to me."
                 pdef "I am the utmost authority in all these things."
                 plaugh "A new trend simply does not get started without my express approval."
@@ -1080,7 +1130,7 @@ label investigation1_chritude_conversation:
 
             "The Tour":
                 show mir
-                show chritude at flip
+                show chritude standard at flip
                 whattip "So, you were part of the group touring the smart house this evening?"
                 pdef "Why, yes. This unveiling is the first step in a major rollout for the Smart House brand."
                 pconceited "So naturally they needed a Thought Influencer such as myself to give it the stamp of approval."
@@ -1103,7 +1153,7 @@ label investigation1_chritude_conversation:
 
             "Your Photo" if unlockedphoto == True:
                 show mir
-                show chritude at flip
+                show chritude standard at flip
                 whattip "I suppose I'll start with the obvious question:"
                 wangry "How on earth could you not not have noticed there was a dead body in your photograph?"
                 poutrage "Listen here, lady cop. I adhere to a strict regimen of twelve glamour shots per hour."
@@ -1132,7 +1182,7 @@ label investigation1_chritude_conversation:
 
             "Power Outage" if unlockedoutage == True:
                 show mir
-                show chritude at flip
+                show chritude standard at flip
                 wbase "Around the time you took that photo of the crime scene, there was a power outage, right?"
                 pnervous "Oh! Was there? I had almost forgotten!"
                 pnervous "However did that happen, is what I'm wondering!"
@@ -1140,18 +1190,20 @@ label investigation1_chritude_conversation:
                 poutrage "-might have blown the fuse myself? Preposterous!"
                 wbase "I was going to say \"might have seen who did it\"."
                 wthink "Although now that you mention it..."
-                poutrage "Too bad! It wasn't me! I don't know anything about that power outage, or that big explosion!"
+                pnervous "Too bad! It wasn't me! I don't know anything about that power outage, or that big explosion!"
                 wbase "Big explosion?"
-                psurprise "Ulp!"
+                show chritude surprised
+                pos "Ulp!"
                 hide mir
                 show ash
                 asurprise "Oh, that's right! Around the time the power went out, there was this big BANG noise!"
                 athink "I guess it did kind of sound like an explosion..."
-                psurprise "Exactly! {i}That{/i} explosion noise!"
+                pnervous "Exactly! {i}That{/i} explosion noise!"
                 pconceited "I don't know anything about it."
                 hide ash
                 show mir annoy anim
                 wos ". . . . ."
+                show mir annoy base
                 wthought "Clearly this guy's hiding something..."
                 wthought "But I've got more pressing matters to deal with than his shaky coverup."
                 wthought "I'll just have to come back to him later."
@@ -1195,7 +1247,7 @@ label investigation_1_chritude_present:
     if present_response == "crimephoto":
         psad "Such a shame..."
         psad "My poor selfie...stricken down before its time by the Cruel Internet Gods."
-        pglitter "Had it been allowed to prosper, it could have gone viral! I just know it!"
+        pglitterin "Had it been allowed to prosper, it could have gone viral! I just know it!"
         hide mir
         show ash
         aunsure "It's got a dead body in it, though!"
@@ -1380,5 +1432,4 @@ label smart_house_act_1_finale:
     bunk "I think... it was me."
     bunk "I'm the one who killed that man."
     ### End of Act 1 Animation
-    jump endgame
     jump smart_house_act_2_intro

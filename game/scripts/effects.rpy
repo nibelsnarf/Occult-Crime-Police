@@ -120,3 +120,36 @@ label objection:
     hide objection
 
     return
+
+label persuasion:
+    show white with Pause(0.05)
+    hide white
+    show PERSU
+    pause 1.0
+    show white with Pause(0.05)
+    hide white
+    show ASION
+    pause 1.0
+    show white with Pause(0.05)
+    hide white
+    hide screen inventory_screen_button
+    return
+
+label witness_statement:
+    show Witness
+    show Statement
+    pause 0.5
+    show white with Pause(0.05)
+    hide white with dissolve
+    pause 2.0
+    return
+
+label interrogation:
+    show Interro
+    show Gation
+    pause 0.3
+    show white with Pause(0.05)
+    hide white with dissolve
+    pause 1.5
+    return
+    return

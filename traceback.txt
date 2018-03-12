@@ -1,25 +1,25 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 158, in script call
-    call case_1 from _call_case_1
-  File "game/scripts/smart_house_act2.rpy", line 1003, in script
-    jump SH_Testimony2C
-ScriptError: could not find label 'SH_Testimony2C'.
+  File "game/script.rpy", line 88, in script
+    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
+  File "game/script.rpy", line 88, in <module>
+    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
+NameError: name 'wdeffos' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 158, in script call
-    call case_1 from _call_case_1
-  File "game/scripts/smart_house_act2.rpy", line 1003, in script
-    jump SH_Testimony2C
-  File "/Users/cameronwoodard/Dropbox/renpy-6.99.12.4-sdk/renpy/ast.py", line 1552, in execute
-    rv = renpy.game.script.lookup(target)
-  File "/Users/cameronwoodard/Dropbox/renpy-6.99.12.4-sdk/renpy/script.py", line 861, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'SH_Testimony2C'.
+  File "game/script.rpy", line 88, in script
+    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
+  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\ast.py", line 1816, in execute
+    value = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\python.py", line 1743, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 88, in <module>
+    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
+NameError: name 'wdeffos' is not defined
 
-Darwin-14.5.0-x86_64-i386-64bit
-Ren'Py 6.99.13.2919
+Windows-8-6.2.9200
+Ren'Py 6.99.12.4.2187
 Occult Crime Police 1.0

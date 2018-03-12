@@ -2,12 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/scripts/smart_house_act2.rpy", line 882: expected statement.
-    wthought
-            ^
+File "game/chritAnimation.rpy", line 141: expected '=' not found.
+    image chritude glitter in = LiveComposite((1920,1080),
+                           ^
+                                    (0,0), "Chritude_Glitter_Base",
+                                    (0,0), "Chritude_Glitter_Blink",
+                                    (0,0), "Chritude_Glitter_Arm")
 
-File "game/scripts/smart_house_act2.rpy", line 883: choice menuitem expects a non-empty block.
-    "Don't Ask Him":
-                    ^
-
-Ren'Py Version: Ren'Py 6.99.13.2919
+Ren'Py Version: Ren'Py 6.99.12.4.2187

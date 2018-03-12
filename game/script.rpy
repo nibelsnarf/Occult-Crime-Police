@@ -3,15 +3,20 @@ image act1 = "assets/backgrounds/Act1.png"
 image act2 = "assets/backgrounds/Act2.png"
 
 
-image policecarbythesideoftheroad = "assets/backgrounds/Fog_at_night.png"
-image outsidebase = "assets/backgrounds/SecurityCheckpointQuickie.png"
-image basewarehouse = "assets/backgrounds/basewarehousewhouse.png"
-image kitchen = "assets/backgrounds/SmartHouseKitchen.png"
+image policecarbythesideoftheroad = "assets/backgrounds/IntroCar.png"
+image outsidebase = "assets/backgrounds/Checkpoint.png"
+image outsidebaseboth = "assets/backgrounds/CheckpointBoth.png"
+image outsidebasecarlos = "assets/backgrounds/CheckpointCarlos.png"
+image outsidebaseguard = "assets/backgrounds/CheckpointGuard.png"
+image basewarehouse = "assets/backgrounds/Warehouse.png"
+image kitchen = "assets/backgrounds/SmartHouseKitchin.png"
 image victimbody = "assets/backgrounds/DarshasBody.png"
-image bottomiKO = "assets/backgrounds/bottomiKO.png"
 image houseflyer = Image("gui/check_brochure.png", yalign= 0.3)
-image chritudesPhoto = Image("gui/check_photo.png", yalign= 0.3)
+image chritudesPhoto = Image("gui/check_pfoto.png", yalign= 0.3)
 image darshasid = Image("gui/check_idcard.png", yalign= 0.3)
+image PERSU = Image("gui/PERSU.png", yalign= 0.45)
+image ASION = Image("gui/ASION.png", yalign= 0.45)
+image BottomiHead = "assets/backgrounds/BottomiHead.png"
 
 # Define characters used by this game.
 define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
@@ -80,26 +85,36 @@ define aunsure = Character('Ash', callback=aunsurevoice, ctc="ctc_blink", ctc_po
 #Define Bottomi Sprites
 define bos = Character('Bottomi', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
 define bunk = Character('???', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
-define bunkfreak = Character('???', callback=bfreakvoice, ctc="ctc_blink", ctc_position="fixed")
+define bunkos = Character('???', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
 define bdef = Character('Bottomi', callback=bstandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define bapology = Character('Bottomi', callback=bapologeticvoice, ctc="ctc_blink", ctc_position="fixed")
 define bdespair = Character('Bottomi', callback=bdespairvoice, ctc="ctc_blink", ctc_position="fixed")
-define bfreak = Character('Bottomi', callback=bfreakvoice, ctc="ctc_blink", ctc_position="fixed")
 define bfuzzy = Character('Bottomi', callback=bfuzzyvoice, ctc="ctc_blink", ctc_position="fixed")
-define bkaboom = Character('Bottomi', callback=bkaboomvoice, ctc="ctc_blink", ctc_position="fixed")
 define bmad = Character('Bottomi', callback=bmadvoice, ctc="ctc_blink", ctc_position="fixed")
 define bnervous = Character('Bottomi', callback=bnervousvoice, ctc="ctc_blink", ctc_position="fixed")
 define bremember = Character('Bottomi', callback=bremembervoice, ctc="ctc_blink", ctc_position="fixed")
 define bsad = Character('Bottomi', callback=bsadvoice, ctc="ctc_blink", ctc_position="fixed")
 
 #Define Chritude Sprites
+define pos = Character('Chritude', callback=wdefos, ctc="ctc_blink", ctc_position="fixed")
 define punk = Character('???', callback=pstandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define pdef = Character('Chritude', callback=pstandardvoice, ctc="ctc_blink", ctc_position="fixed")
 define pconceited = Character('Chritude', callback=pconceitedvoice, ctc="ctc_blink", ctc_position="fixed")
+define pglitterin = Character('Chritude', callback=pglitterinvoice, ctc="ctc_blink", ctc_position="fixed")
 define pglitter = Character('Chritude', callback=pglittervoice, ctc="ctc_blink", ctc_position="fixed")
 define plaugh = Character('Chritude', callback=plaughvoice, ctc="ctc_blink", ctc_position="fixed")
 define poutrage = Character('Chritude', callback=poutragevoice, ctc="ctc_blink", ctc_position="fixed")
 define psad = Character('Chritude', callback=psadvoice, ctc="ctc_blink", ctc_position="fixed")
+define pnervous = Character('Chritude', callback=pnervousvoice, ctc="ctc_blink", ctc_position="fixed")
+#define psurprise = Character('Chritude', callback=psurpvoice, ctc="ctc_blink", ctc_position="fixed")
+
+define hunk = Character('???', callback=hbasevoice, ctc="ctc_blink", ctc_position="fixed")
+define hbase = Character('H.A.R.P.E.R.', callback=hbasevoice, ctc="ctc_blink", ctc_position="fixed")
+define hno = Character('H.A.R.P.E.R.', callback=hnovoice, ctc="ctc_blink", ctc_position="fixed")
+define hyes = Character('H.A.R.P.E.R.', callback=hyesvoice, ctc="ctc_blink", ctc_position="fixed")
+define hwave = Character('H.A.R.P.E.R.', callback=hwavevoice, ctc="ctc_blink", ctc_position="fixed")
+define hturn = Character('H.A.R.P.E.R.', callback=hturnvoice, ctc="ctc_blink", ctc_position="fixed")
+
 
 label splashscreen:
     play sound "sound/BootNoise2.ogg"
