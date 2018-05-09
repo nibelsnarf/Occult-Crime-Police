@@ -1,25 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 88, in script
-    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
-  File "game/script.rpy", line 88, in <module>
-    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
-NameError: name 'wdeffos' is not defined
+  File "game/script.rpy", line 50, in script
+    define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
+  File "game/script.rpy", line 50, in <module>
+    define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
+NameError: name 'typingvoice' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 88, in script
-    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
-  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\ast.py", line 1816, in execute
+  File "game/script.rpy", line 50, in script
+    define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
+  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\ast.py", line 1946, in execute
     value = renpy.python.py_eval_bytecode(self.code.bytecode)
-  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\python.py", line 1743, in py_eval_bytecode
+  File "C:\Users\Owner\Downloads\renpy-6.99.12.4-sdk\renpy\python.py", line 1863, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 88, in <module>
-    define bunkos = Character('???', callback=wdeffos, ctc="ctc_blink", ctc_position="fixed")
-NameError: name 'wdeffos' is not defined
+  File "game/script.rpy", line 50, in <module>
+    define typing = Character(None, callback=typingvoice, xalign=0.5, yalign=0.5, ctc="ctc_blink", ctc_position="fixed")
+NameError: name 'typingvoice' is not defined
 
 Windows-8-6.2.9200
-Ren'Py 6.99.12.4.2187
+Ren'Py 6.99.14.2.3333
 Occult Crime Police 1.0
+Tue May 08 23:16:30 2018

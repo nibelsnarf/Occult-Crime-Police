@@ -2,11 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/chritAnimation.rpy", line 141: expected '=' not found.
-    image chritude glitter in = LiveComposite((1920,1080),
-                           ^
-                                    (0,0), "Chritude_Glitter_Base",
-                                    (0,0), "Chritude_Glitter_Blink",
-                                    (0,0), "Chritude_Glitter_Arm")
+File "game/screens.rpy", line 520: u'xalign' is not a keyword argument or valid child for the screen statement.
+    xalign 0.5
+          ^
 
-Ren'Py Version: Ren'Py 6.99.12.4.2187
+Ren'Py Version: Ren'Py 6.99.14.2.3333
+Tue May 08 21:55:34 2018

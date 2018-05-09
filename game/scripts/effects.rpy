@@ -152,4 +152,26 @@ label interrogation:
     hide white with dissolve
     pause 1.5
     return
+
+
+label healthDrain:
+    while mc_health_display > mc_health:
+        $mc_health_display -= 0.1
+        pause 0.01
+    return
+
+label healthGain:
+    while mc_health_display < mc_health:
+        $mc_health_display += 0.1
+        pause 0.01
+    return
+
+label resetHealth:
+    $ mc_health = mc_maxhealth
+    $ mc_health_display = mc_health
+    return
+    
+label flash:
+    show white with Pause(0.05)
+    hide white with dissolve
     return

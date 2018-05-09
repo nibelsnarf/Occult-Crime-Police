@@ -7,7 +7,7 @@ label smart_house_act_2:
     scene kitchen
     show mir default
     show bottomi standard
-    with fade
+    with dissolve
     show screen inventory_screen_button
     wbase "Sir...what did you just say?"
     bunk "I- I think I'm the one who killed that man on the ground."
@@ -24,10 +24,10 @@ label smart_house_act_2:
     dthink_gup "I reckon these are your footprints, then?"
     bremember "Y-yes, that's right! I tracked in some mud from the garden when I came in here!"
     hide drang
-    show car gloves
+    show car think
     with dissolve
-    cgloves "Let me see that shoe of yours..."
-    cgloves "Yup, it's the same pattern."
+    cthink "Let me see that shoe of yours..."
+    cthink "Yup, it's the same pattern."
     hide bottomi
     hide car
     show mir default
@@ -56,12 +56,12 @@ label smart_house_act_2:
     dthink_gdown "But as far as I'm concerned, this case is already closed."
     hide drang
     show bottomi standard
-    wbase "Mr Bottomi, can you please tell me your story from the start?"
+    wbase "Mr. Bottomi, can you please tell me your story from the start?"
     bapology "Yeah, just give me a second."
     bfuzzy "My thoughts seem a little hazy right now..."
     bdef "Okay, I'm ready."
     hide mir with fade
-    call witness_statement
+    call witness_statement from _call_witness_statement
     typing "-- Bottomi's Confession --{fast}"
     bapology "I'm a test subject in a clinical trial here at the base."
     bdef "Today I was here for another round in the trial."
@@ -106,6 +106,7 @@ label smart_house_act_2:
     apsyched "All right, let's take this guy's testimony down a peg!"
 
 label testimony1_intro:
+    $testiLength = 7
     $ current_present = "SH_Objection1"
     $ CurrentTestimony = "SH_Testimony1A"
     $ back_action = CurrentTestimony
@@ -116,11 +117,11 @@ label testimony1_intro:
     hide mir
     show bottomi apologetic
     with fade
-    call interrogation
-    play music "Interrogation_Moderato.mp3" fadein 1.0
+    call interrogation from _call_interrogation
+    play music "music/BustingLiesAtAModerateTempo.ogg" fadein 1.0
 
 label SH_Testimony1A:
-    $ settesti("SH_Testimony1A", None, "SH_Testimony1B", "SH_Press1A","SH_Advice1")
+    $ settesti("SH_Testimony1A", None, "SH_Testimony1B", "SH_Press1A","SH_Advice1",1)
     show screen testi
     bapology "I'm a test subject in a clinical trial here at the base."
     jump SH_Testimony1B
@@ -146,7 +147,7 @@ label SH_Press1A:
     jump SH_Testimony1B
 
 label SH_Testimony1B:
-    $ settesti("SH_Testimony1B", "SH_Testimony1A", "SH_Testimony1C", "SH_Press1B","SH_Advice1")
+    $ settesti("SH_Testimony1B", "SH_Testimony1A", "SH_Testimony1C", "SH_Press1B","SH_Advice1",2)
     show screen testi
     bdef "Today I was here for another round in the trial."
     jump SH_Testimony1C
@@ -158,7 +159,7 @@ label SH_Press1B:
     bapology "Yeah. It's standard procedure while they do the tests."
     bapology "Between you and me, they're a little itchy."
     wthink "Was there anything different about this round of the trial?"
-    wthink "Anything that might account for your sudden outburt?"
+    wthink "Anything that might account for your sudden outburst?"
     bfuzzy "I... don't think so."
     bapology "They were just doing a check-up on the hardware."
     wbase "Hardware?"
@@ -171,7 +172,7 @@ label SH_Press1B:
     jump SH_Testimony1C
 
 label SH_Testimony1C:
-    $ settesti("SH_Testimony1C", "SH_Testimony1B", "SH_Testimony1D", "SH_Press1C","SH_Advice1")
+    $ settesti("SH_Testimony1C", "SH_Testimony1B", "SH_Testimony1D", "SH_Press1C","SH_Advice1",3)
     show screen testi
     bnervous "I had some free time, so I came over here to take a look at the house."
     jump SH_Testimony1D
@@ -193,7 +194,7 @@ label SH_Press1C:
     jump SH_Testimony1D
 
 label SH_Testimony1D:
-    $ settesti("SH_Testimony1D", "SH_Testimony1C", "SH_Testimony1E", "SH_Press1D","SH_Advice1")
+    $ settesti("SH_Testimony1D", "SH_Testimony1C", "SH_Testimony1E", "SH_Press1D","SH_Advice1",4)
     show screen testi
     bmad "I saw that man in the kitchen and was suddenly filled with rage."
     jump SH_Testimony1E
@@ -210,12 +211,12 @@ label SH_Press1D:
     show bottomi standard
     bos ". . ."
     bdespair "...I'm sorry..."
-    wholdon "It's okay, Mr Bottomi. Just tell me what happened."
+    wholdon "It's okay, Mr. Bottomi. Just tell me what happened."
     hide mir
     jump SH_Testimony1E
 
 label SH_Testimony1E:
-    $ settesti("SH_Testimony1E", "SH_Testimony1D", "SH_Testimony1F", "SH_Press1E","SH_Advice1")
+    $ settesti("SH_Testimony1E", "SH_Testimony1D", "SH_Testimony1F", "SH_Press1E","SH_Advice1",5)
     show screen testi
     bmad "So I grabbed a nearby knife and... I stabbed it into his back!"
     jump SH_Testimony1F
@@ -235,7 +236,7 @@ label SH_Press1E:
     jump SH_Testimony1F
 
 label SH_Testimony1F:
-    $ settesti("SH_Testimony1F","SH_Testimony1E", "SH_Testimony1G", "SH_Press1F", "SH_Advice1")
+    $ settesti("SH_Testimony1F","SH_Testimony1E", "SH_Testimony1G", "SH_Press1F", "SH_Advice1",6)
     show screen testi
     bapology "After I left the house, I just sort of wandered around for a while."
     jump SH_Testimony1G
@@ -257,7 +258,7 @@ label SH_Press1F:
     jump SH_Testimony1G
 
 label SH_Testimony1G:
-    $ settesti("SH_Testimony1G", "SH_Testimony1F", "SH_Testimony1A", "SH_Press1G","SH_Advice1")
+    $ settesti("SH_Testimony1G", "SH_Testimony1F", "SH_Testimony1A", "SH_Press1G","SH_Advice1",7)
     show screen testi
     bdespair "How could I have done something so awful... you've got to lock me up!"
     show bottomi apologetic
@@ -269,11 +270,11 @@ label SH_Press1G:
     show mir default
     wcasefile "How indeed? You claim not to have a motive for the crime."
     wcasefile "And most people don't go around stabbing random individuals for no reason."
-    wbase "Do you have a history of mental illness, Mr Bottomi?"
+    wbase "Do you have a history of mental illness, Mr. Bottomi?"
     bapology "You think I'm some kind of psycho?"
     bdef "Well, sorry, but I'm not. I had to pass a medical examination to qualify for the clinical trial here."
     bfuzzy "They wouldn't have let me participate if I had something wrong with my head."
-    bnervous "It would have interfered with the hardw- with the tests, I mean."
+    bnervous "It would have interfered with the hardw-{w=0.2} with the tests, I mean."
     if mentionedhardware == True:
         wthought "There he goes, talking about \"hardware\" again."
     else:
@@ -287,7 +288,7 @@ label SH_Press1G:
     wos "..."
     whattip "...So? {i}Could{/i} he have just \"snapped\"?"
     cagit "I don't know! I'm not {i}that{/i} kind of doctor!"
-    wangry "Then don't pipe up like that!"
+    wangry "Then don't pipe up like that!" with shake
     hide car
     show bottomi standard
     bapology "Anyway, that's all I remember about the day."
@@ -304,7 +305,7 @@ label SH_Advice1:
     with fade
     aunsure "I hate to admit it, but I'm kind of lost."
     athink "Where is this {color=#FF9966}contradiction{/color} you keep talking about?"
-    whattip "Well, Mr Bottomi keeps talking about how he {color=#FF9966}stabbed{/color} the victim himself."
+    whattip "Well, Mr. Bottomi keeps talking about how he {color=#FF9966}stabbed{/color} the victim himself."
     wcasefile "But don't we have a piece of evidence which suggests otherwise?"
     wcasefile "If you're still confused, look through the evidence one more time."
     asurprise "...Oh! I think I know what you're talking about!"
@@ -352,7 +353,7 @@ label SH_Objection1:
 
 label SH_Failure1:
     show mir default
-    wbase "That's a pretty interesting story, Mr Bottomi."
+    wbase "That's a pretty interesting story, Mr. Bottomi."
     wgotcha "Unfortunately, it's completely false."
     wgotcha "As demonstrated... by THIS EVIDENCE!"
     bapology "It is? How so?"
@@ -364,9 +365,7 @@ label SH_Failure1:
     show screen healthBar
     ddril_gdown "Come now, assistant. You've got to try a little harder than that."
     $ mc_health -= 1
-    while mc_health_display > mc_health:
-        $mc_health_display -= 0.1
-        pause 0.01
+    call healthDrain from _call_healthDrain_9
     ddril_gdown "Here's a little motivation to step up your game."
     wthought "Couldn't you try the carrot before you reach for the stick?"
     hide screen healthBar
@@ -389,18 +388,18 @@ label SH_GameOver1:
     show black with dissolve
     wthought "And so, the truth disappeared into darkness."
     wthought "Drang failed to bring the real culprit to justice."
-    wthought "And I never unravelled the enigma of Base 24."
+    wthought "And I never unraveled the enigma of Base 24."
     jump endgame
 
 label SH_Success1:
     stop music
     show mir default
-    wcasefile "Just to clarify, Mr Bottomi... were you wearing the same clothes as you are right now?"
+    wcasefile "Just to clarify, Mr. Bottomi... were you wearing the same clothes as you are right now?"
     bapology "I guess I must have been. I don't remember going anywhere to change."
     wcasefile "And you're {i}absolutely certain{/i} you stabbed the knife into the victim?"
     bmad "How many times are you gonna make me say it, lady? I stabbed him with my own two hands!"
     bapology "I mean, it was only one hand, but you get the idea!"
-    wbase "How interesting that you should mention hands, Mr Bottomi..."
+    wbase "How interesting that you should mention hands, Mr. Bottomi..."
     wgotcha "...because I don't think yours were ever on this blade!"
     bnervous "What are you talking about?"
     wcasefile "Is this is the knife you remember plunging into the victim?"
@@ -415,7 +414,7 @@ label SH_Success1:
     hide ash
     show bottomi freak
     bos "No, that can't be right... I remember stabbing him! I swear I'm telling the truth!"
-    bfuzzy "There has to be some sort of explaination..."
+    bfuzzy "There has to be some sort of explanation..."
     bremember "Gloves!"
     whattip "I'm sorry?"
     bremember "I must have been wearing gloves! That would explain the lack of fingerprints, wouldn't it?"
@@ -432,12 +431,12 @@ label SH_Success1:
     wbase "Can you please make another statement including this new information?"
     bdespair "Come on lady, I already told you I did it. Why do you gotta keep grilling me?"
     bfuzzy "Every time you ask a question, it just makes my head hurt..."
-    wbase "I'm just trying to reach the truth, Mr Bottomi."
+    wbase "I'm just trying to reach the truth, Mr. Bottomi."
     wbase "Everything you tell me is immensely helpful."
     bdef "All right, all right. What do you want to know about?"
     wbase "Tell me more about the exact moment of the crime, please."
     hide mir with fade
-    ### Eyewitness Statement Animation
+    call witness_statement from _call_witness_statement_1
     typing "-- The Exact Moment of the Crime --{fast}"
     bremember "I was already wearing the gloves before I entered the kitchen."
     bmad "I saw the man and knew I needed to stab him, so I grabbed a knife from the counter."
@@ -459,15 +458,16 @@ label testimony2_intro:
     hide mir
     show bottomi remembering
     with fade
-    #Interrogation Animation
+    call interrogation from _call_interrogation_1
+    $ testiLength = 5
     $ CurrentTestimony = "SH_Testimony2A"
     $ current_present = "SH_Objection2"
     $ knows2E = False
     $ back_action = "CurrentTestimony"
-    play music "Interrogation_Moderato.mp3" fadein 1.0
+    play music "music/BustingLiesAtAModerateTempo.ogg" fadein 1.0
 
 label SH_Testimony2A:
-    $ settesti("SH_Testimony2A", None, "SH_Testimony2B", "SH_Press2A","SH_Advice2")
+    $ settesti("SH_Testimony2A", None, "SH_Testimony2B", "SH_Press2A","SH_Advice2",1)
     show screen testi
     bremember "I was already wearing the gloves before I entered the kitchen."
     jump SH_Testimony2B
@@ -489,14 +489,14 @@ label SH_Press2A:
     wos "Gah! {w=4.0}"
     wthought "I didn't know that Drang was capable of such succinct rebuttals!"
     wthought "(Or that he frequented internet movie forums...)"
-    ddef_gdown "Carry on, Mr Bottomi."
+    ddef_gdown "Carry on, Mr. Bottomi."
     hide drang
     bdef "Oh, uh, all right. So I went into the kitchen and..."
     hide mir
     jump SH_Testimony2B
 
 label SH_Testimony2B:
-    $ settesti("SH_Testimony2B", "SH_Testimony2A", "SH_Testimony2D", "SH_Press2B","SH_Advice2")
+    $ settesti("SH_Testimony2B", "SH_Testimony2A", "SH_Testimony2D", "SH_Press2B","SH_Advice2",2)
     show screen testi
     bmad "I saw the man and knew I needed to stab him, so I grabbed a knife from the counter."
     jump SH_Testimony2D
@@ -506,13 +506,13 @@ label SH_Press2B:
     show mir default
     whattip "And you still don't know what compelled you to attack him?"
     bdef "Not at all."
-    bremember "It might have been one of those \"intrustive thoughts\" people talk about. You know the ones?"
+    bremember "It might have been one of those \"intrusive thoughts\" people talk about. You know the ones?"
     bdef "Like, you're driving home and you hear a little voice in your head that says,"
     bdef "\"Drive your car off the freeway!\""
     bapology "Apparently they're pretty normal things.\nNobody actually listens to them."
     bsad "Only this time I guess I did..."
     bos ". . . . ."
-    wbase "Please carry on with your testimony, Mr Bottomi."
+    wbase "Please carry on with your testimony, Mr. Bottomi."
     bremember "Oh! Right! So anyways..."
     hide mir
     jump SH_Testimony2D
@@ -531,9 +531,9 @@ label SH_Press2B:
 
 label SH_Testimony2D:
     if knows2E:
-        $ settesti("SH_Testimony2D", "SH_Testimony2B", "SH_Testimony2E", "SH_Press2D","SH_Advice2")
+        $ settesti("SH_Testimony2D", "SH_Testimony2B", "SH_Testimony2E", "SH_Press2D","SH_Advice2",3)
     else:
-        $ settesti("SH_Testimony2D", "SH_Testimony2B", "SH_Testimony2F", "SH_Press2D","SH_Advice2")
+        $ settesti("SH_Testimony2D", "SH_Testimony2B", "SH_Testimony2F", "SH_Press2D","SH_Advice2",3)
     show screen testi
     bmad "When I stabbed him, he slumped over onto the floor."
     if knows2E:
@@ -545,7 +545,7 @@ label SH_Press2D:
     hide screen testi
     show mir default
     whattip "Did he try to fight back at all?"
-    bremember "No, he just went still when I plunged the kinfe in."
+    bremember "No, he just went still when I plunged the knife in."
     bremember "I think he tried to scream, but he couldn't make a sound."
     hide bottomi
     show car serious at flip
@@ -564,12 +564,12 @@ label SH_Press2D:
         "Yes, very important.":
             wcasefile "Yes, I think what you said was very important. Could you please add it to your statement?"
             bapology "Oh, uh, sure. If you think it really matters that much..."
-            hide mir
+            $ testiLength = 6
             $ knows2E = True
         "Nah, it's probably nothing.":
             wthink "Hm..."
             wthink "Nah, it's probably nothing."
-            wbase "Carry on with your testimony, Mr Bottomi."
+            wbase "Carry on with your testimony, Mr. Bottomi."
             bapology "Okay. So, after I stabbed him..."
     hide mir
     if knows2E:
@@ -578,7 +578,7 @@ label SH_Press2D:
         jump SH_Testimony2F
 
 label SH_Testimony2E:
-    $ settesti("SH_Testimony2E", "SH_Testimony2D", "SH_Testimony2F", "SH_Press2E","SH_Advice2")
+    $ settesti("SH_Testimony2E", "SH_Testimony2D", "SH_Testimony2F", "SH_Press2E","SH_Advice2",4)
     show screen testi
     bapology "I only ever stabbed him. I didn't beat him up or anything."
     jump SH_Testimony2F
@@ -596,9 +596,9 @@ label SH_Press2E:
 
 label SH_Testimony2F:
     if knows2E:
-        $ settesti("SH_Testimony2F", "SH_Testimony2E", "SH_Testimony2G", "SH_Press2F","SH_Advice2")
+        $ settesti("SH_Testimony2F", "SH_Testimony2E", "SH_Testimony2G", "SH_Press2F","SH_Advice2",(testiLength - 1))
     else:
-        $ settesti("SH_Testimony2F", "SH_Testimony2D", "SH_Testimony2G", "SH_Press2F","SH_Advice2")
+        $ settesti("SH_Testimony2F", "SH_Testimony2D", "SH_Testimony2G", "SH_Press2F","SH_Advice2",(testiLength - 1))
     show screen testi
     bnervous "I thought I saw movement in the window, so I ran away."
     jump SH_Testimony2G
@@ -606,7 +606,7 @@ label SH_Testimony2F:
 label SH_Press2F:
     hide screen testi
     show mir default
-    wcasefile "Presumably that was Mr Chritude taking pictures outside the house."
+    wcasefile "Presumably that was Mr. Chritude taking pictures outside the house."
     bdef "See, I didn't know that at the time."
     bnervous "I thought it might have been one of the security guards, come to arrest me."
     bnervous "I didn't want to be caught, so I ran away."
@@ -618,7 +618,7 @@ label SH_Press2F:
     jump SH_Testimony2G
 
 label SH_Testimony2G:
-    $ settesti("SH_Testimony2G", "SH_Testimony2F", "SH_Testimony2A", "SH_Press2G","SH_Advice2")
+    $ settesti("SH_Testimony2G", "SH_Testimony2F", "SH_Testimony2A", "SH_Press2G","SH_Advice2",testiLength)
     show screen testi
     bdef "While I was wandering around the base, I took off the gloves and threw them away."
     show bottomi remembering with fade
@@ -656,7 +656,7 @@ label SH_Advice2:
         wangry "Then we look harder."
         aunsure "Jeez, Randi. You get serious when you're on the job."
     else:
-        wthink "Mr bottomi's story is suspicious in six differet ways."
+        wthink "Mr. Bottomi's story is suspicious in six different ways."
         wthink "Unfortunately, none of them are conclusive contradictions with the facts."
         wbase "Right now we need more information from him."
         wbase "And the best way to get that is to press his statements."
@@ -718,9 +718,7 @@ label SH_Failure2:
     show screen healthBar
     dangry_gdown "I've heard enough."
     $ mc_health -= 1
-    while mc_health_display > mc_health:
-        $mc_health_display -= 0.1
-        pause 0.01
+    call healthDrain from _call_healthDrain_10
     dangry_gdown "Stop wasting our time with needless objections, assistant."
     hide screen healthBar
     if mc_health == 0:
@@ -742,7 +740,7 @@ label SH_GameOver2:
     show black with fade
     wthought "And so, the truth disappeared into darkness."
     wthought "Drang failed to bring the real culprit to justice."
-    wthought "And I never unravelled the enigma of Base 24."
+    wthought "And I never unraveled the enigma of Base 24."
     jump endgame
 
 label SH_Success2:
@@ -756,10 +754,10 @@ label SH_Success2:
     hide mir
     show car default
     cdef "Hi, I'm the horse."
-    cconfuse "Or am I the mouth?"
+    cthink "Or am I the mouth?"
     hide car
     show mir default
-    wbase "Carlos, could you please tell Mr Bottomi about the state we found the victim's body in?"
+    wbase "Carlos, could you please tell Mr. Bottomi about the state we found the victim's body in?"
     hide mir
     show car serious
     cser "Sure. He was dead on the floor with a knife in his back..."
@@ -768,9 +766,9 @@ label SH_Success2:
     bnervous "Ah!"
     cser "At this point, it's unknown whether the cause of death was stabbing... or blunt force trauma!"
     show bottomi freak
-    bos "AAAAAAHHHHH!"
+    bos "AAAAAAHHHHH!" with shake
     show bottomi freak
-    bos "I forgot about the bruises!"
+    bos "I forgot about the bruises!" with shake
     hide car
     show mir thinking
     wthink "So you remember them now?"
@@ -816,7 +814,8 @@ label testimony3_intro:
     wcasefile "Assuming he's lying, every time he makes something up he increases the chances of contradicting a piece of evidence we already have."
     wbase "We just need to wait for a slip-up he can't possibly cover up."
 
-    #Interrogation Animation
+    #Interrogation
+    $ testiLength = 5
     $ CurrentTestimony = "SH_Testimony3A"
     $ current_present = "SH_Objection3"
     $ back_action = "CurrentTestimony"
@@ -825,10 +824,11 @@ label testimony3_intro:
     hide ash
     show bottomi remembering
     with fade
-    play music "Interrogation_Moderato.mp3" fadein 1.0
+    call interrogation from _call_interrogation_2
+    play music "BustingLiesAtABriskTempo.ogg" fadein 1.0
 
 label SH_Testimony3A:
-    $ settesti("SH_Testimony3A", None, "SH_Testimony3B", "SH_Press3A","SH_Advice3")
+    $ settesti("SH_Testimony3A", None, "SH_Testimony3B", "SH_Press3A","SH_Advice3",1)
     show screen testi
     bremember "I remember that man now. He was the one in charge of the trial I'm participating in."
     jump SH_Testimony3B
@@ -846,7 +846,7 @@ label SH_Press3A:
     jump SH_Testimony3B
 
 label SH_Testimony3B:
-    $ settesti("SH_Testimony3B", "SH_Testimony3A", "SH_Testimony3C", "SH_Press3B","SH_Advice3")
+    $ settesti("SH_Testimony3B", "SH_Testimony3A", "SH_Testimony3C", "SH_Press3B","SH_Advice3",2)
     show screen testi
     bdef "Today he asked me to meet him here in the Smart House."
     jump SH_Testimony3C
@@ -865,9 +865,9 @@ label SH_Press3B:
 
 label SH_Testimony3C:
     if knows3Secret:
-        $ settesti("SH_Testimony3C", "SH_Testimony3B", "SH_Testimony3Secret", "SH_Press3C","SH_Advice3")
+        $ settesti("SH_Testimony3C", "SH_Testimony3B", "SH_Testimony3Secret", "SH_Press3C","SH_Advice3",3)
     else:
-        $ settesti("SH_Testimony3C", "SH_Testimony3B", "SH_Testimony3D", "SH_Press3C","SH_Advice3")
+        $ settesti("SH_Testimony3C", "SH_Testimony3B", "SH_Testimony3D", "SH_Press3C","SH_Advice3",3)
     show screen testi
     bdef "We walked into the kitchen together, and that's when he broke the news to me."
     if knows3Secret:
@@ -895,20 +895,21 @@ label SH_Press3C:
     menu:
         "Ask Him":
             wthought "Might as well... no harm in it."
-            wbase "Mr Bottomi, can you please add that information to your testimony?"
+            wbase "Mr. Bottomi, can you please add that information to your testimony?"
             bdef "Uh, all right... sure."
             $ knows3Secret = True
+            $ testiLength = 6
             hide mir
             jump SH_Testimony3Secret
         "Don't Ask Him":
             wthought "Nah... it's probably not that important."
-            wbase "Carry on with your testimony, Mr Bottomi."
+            wbase "Carry on with your testimony, Mr. Bottomi."
             bdef "Oh, yeah, okay..."
             hide mir
             jump SH_Testimony3D
 
 label SH_Testimony3Secret:
-    $ settesti("SH_Testimony3Secret", "SH_Testimony3C", "SH_Testimony3D", "SH_Press3Secret","SH_Advice3")
+    $ settesti("SH_Testimony3Secret", "SH_Testimony3C", "SH_Testimony3D", "SH_Press3Secret","SH_Advice3",4)
     show screen testi
     bremember "There was this big mud puddle outside. You couldn't avoid stepping in it."
     jump SH_Testimony3D
@@ -926,9 +927,9 @@ label SH_Press3Secret:
 
 label SH_Testimony3D:
     if knows3Secret:
-        $ settesti("SH_Testimony3D", "SH_Testimony3Secret", "SH_Testimony3E", "SH_Press3D","SH_Advice3")
+        $ settesti("SH_Testimony3D", "SH_Testimony3Secret", "SH_Testimony3E", "SH_Press3D","SH_Advice3", (testiLength - 1))
     else:
-        $ settesti("SH_Testimony3D", "SH_Testimony3C", "SH_Testimony3E", "SH_Press3D","SH_Advice3")
+        $ settesti("SH_Testimony3D", "SH_Testimony3C", "SH_Testimony3E", "SH_Press3D","SH_Advice3", (testiLength - 1))
     show screen testi
     bmad "Darsha was kicking me off the trial because he thought I had leaked information."
     jump SH_Testimony3E
@@ -946,16 +947,16 @@ label SH_Press3D:
     hide bottomi
     show drang think gdown
     dthink_gdown "Is this line of questioning relevant, assistant?"
-    dthink_gdown "Mr Bottomi is under suspicion of murder, not espionage."
+    dthink_gdown "Mr. Bottomi is under suspicion of murder, not espionage."
     wbase "Okay, okay."
-    whattip "So how did you react to this information, Mr Bottomi?"
+    whattip "So how did you react to this information, Mr. Bottomi?"
     hide mir
     hide drang
     show bottomi mad
     jump SH_Testimony3E
 
 label SH_Testimony3E:
-    $ settesti("SH_Testimony3E", "SH_Testimony3D", "SH_Testimony3A", "SH_Press3E","SH_Advice3")
+    $ settesti("SH_Testimony3E", "SH_Testimony3D", "SH_Testimony3A", "SH_Press3E","SH_Advice3",testiLength)
     show screen testi
     bmad "I was so mad that I just started wailing on him. And then... I grabbed the knife and..."
     show bottomi remembering with fade
@@ -1022,6 +1023,8 @@ label SH_Objection3:
     hide screen testi
     if testipart == "SH_Testimony3Secret" and present_response == "footprints":
         jump SH_Success3
+    elif testipart == "SH_Testimony3C" and present_response == "footprints":
+        jump SH_Success3
     else:
         jump SH_Failure3
 
@@ -1038,9 +1041,7 @@ label SH_Failure3:
     show drang jacket popped
     dos ". . . . ."
     $ mc_health -= 1
-    while mc_health_display > mc_health:
-        $mc_health_display -= 0.1
-        pause 0.07
+    call healthDrain from _call_healthDrain_11
     djacket_popped "Next time think before you speak, huh?"
     hide screen healthBar
     if mc_health == 0:
@@ -1071,12 +1072,12 @@ label SH_GameOver3:
     show black with fade
     wthought "And so, the truth disappeared into darkness."
     wthought "Drang failed to bring the real culprit to justice."
-    wthought "And I never unravelled the enigma of Base 24."
+    wthought "And I never unraveled the enigma of Base 24."
     jump endgame
 
 label SH_Success3:
     stop music
-    wgotcha "You've really stepped in it now, Mr Bottomi."
+    wgotcha "You've really stepped in it now, Mr. Bottomi."
     wgotcha "And by {i}it{/i}... I MEAN MUD!"
     bnervous "Excuse me?"
     wcasefile "There's no doubt that you tracked in mud when you entered the smart house."
@@ -1086,7 +1087,7 @@ label SH_Success3:
     show bottomi freak
     bos "Gwah! You're absolutely right!"
     bfuzzy "What does this mean?"
-    wbase "It means you've been lying to us, Mr Bottomi."
+    wbase "It means you've been lying to us, Mr. Bottomi."
     wbase "You lied about the fingerprints, you lied about the bruises, and you're lying to us right now!"
     bmad "N-no! I'm not lying! I remember walking in with him!"
     bdespair "But the footprints... why aren't there two pairs...?"
@@ -1109,4 +1110,5 @@ label SH_Success3:
     hide BottomiHead with dissolve
     pause 2.5
     hide BottomiLight with dissolve
+    call resetHealth from _call_resetHealth_4
     jump smart_house_act_3_intro

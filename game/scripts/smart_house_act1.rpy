@@ -2,10 +2,10 @@ label smart_house_act_1:
     show screen jumpTo
     scene black
     pause 1.0
+    $bHat = 1
     typing "September 13th. 7:28 P.M.\nNear the outskirts of town."
     play music "sound/Car_Loop.ogg" fadein 1.0
     scene policecarbythesideoftheroad with fade
-    #show WvDPersuasion
     pscanner "Sheriff? Sheriff Warren, are you there?"
     menu:
         "No, it's a completely different person emulating her voice perfectly.":
@@ -16,11 +16,11 @@ label smart_house_act_1:
             wos "You better have a good reason for calling me up. I'm incredibly busy right now."
             pscanner "You've been napping in the seat off your car, haven't you?"
             wos "..."
-            wos "I inkove my right to plead the fifth."
+            wos "I invoke my right to plead the fifth."
 
     pscanner "See, this is why nobody in town respects you anymore."
     wos "I think we both know why nobody in town respects me anymore."
-    wos "Now, what's so important you had to call up the sherrif?"
+    wos "Now, what's so important you had to call up the sheriff?"
     wos "Another loiterer by the general store? Somebody's hedges leaking into their neighbor's yard?"
     pscanner "There's been a murder."
     menu:
@@ -52,7 +52,7 @@ label smart_house_act_1:
         "Carlos the margarita nut?":
             wos "Carlos the margarita nut?"
             pscanner "That's an oversimplification."
-            wos "You're right. He also likes hawaiian shirts."
+            wos "You're right. He also likes Hawaiian shirts."
 
     pscanner "Well, he'll be waiting for you over at the security checkpoint. {i}If{/i} you can be bothered to show up."
     wos "Security checkpoint?"
@@ -66,7 +66,7 @@ label smart_house_act_1:
     pause 4.0
 
     wthought "My name is Miranda Warren."
-    wthought "I've been the Sherriff of {color=#FF9966}Boomtown, USA{/color} for thirteen years now."
+    wthought "I've been the Sheriff of {color=#FF9966}Boomtown, USA{/color} for thirteen years now."
     wthought "Boomtown was built by a real estate tycoon, expecting a large influx of people once the freeways were finished."
     wthought "But barely anyone came, and the town has been sinking back into the desert ever since."
     wthought "The only reason to put it on a map anymore is {color=#FF9966}Base 24,{/color} a government facility on the outskirts of town."
@@ -87,8 +87,6 @@ label outside_base_intro:
 
     $ eyesight = 0
     $initialguardtalk = 0
-    $renpy.start_predict("sprites/Carlos*.*")
-    $renpy.start_predict("sprites/Miranda*.*")
     scene outsidebase with dissolve
     pause 1.0
     typing "September 13th\nBase 24 - Security Checkpoint"
@@ -101,7 +99,7 @@ label outside_base_intro:
     cagit "Hey buddy, I'm an american citizen! My taxes pay your salary!" with smallshake
     hide guard eyes
     show mir default at flip
-    wbase "Carlos, you work for the Sherrif's Department. His taxes pay {i}your{/i} salary."
+    wbase "Carlos, you work for the Sheriff's Department. His taxes pay {i}your{/i} salary."
     $profile.add(carlos)
     cdef "Oh! Hey, Chief. About time you got here."
     cagit "This stick-in-the-mud won't let me in to investigate."
@@ -170,12 +168,12 @@ label outside_base_carlos:
             "What's Going On":
                 whattip "So what's the problem here?"
                 cagit "Agent Smith over there doesn't believe I'm a real cop."
-                wannoy "Here's a thought: maybe it's because you're wearing a hawaiian shirt instead of a police uniform."
+                wannoy "Here's a thought: maybe it's because you're wearing a Hawaiian shirt instead of a police uniform."
                 show mir default
                 clift "Come on, Chief. You know you can't stop a man when he's on ISLAND TIME."
                 chold "Who am I to resist the siren song of Beach Life?"
                 chold "Besides, I don't even think he can see what I'm wearing."
-                cwhis "Between you and me, it seems like his eyesight leaves something to be desired."
+                chold "Between you and me, it seems like his eyesight leaves something to be desired."
                 $ eyesight = 1
 
             "The Guard's Eyesight" if eyesight == 1:
@@ -220,11 +218,11 @@ label outside_base_guard:
     $loop = 1
     while loop == 1:
             menu:
-                "The Sherrif":
-                    wbase "Sir, I am the sherrif of this county."
+                "The Sheriff":
+                    wbase "Sir, I am the sheriff of this county."
                     wbase "I need you to let us in so we can investigate a crime."
                     gglasses "Hah! I get it."
-                    gglasses "He's an officer, and now you're the sherrif."
+                    gglasses "He's an officer, and now you're the sheriff."
                     gglasses "I guess the next guy who shows up will be the president?"
                     wangry "It's the truth!"
                     gglasses "I'm sure it is. Look, I can't just take your word for it."
@@ -315,7 +313,8 @@ label outside_base_outro:
     show black with fade
 
 label meeting_ash_intro:
-
+    $renpy.stop_predict("sprites/Guard*.*")
+    $renpy.start_predict("sprites/Ash*.*")
     scene black
     typing "September 13th\nBase 24 - Warehouse"
     show screen inventory_screen_button
@@ -418,7 +417,7 @@ label meeting_ash_conversation:
                         show ash standard
                         adef "It's fine, Randi."
                         asad "A few years back, I lost my brother."
-                        asad "Sherrif Warren helped on the case."
+                        asad "Sheriff Warren helped on the case."
                         hide ash
                         show mir default
                         cser "Wait a minute... this wouldn't happen to be the {color=#FF9966}PW-3 Incident{/color}, would it?"
@@ -459,11 +458,11 @@ label meeting_ash_conversation:
                 hide houseflyer with dissolve
                 adef "I've got an extra flyer if you want to thumb through it."
                 $inventory.add(brochure)
-                typing "House Brochure Added to Inventory"
+                typing "House Brochure Added to Evidence"
                 hide mir default
                 show car default
                 cser "The AI {i}learns?{/i} How does it do that?"
-                athink "There were a lot of big words in the explaination, but I'm pretty sure it's..."
+                athink "There were a lot of big words in the explanation, but I'm pretty sure it's..."
                 athink "The Cloud?"
                 hide car default
                 show mir default
@@ -558,16 +557,16 @@ label meeting_ash_outro:
     hide mir default
     show ash surprised
     asurprise "He was so fast I didn't even have time to snap a picture of him."
-    acam "Oh well. Guess I'll just have to snap a picture of you, Mr Tsukada."
+    acam "Oh well. Guess I'll just have to snap a picture of you, Mr. Tsukada."
     cagit "No wait I have a problem with{nw}"
-    show white with Pause(0.05)
-    hide white with dissolve
     show Ash_Camera_Polaroid
+    call flash from _call_flash_8
     acam "Ooh, that was a nice one!"
     hide Ash_Camera_Polaroid
     wthought "I wonder where that man was going in such a hurry..."
 
 label meeting_drang_intro:
+    $renpy.start_predict("sprites/Drang*.*")
     show screen inventory_screen_button
     scene black
     typing "September 13th\nSmart House - Kitchen"
@@ -607,7 +606,7 @@ label meeting_drang_intro:
     ddef_gdown "I must say, you're quite lucky."
     wannoy "How so?"
     dthink_gdown "Well, you must be dealing with a real puzzler of a case if they had to send me in."
-    ddril_gdown "Of course, it will be like child's play to me, but for a non-sophistocate such as yourself..."
+    ddril_gdown "Of course, it will be like child's play to me, but for a non-sophisticate such as yourself..."
     dthink_gdown "...this case may have taken you ten, no, {i}eleven{/i} thousand years to solve."
     ddef_gdown "Good thing I came along."
     whattip "Listen...Agent Drang? Hmm... how do I put this..."
@@ -643,7 +642,7 @@ label meeting_drang_intro:
     show drang default gdown
     with dissolve
     pause 0.2
-    call persuasion
+    call persuasion from _call_persuasion_1
     scene WvDPersuasion
     show drang default gdown
     show mir default
@@ -675,7 +674,7 @@ label meeting_drang_conversation_p1:
             wbase "I'm the Sheriff of this town, and I have as much of a right to investigate as you."
             ddef_gup "Blunt and to the point. I like people who don't waste my time."
             dthink_gup "Unfortunately, you're not quite right."
-            ddril_gdown "I have been given full athority over this crime scene by my superiors."
+            ddril_gdown "I have been given full authority over this crime scene by my superiors."
             ddril_gup "They're part of a little organization, maybe you've heard of it, called the {i}FBI?{/i}"
             ddef_gup "So, no, sweetcheeks. I'm the only one here with the right to investigate."
 
@@ -685,9 +684,7 @@ label meeting_drang_conversation_p1:
             wannoy "N-no, I just {nw}"
             dangry_gdown "Save it. I won't be condescended to."
             $ mc_health -= 1
-            while mc_health_display > mc_health:
-                $mc_health_display -= 0.1
-                pause 0.01
+            call healthDrain from _call_healthDrain_6
             show mir recoil anim
             wos "NNNGGGGGG!!!! {w=4.0}"
             djacket_pop "I'm a big man. I know big words."
@@ -695,7 +692,10 @@ label meeting_drang_conversation_p1:
             wthought "Damn. He saw right through me."
             wthought "I'm going to have to take a different approach."
             dthink_gdown "Now I'm going to ask you once again..."
-            jump meeting_drang_conversation_p1
+            if mc_health == 0:
+                jump meeting_drang_conversation_gameover
+            else:
+                jump meeting_drang_conversation_p1
 
     wangry "No. I've got to get in there."
     dangry_gdown "Boy, you're persistent, huh?"
@@ -711,37 +711,31 @@ label meeting_drang_conversation_p2:
             wbase "So, the more help you have, the faster you can wrap this case up."
             wbase "The faster you wrap this case up, the faster you're back where you belong."
             dthink_gdown "Compelling. Succinct. Logical."
-            ddef_gdown "I like the cut of your gib, Warren."
+            ddef_gdown "I like the cut of your jib, Warren."
 
         "Blunt: You clearly have no idea what you’re doing.":
             wbase "I'll cut right to the chase, Drang."
             wangry "You clearly have no idea what you’re doing."
             wangry "You haven't set up a perimeter, you haven't begun to interview witnesses."
             wangry "Best I can tell, you've just been standing here rubbing your chin."
-            dangry_gup "Get out of my sight, you disrespecful cretin!"
+            dangry_gup "Get out of my sight, you disrespectful cretin!"
             dangry_gup "Never in all my life have I met someone so asinine!"
             $ mc_health -= 1
-            while mc_health_display > mc_health:
-                $mc_health_display -= 0.1
-                pause 0.01
+            call healthDrain from _call_healthDrain_7
             show mir recoil anim
             wos "NNNGGGGGG!!!! {w=4.0}"
             wthought "Uh oh. Looks like I pushed him too far."
             wthought "Maybe I should try that one again."
-            jump meeting_drang_conversation_p2
+            if mc_health == 0:
+                jump meeting_drang_conversation_gameover
+            else:
+                jump meeting_drang_conversation_p2
 
         "Flattery: You’ll need someone around to appreciate your genius.":
             wthink "I have no doubt that you can solve this case on your own."
             whattip "That's why they sent you down all this way, right?"
             wbase "But you’ll still need someone around to appreciate your genius."
             wbase "A Watson to your Holmes. A Hastings to your Poirot."
-            hide mir
-            show ash
-            aflippant "A Marty to your Doc Brown!"
-            hide ash
-            show mir
-            wannoy "Not the analogy I would have gone with,{nw}"
-            wbase "Not the analogy I would have gone with,{fast} but yes."
             dthink_gup "Hmm...a most astute point."
             ddril_gup "My talents are wasted without someone to marvel at them."
 
@@ -757,35 +751,32 @@ label meeting_drang_conversation_p3:
             wbase "I'll try to follow your lead as much as I can. However..."
             wbase "If you contradict the facts of the case, I’ll be forced to disregard your directions."
             dthink_gdown "Intriguing. An officer of the law with as strong a will as I."
-            dthink_gdown "Engaged in a speculative tete-a-tete, a war of competing logics."
+            dthink_gdown "Engaged in a speculative tête-à-tête, a war of competing logics."
             ddril_gdown "And only he with the superior intellect will emerge victorious."
             whattip "You mean he {i}or she{/i}."
             ddril_gup "No..... Just he."
-            hide mir
-            show ash
-            aannoy "What about \"they\"?"
-            hide ash
-            show mir default
             djacket_pop "Very well, Officer. I accept your proposition."
             djacket_popped "You may accompany me into this snake pit of criminality for as long as you prove a worthy foe."
+            jump meeting_drang_outro
 
         "Blunt: I’ll never follow the instructions of a dope like you.":
             wangry "Hah! I’ll never follow the instructions of a dope like you."
             wangry "You need to grow up and accept that you can't just boss people around!"
             ddril_gdown "Well, that was a close one."
             ddril_gdown "To think I almost let a rude little boondock cop into {i}my{/i} crime scene!"
-            ddril_gdown "Good thing your little outburst there convinved me otherwise!"
+            ddril_gdown "Good thing your little outburst there convinced me otherwise!"
             $ mc_health -= 1
-            while mc_health_display > mc_health:
-                $mc_health_display -= 0.1
-                pause 0.01
+            call healthDrain from _call_healthDrain_8
             show mir recoil anim
             wos "Ah! Wait! {w=4.0}"
             wthought "What was I thinking, getting so confrontational with him?"
             wthought "And right as I was getting through to him, too!"
             wannoy "Agent Drang, I'm sorry for speaking out of turn. Give me another chance."
             dthink_gdown "Humbling yourself before me is a good start. Now..."
-            jump meeting_drang_conversation_p3
+            if mc_health == 0:
+                jump meeting_drang_conversation_gameover
+            else:
+                jump meeting_drang_conversation_p3
 
         "Flattery: Of course. You are my superior officer, after all.":
             whattip "Well, Of course. You are my superior officer, after all."
@@ -809,7 +800,21 @@ label meeting_drang_conversation_p3:
             ddef_gup "Well, don't be so shy about it from now on."
             ddef_gup "I am a humble man. I am not embarrassed by descriptions of my incredible wit."
             ddef_gdown "Now, come along. There will be plenty of time to bask in my genius."
+            jump meeting_drang_outro
 
+label meeting_drang_conversation_gameover:
+    ddef_gup "Hey you."
+    ddef_gup "You, on the other side of the screen."
+    ddef_gup "I see you, you son of a bitch."
+    dthink_gup "How the hell did you fail this part?"
+    dangry_gup "This is the tutorial! It is nearly impossible to fail!"
+    dangry_gup "You did this on purpose, didn't you, wise guy?"
+    dfrown_gup "Go back and do it right, you jokester!"
+    wconfused "Who are you talking to?"
+    ddef_gup "Never mind that."
+    call resetHealth from _call_resetHealth_2
+    call healthGain from _call_healthGain_1
+    jump meeting_drang_conversation_p1
 
 label meeting_drang_outro:
     stop music fadeout 1.0
@@ -847,13 +852,14 @@ screen sh_investigation1_kitchen:
     modal True
     imagemap:
         ground "kitchendrang"
-        hover "basewarehousepaul"
+        hotspot (1,1,1919,1079) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_relevant")]
         hotspot (1035,798,564,287) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_footprints")]
         hotspot (1325,271,207,500) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_drang_conversation")]
         hotspot (261,632,300,200) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_examining_victim")]
         hotspot (561,212,180,350) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_fridge")]
         hotspot (0,280,400,330) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_window")]
         hotspot (1500,170,420,200) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_shelves")]
+        hotspot (1060,200,240,200) action [Hide("sh_investigation1_kitchen"), Jump("investigation1_shelves")]
     use inventory_screen_button
     imagebutton auto "assets/menu/move_%s.png"  xalign 0.5 yalign 1.0 action Jump("inv1_move_kitchen")
 
@@ -891,7 +897,7 @@ label investigation1_drang_conversation:
                 ddef_gdown "We know this because the first sighting of the body was at 6..."
                 ddef_gdown "And the tour group passing through the kitchen around 5 did not see it."
                 wbase "This first sighting of the body..."
-                whattip "Was this the boy who unknowlingly uploaded a photo of the body online?"
+                whattip "Was this the boy who unknowingly uploaded a photo of the body online?"
                 ddef_gdown "That's the one."
                 ddril_gdown "Simpleton didn't even notice there was key evidence in his glamour shot."
                 dthink_gup "Eventually someone else reported the photo to the FBI."
@@ -965,7 +971,7 @@ label investigation_1_drang_present:
         djacket_pop "There it is, the murder weapon."
         djacket_popped "Did you have your Forensics Stooge take a look at this?"
         cos "Hey!"
-        wbase "Yes. He didn't find any fingeprints on the handle."
+        wbase "Yes. He didn't find any fingerprints on the handle."
         dthink_gup "Interesting. There's only one conclusion to draw from this."
         wbase "The culprit was{nw}"
         dthink_gdown "Your assistant is completely incompetent."
@@ -980,7 +986,7 @@ label investigation_1_drang_present:
         ddef_gup "I've seen this kind of thing before. Nasty business."
         wbase "What is it?"
         dthink_gdown "Technically, I'm not supposed talk about it."
-        dthink_gup "But if it's neccesary to solve this case..."
+        dthink_gup "But if it's necessary to solve this case..."
         wangry "What? What is it? Tell me!"
         dos ". . ."
         dthink_gup "Have you ever heard... of a \"Fight Club\"?"
@@ -1037,7 +1043,203 @@ label investigation_1_drang_present:
 
     jump investigation1_drang_conversation
 
+label investigation1_footprints:
+    show mir default
+    show ash standard at flip
+    with dissolve
+    apsyched "Look over here, Randi! Muddy footprints!"
+    apsyched "That's like Clues 101!"
+    athink "But whose could they be...?"
+    wthink "They don't seem to be the victim's. His feet are clean."
+    aposit "We know one thing for certain..."
+    aposit "Whoever this person is, they don't possess the power of flight."
+    hide ash
+    show car at flip
+    clift "I just kind of assume that about everybody, all the time."
+    cdef "Hey, these are some pretty clear prints."
+    cdef "It won't be hard to match it up with the shoe, if we can find it."
+    wthink "There's something bothering me about these prints..."
+    cser "Hm?"
+    wthink "We're in a pristine government warehouse."
+    wbase "Where did this person find a puddle big enough to muddy their shoes like this?"
+    hide car
+    show ash standard at flip
+    adef "There's a little fake garden outside the house."
+    athink "Maybe this person stepped in the dirt out there?"
+    wthink "It's possible..."
+    whattip "Still, it seems like you'd have to go out of your way to make these footprints."
+    hide ash
+    show car at flip
+    cser "You mean... somebody {i}wanted{/i} us to find these?"
+    cser "Why would anybody do that?"
+    $inventory.add(footprints)
+    typing "Muddy Footprints Added to Evidence"
+    $ investigation1_cleareditems.append("5")
+    hide mir
+    hide car
+    with dissolve
+    call investigation1 from _call_investigation1_2
+
+label investigation1_fridge:
+    show mir default
+    show ash standard at flip
+    with dissolve
+    adef "Wanna check the fridge?"
+    adef "Best case scenario:{w=0.1} we find another clue in there."
+    adef "{i}Other{/i} best case scenario:{w=0.1} Free Sodas."
+    wbase "And what about a {i}worst{/i} case scenario?"
+    athink "I guess...{w=0.2} more dead bodies?"
+    aannoy "Oh,{w=0.1} or {i}celery  sticks.{/i}"
+    aannoy "I don't care how much peanut butter you put on,{w=0.2} it's {i}not{/i} a snack!"
+    wbase "Well, let's check and find out."
+    wos ".{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}.{w=0.1}"
+    wbase "There's nothing in here."
+    wbase "Which makes sense,{w=0.1} because this is just a model home."
+    wbase "I don't even think it's plugged in."
+    asad "I changed my mind...{w=0.2} {i}this{/i} is the worst case scenario."
+    wthought "Worse than dead bodies?"
+    hide mir
+    hide ash
+    with dissolve
+    call investigation1 from _call_investigation1_3
+
+label investigation1_window:
+    wthought "A window looking outside to the rest of the base."
+    if "3" in investigation1_cleareditems:
+        wthought "This must be the window Paul Chritude photographed the body through."
+    else:
+        wthought "Maybe somebody witnessed the murder through here?"
+    call investigation1 from _call_investigation1_4
+
+label investigation1_shelves:
+    show mir default
+    show ash standard at flip
+    with dissolve
+    adef "Hey Randi,{w=0.1} need help reaching these high up shelves?"
+    wangry "Hey!{w=0.1} I'm not that much shorter than you!" with smallshake
+    wthink "B-besides,{w=0.1} I don't even {i}want{/i} to check those shelves."
+    aconfident "Oh,{w=0.1} is that right?"
+    wbase "Y-yup.{w=0.1} Murderers {i}never{/i} place things in high up locations."
+    wbase "That's just classic criminal psychology."
+    aconfident "If{w=0.1} you{w=0.1} say{w=0.1} so..."
+    wthought "Man, when did Ash get so darn tall anyways?"
+    wthought "Seems like only yesterday they were barely up to my knees."
+    hide ash
+    hide mir
+    with dissolve
+    call investigation1 from _call_investigation1_5
+
+label investigation1_relevant:
+    wthought "I don't think this is especially relevant to the case at hand."
+    call investigation1 from _call_investigation1_6
+
+label investigation1_examining_victim:
+    wos "Let's get a closer look at the body."
+    show victimbody with dissolve
+    cos "Jeez. This guy looks really bad."
+    cos "Not that murder victims usually look {i}great{/i}, but even by corpse standards this is nasty."
+    wos "Ash, you really shouldn't be looking at this."
+    aos "I'll be fine. This isn't much worse than most video games."
+    wos "That's awful. Who'd want to play a video game with something like {i}this{/i} in it?"
+    jump investigation1_examining_victim_map
+
+label investigation1_examining_victim_map:
+    show screen sh_investigation1_body
+    pause
+
+screen sh_investigation1_body:
+    modal True
+    imagemap:
+        ground "victimbody"
+        hotspot (1565,664,296,145) action [Hide("sh_investigation1_body"), Jump("investigation1_missing_shoe")]
+        hotspot (244,425,93,89) action [Hide("sh_investigation1_body"), Jump("investigation1_identifying_victim")]
+        hotspot (54,331,159,439) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_injuries")]
+        hotspot (699,132,299,221) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_injuries")]
+        hotspot (483,157,164,290) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_weapon")]
+    use inventory_screen_button
+    imagebutton auto "assets/menu/return_%s.png"  action [Hide("sh_investigation1_body"), Jump("investigation1")] xalign 1.0 yalign 1.0
+
+label investigation1_missing_shoe:
+    wos "Tsukada. Take a look at this."
+    cos "What?"
+    wos "This man is missing one of his shoes."
+    cos "You think it came off during the murder?"
+    wos "I don't think he took it off for the fun of it, if that's what you're asking."
+    aos "Maybe some sort of shoe-hungry creature came and took it for a snack!"
+    wos "That's completely ridiculous."
+    aos "Agh, you're right. A shoe-eater obviously would have taken the other one, too."
+    wos "That's not what I... never mind."
+    wos "In any case, let's take a note of it."
+    $ investigation1_cleareditems.append("6")
+    $inventory.add(missingshoe)
+    typing "Missing Shoe Added to Evidence"
+    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map
+
+label investigation1_identifying_victim:
+    wos "There's something pinned to his shirt."
+    cos "Looks like an ID Card."
+    $inventory.add(idcard)
+    typing "ID Card Added to Evidence"
+    show darshasid with dissolve
+    ### ID Card icon on screen
+    cos "\"Orin Darsha, Base 24 Research and Development.\""
+    cos "\"Head of Applied Research.\""
+    hide darshasid with dissolve
+    $profile.add(darsha)
+    cos "I guess this guy was in charge around here."
+    wos "He was probably overseeing the development of this smart house."
+    aos "Poor guy. Killed in the kitchen of his own project."
+    aos "And on the day he finally got to unveil it to everyone."
+    cos "I wonder if this house has anything to do with why he was killed."
+    wos "We should ask around to see if anyone knows more about him."
+    cos "At least we've got a name for our John Doe now."
+    $ investigation1_cleareditems.append("7")
+    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_1
+
+label investigation1_examine_injuries:
+    cos "This guy's got quite a few injuries on him."
+    cos "Obviously, he's got a massive stab wound."
+    cos "But what's really strange is the bruises."
+    cos "You don't expect a stabbing victim to have signs of blunt force trauma."
+    wos "Well, which one is the cause of death?"
+    cos "I can figure that out, but it's going to take a while."
+    cos "In the meantime, let me write you up a preliminary medical report."
+    $inventory.add(prelim)
+    typing "Autopsy Report Added to Evidence"
+    $ investigation1_cleareditems.append("8")
+    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_2
+
+label investigation1_examine_weapon:
+    cos "Well, not to jump to conclusions here..."
+    cos "But I think we've found our murder weapon."
+    cos "I'll be running some tests to determine the cause of death, of course."
+    cos "But in most cases, the simplest solution is usually the correct one."
+    wos "Occam's Razor."
+    cos "Or in this case, Occam's Kitchen Knife."
+    wos "Carlos, can you run a fingerprint test on the handle of this knife?"
+    cos "No problem. Just give me one second..."
+    ### Short fade to black to show passage of time
+    show black with dissolve
+    pause 1.0
+    hide black with dissolve
+    cos "Huh. That's strange."
+    wos "What?"
+    cos "There's not a single print on this handle."
+    cos "In fact, there's no indication a hand even {i}touched{/i} this knife."
+    $inventory.add(knife)
+    typing "Kitchen Knife Added to Evidence"
+    aos "No fingerprints, huh?"
+    aos "You know what could grab a knife without leaving fingerprints?"
+    wos "Please don't say ghosts."
+    aos "Now, listen."
+    aos "I'm not saying it {i}was{/i} ghosts."
+    aos "{i}All I'm saying is{/i} we need to keep an open mind to the {i}possibility{/i} that it was ghosts."
+    wos "Let's stay away from the supernatural theories until we conclusively rule out the natural ones, all right?."
+    $ investigation1_cleareditems.append("9")
+    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_3
+
 label investigation1_warehouse:
+    $renpy.start_predict("sprites/Chritude*.*")
     if warehouseFirstVisit == True:
         show black with dissolve
         typing "Base 24 - Warehouse"
@@ -1051,11 +1253,8 @@ screen sh_investigation1_warehouse:
     modal True
     imagemap:
         ground "basewarehousepaul"
-        hover "kitchendrang"
         hotspot (1220,666,100,200) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_chritude_conversation")]
         hotspot (750,830,467,60) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_garden")]
-        hotspot (400,690,100,200) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_backdoor")]
-        hotspot (250,620,140,240) action [Hide("sh_investigation1_warehouse"), Jump("investigation1_garage")]
     use inventory_screen_button
     imagebutton auto "assets/menu/move_%s.png" xalign 0.5 yalign 1.0 action Jump("inv1_move_warehouse")
 
@@ -1063,6 +1262,7 @@ label inv1_move_warehouse:
     menu:
         "Smart House - Kitchen":
             hide screen sh_investigation1_warehouse
+            $renpy.stop_predict("sprites/Chritude*.*")
             jump investigation1
 
 label investigation1_chritude_conversation:
@@ -1095,7 +1295,7 @@ label investigation1_chritude_conversation:
         hide ash
         show mir hattip
         wthought "Master Style, huh? He looks more like a King Clown."
-        wbase "Mr Chritude, my name is Miranda Warren. I'm the Sheriff of Boomtown."
+        wbase "Mr. Chritude, my name is Miranda Warren. I'm the Sheriff of Boomtown."
         pdef "Oh, you're here about the murder!"
         psad "Terrible thing, that. Ruined one of my trademark glamour shots!"
         wannoy "You'll forgive me if the disruption of a selfie isn't my number one concern right now."
@@ -1110,7 +1310,7 @@ label investigation1_chritude_conversation:
                 show mir
                 show chritude standard at flip
                 whattip "Mr Chritude... could you explain to me what it is you actually do?"
-                poutrage "Are you saying you've never heard of moi?"
+                poutrage "Are you saying you've never heard of {i}moi?{/i}"
                 poutrage "Why, I've never been more offended in all my life!"
                 hide mir default
                 show ash
@@ -1134,14 +1334,14 @@ label investigation1_chritude_conversation:
                 whattip "So, you were part of the group touring the smart house this evening?"
                 pdef "Why, yes. This unveiling is the first step in a major rollout for the Smart House brand."
                 pconceited "So naturally they needed a Thought Influencer such as myself to give it the stamp of approval."
-                pconceited "My upcoming tell-all expoSay vlog will either make or break the Smart House."
+                pconceited "My upcoming tell-all expo-Say vlog will either make or break the Smart House."
                 hide mir
                 show ash
                 aflippant "So... are you going to make it, or break it?"
                 plaugh "You'll have to wait and see, now won't you?"
                 hide ash
                 show mir
-                wcasefile "At one point you snuck away from the the tour group, is that right?"
+                wcasefile "At one point you snuck away from the tour group, is that right?"
                 pdef "Yes, that tour was getting dreadfully boring."
                 poutrage "My followers were chomping at the bit for new content! How could I deny them?"
                 wbase "So what did you do?"
@@ -1155,11 +1355,11 @@ label investigation1_chritude_conversation:
                 show mir
                 show chritude standard at flip
                 whattip "I suppose I'll start with the obvious question:"
-                wangry "How on earth could you not not have noticed there was a dead body in your photograph?"
+                wangry "How on earth could you not have noticed there was a dead body in your photograph?"
                 poutrage "Listen here, lady cop. I adhere to a strict regimen of twelve glamour shots per hour."
                 pconceited "I don't have the time to be combing each and every one for corpses!"
                 pconceited "The only thing I can review with any sort of thoroughness is the face region, which must, of course, be perfect."
-                pdef "Frankly, I only looked twice at that picture after I'd recieved the takedown notice."
+                pdef "Frankly, I only looked twice at that picture after I'd received the takedown notice."
                 wthink "That reminds me... I need to consult that photograph, but it's been taken offline."
                 wbase "Is there any chance you have a copy you could give me?"
                 plaugh "Don't worry, I get asked this all the time."
@@ -1168,7 +1368,7 @@ label investigation1_chritude_conversation:
                 psad "Very well, very well..."
                 psad "...spoilsport..."
                 show chritudesPhoto with dissolve
-                wos "This has got to be the most absurd evidence I've ever recieved."
+                wos "This has got to be the most absurd evidence I've ever received."
                 wos "Still, it's a bit more understandable he didn't notice something that was on the other side of a window."
                 wos "All this time I thought he'd been in the same room as the body."
                 aos "Hey, look at that! Is there someone else inside the kitchen?"
@@ -1178,6 +1378,7 @@ label investigation1_chritude_conversation:
                 wos "Let's... put a pin in that theory, okay?"
                 hide chritudesPhoto with dissolve
                 $inventory.add(photo)
+                typing "Chritude's Photo Added to Evidence"
                 $ investigation1_cleareditems.append("3")
 
             "Power Outage" if unlockedoutage == True:
@@ -1231,7 +1432,6 @@ label investigation1_chritude_conversation:
 
     call investigation1_warehouse from _call_investigation1_warehouse
 
-
 label investigation_1_chritude_present:
     if present_response == "sheriffbadge":
         pdef "What a wonderful little trinket!"
@@ -1264,152 +1464,13 @@ label investigation_1_chritude_present:
     else:
         pconceited "Fabulous! Daring! I love it!"
         wannoy "Um, you haven't even looked at it."
-        pconceited "I've never seen something so marvellous in all my life!"
+        pconceited "I've never seen something so marvelous in all my life!"
         wannoy "All right, sheesh, never mind."
 
     jump investigation1_chritude_conversation
 
-label investigation1_footprints:
-    show mir default
-    show ash standard at flip
-    apsyched "Look over here, Randi! Muddy footprints!"
-    apsyched "That's like Clues 101!"
-    athink "But whose could they be...?"
-    wthink "They don't seem to be the victim's. His feet are clean."
-    aposit "We know one thing for certain..."
-    aposit "Whoever this person is, they don't possess the power of flight."
-    hide ash
-    show car at flip
-    clift "I just kind of assume that about everybody, all the time."
-    cdef "Hey, these are some pretty clear prints."
-    cdef "It won't be hard to match it up with the shoe, if we can find it."
-    wthink "There's something bothering me about these prints..."
-    cser "Hm?"
-    wthink "We're in a pristine government warehouse."
-    wbase "Where did this person find a puddle big enough to muddy their shoes like this?"
-    hide car
-    show ash standard at flip
-    adef "There's a little fake garden outside the house."
-    athink "Maybe this person stepped in the dirt out there?"
-    wthink "It's possible..."
-    whattip "Still, it seems like you'd have to go out of your way to make these footprints."
-    hide ash
-    show car at flip
-    cser "You mean... somebody {i}wanted{/i} us to find these?"
-    cser "Why would anybody do that?"
-    $inventory.add(footprints)
-    $ investigation1_cleareditems.append("5")
-    call investigation1 from _call_investigation1_2
-
-
-label investigation1_examining_victim:
-    wos "Let's get a closer look at the body."
-    ### Show Closeup of Body
-    show victimbody with dissolve
-    cos "Jeez. This guy looks really bad."
-    cos "Not that murder victims usually look {i}great{/i}, but even by corpse standards this is nasty."
-    wos "Ash, you really shouldn't be looking at this."
-    aos "I'll be fine. This isn't much worse than most video games."
-    wos "That's awful. Who'd want to play a video game with something like {i}this{/i} in it?"
-    jump investigation1_examining_victim_map
-
-label investigation1_examining_victim_map:
-    show screen sh_investigation1_body
-    pause
-
-screen sh_investigation1_body:
-    modal True
-    imagemap:
-        ground "victimbody"
-        hotspot (1565,664,296,145) action [Hide("sh_investigation1_body"), Jump("investigation1_missing_shoe")]
-        hotspot (244,425,93,89) action [Hide("sh_investigation1_body"), Jump("investigation1_identifying_victim")]
-        hotspot (54,331,159,439) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_injuries")]
-        hotspot (699,132,299,221) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_injuries")]
-        hotspot (483,157,164,290) action [Hide("sh_investigation1_body"), Jump("investigation1_examine_weapon")]
-    use inventory_screen_button
-    imagebutton auto "assets/menu/return_%s.png"  action [Hide("sh_investigation1_body"), Jump("investigation1")] xalign 1.0 yalign 1.0
-
-label investigation1_missing_shoe:
-    wos "Tsukada. Take a look at this."
-    cos "What?"
-    wos "This man is missing one of his shoes."
-    cos "You think it came off during the murder?"
-    wos "I don't think he took it off for the fun of it, if that's what you're asking."
-    aos "Maybe some sort of shoe-hungry creature came and took it for a snack!"
-    wos "That's completely ridiculous."
-    aos "Agh, you're right. A shoe-eater obviously would have taken the other one, too."
-    wos "That's not what I... never mind."
-    wos "In any case, let's take a note of it."
-    $ investigation1_cleareditems.append("6")
-    $inventory.add(missingshoe)
-    typing "Missing Shoe Added to Inventory"
-    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map
-
-
-label investigation1_identifying_victim:
-    wos "There's something pinned to his shirt."
-    cos "Looks like an ID Card."
-    $inventory.add(idcard)
-    typing "ID Card Added to Inventory"
-    show darshasid with dissolve
-    ### ID Card icon on screen
-    cos "\"Orin Darsha, Base 24 Research and Development.\""
-    cos "\"Head of Applied Research.\""
-    hide darshasid with dissolve
-    $profile.add(darsha)
-    cos "I guess this guy was in charge around here."
-    wos "He was probably overseeing the development of this smart house."
-    aos "Poor guy. Killed in the kitchen of his own project."
-    aos "And on the day he finally got to unveil it to everyone."
-    cos "I wonder if this house has anything to do with why he was killed."
-    wos "We should ask around to see if anyone knows more about him."
-    cos "At least we've got a name for our John Doe now."
-    $ investigation1_cleareditems.append("7")
-    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_1
-
-label investigation1_examine_injuries:
-    cos "This guy's got quite a few injuries on him."
-    cos "Obviously, he's got a massive stab wound."
-    cos "But what's really strange is the bruises."
-    cos "You don't expect a stabbing victim to have signs of blunt force trauma."
-    wos "Well, which one is the cause of death?"
-    cos "I can figure that out, but it's going to take a while."
-    cos "In the meantime, let me write you up a preliminary medical report."
-    $inventory.add(prelim)
-    typing "Autopsy Report Added to Inventory"
-    $ investigation1_cleareditems.append("8")
-    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_2
-
-label investigation1_examine_weapon:
-    cos "Well, not to jump to conclusions here..."
-    cos "But I think we've found our murder weapon."
-    cos "I'll be running some tests to determine the cause of death, of course."
-    cos "But in most cases, the simplest solution is usually the correct one."
-    wos "Occam's Razor."
-    cos "Or in this case, Occam's Kitchen Knife."
-    wos "Carlos, can you run a fingerprint test on the handle of this knife?"
-    cos "No problem. Just give me one second..."
-    ### Short fade to black to show passage of time
-    show black with dissolve
-    pause 1.0
-    hide black with dissolve
-    cos "Huh. That's strange."
-    wos "What?"
-    cos "There's not a single print on this handle."
-    cos "In fact, there's no indication a hand even {i}touched{/i} this knife."
-    $inventory.add(knife)
-    typing "Kitchen Knife Added to Inventory"
-    aos "No fingerprints, huh?"
-    aos "You know what could grab a knife without leaving fingerprints?"
-    wos "Please don't say ghosts."
-    aos "Now, listen."
-    aos "I'm not saying it {i}was{/i} ghosts."
-    aos "{i}All I'm saying is{/i} we need to keep an open mind to the {i}possibility{/i} that it was ghosts."
-    wos "Let's stay away from the supernatural theories until we conclusively rule out the natural ones, all right?."
-    $ investigation1_cleareditems.append("9")
-    call investigation1_examining_victim_map from _call_investigation1_examining_victim_map_3
-
 label smart_house_act_1_finale:
+    $renpy.start_predict("sprites/Bottomi*.*")
     stop music fadeout 1.0
     show mir default
     show car at flip
@@ -1432,4 +1493,5 @@ label smart_house_act_1_finale:
     bunk "I think... it was me."
     bunk "I'm the one who killed that man."
     ### End of Act 1 Animation
-    jump smart_house_act_2_intro
+    call resetHealth from _call_resetHealth_3
+    jump smart_house_act_2
